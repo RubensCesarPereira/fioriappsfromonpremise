@@ -1,0 +1,113 @@
+<mvc:View controllerName="conchaytoro.cl.zsd_autorizar_merma.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:f="sap.ui.layout.form">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<!--<ObjectHeader id="objectHeader" title="Merma" number="{Rsnum}" condensed="true"></ObjectHeader>-->
+			<ObjectHeader id="objectHeader" binding="" title="{Desc_Centro}" condensed="true" number="{Rsnum}" numberUnit="Reserva">
+				<attributes>
+					<ObjectAttribute id="objectAttribute" text="{Plant}"/>
+				</attributes>
+			</ObjectHeader>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="30.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items></items>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Center"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Label text="Tipo Merma:" width="90px" design="Bold"/>
+					<Text id="mov" text="{Desc_Clas_Mov}" width="150px"/>
+					<Label width="80px"/>
+					<Label text="Motivo Merma:" width="110px" design="Bold"/>
+					<Text id="motivo" visible="false" text="{Motivo}"/>
+					<Text id="mo" text="{Motiv_Merma}" width="200px"/>
+					<!--<Text id="centroCosto" text="{Kostl}" visible="false"/>-->
+				</items>
+			</HBox>
+			<!--<f:SimpleForm minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3"
+				emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+				<f:content>
+					<Label text="Clase Movimiento" design="Bold"/>
+					<Text id="mov" text="{MoveType}"/>
+					<Label text="Centro" design="Bold"/>
+					<Text id="centro" text="{Plant}"/>
+					<Label text="Motivo Merma" design="Bold"/>
+					<Text id="motivo" text="{Motivo}"/>
+				</f:content>
+			</f:SimpleForm>-->
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" width="auto" items="{MermaToPosiciones}" updateFinished="onListUpdateFinished"
+					noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="5em">
+							<Text text="Posición"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Material"/>
+						</Column>
+						<Column width="18em">
+							<Text text="Descripción"/>
+						</Column>
+						<Column width="7em">
+							<Text text="Cantidad"/>
+						</Column>
+						<Column width="2em">
+							<Text text="ud."/>
+						</Column>
+						<Column width="6em">
+							<Text text="Almacén"/>
+						</Column>
+						<Column width="7em">
+							<Text text="Lote"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Autorizar"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Rechazar"/>
+						</Column>
+						<!--<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>-->
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Rspos}" id="pos"/>
+								<!--<Text text="{ path: 'Rspos', formatter: '.formatter.removeZero' }"/>-->
+								<!--<ObjectIdentifier text="{ path: 'Material', formatter: '.formatter.removeZero' }"/>-->
+								<ObjectIdentifier text="{Material}"/>
+								<Text text="{Makt}"/>
+								<Text text="{Quantity}"/>
+								<ObjectNumber unit="{Unit}"/>
+								<Text text="{StoreLoc}"/>
+								<Text text="{Batch}"/>
+								<Text text="{AnMerma}"/>
+								<CheckBox select="_validaCheck"/>
+								<CheckBox selected="true" select="_validaCheckRech"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Aceptar" press="onAutorizar"/>
+		</semantic:positiveAction>
+		<!--		<semantic:negativeAction>
+			<semantic:NegativeAction text="Cancelar" press="onSemanticButtonPress"/>
+		</semantic:negativeAction>-->
+	</semantic:DetailPage>
+</mvc:View>

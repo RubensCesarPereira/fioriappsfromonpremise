@@ -1,0 +1,58 @@
+_schema-version: "3.2"
+ID: portalFIORI
+version: 0.0.1
+modules:
+- name: portalfiori-approuter
+  type: approuter.nodejs
+  path: portalfiori-approuter
+  requires:
+  - name: portalFIORI_html_repo_runtime
+  - name: uaa_portalFIORI
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: portalFIORI_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: portalFIORI_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - portalFIORI-content.zip
+      name: portalFIORI
+      target-path: resources/
+- name: portalFIORI
+  type: html5
+  path: portalFIORI
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: portalFIORI_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: portalFIORI_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_portalFIORI
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: portalFIORI-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

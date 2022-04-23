@@ -1,0 +1,8 @@
+{ "application" : "ui.s2p.mm.purchorder.approve",
+  "version" : "1.5.43",
+  "buildNumber" : "20",
+  "buildId" : "2017-10-26_13-31-02",
+  "branch" : "origin/rel-1.5",
+  "revision" : "7d6e20e3e6b28e82846a7c49477d7ba1b5266e0b",
+  "GitURL" : ""
+}

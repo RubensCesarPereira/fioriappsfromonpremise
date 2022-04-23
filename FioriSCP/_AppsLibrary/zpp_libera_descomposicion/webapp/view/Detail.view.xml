@@ -1,0 +1,84 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_libera_descomposicion.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<!--<ObjectHeader id="objectHeader" title="{IAufnr}" numberUnit="{Costo}"></ObjectHeader>-->
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm layout="ResponsiveGridLayout" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2" labelSpanM="2"
+					labelSpanS="5">
+					<f:content>
+						<Label text="Orden" design="Bold"/>
+						<Text id="orden" text="{Aufnr}"/>
+						<Label text="Código" design="Bold"/>
+						<Text id="codigo" text="{Codigo}"/>
+						<Label text="Bodega" design="Bold"/>
+						<Text id="bodega" text="{Werks}"/>
+						<Label text="Cantidad" design="Bold"/>
+						<!--<Text id="cantidad" text="{Cantidad} Lts."/>-->
+						<Text id="cantidad" text="{ path: 'Cantidad', formatter: '.formatter.addDot' }"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" width="auto" items="{LosLibPosicion}" updateFinished="onListUpdateFinished"
+					noDataText="Número de Orden sin Posiciones" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="4em">
+							<Text text="Posición"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Material"/>
+						</Column>
+						<Column width="20em">
+							<Text text="Descripción"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Cantidad"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Almacén"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Lote"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Posnr}"/>
+								<Text text="{Matnr}"/>
+								<Text text="{Descripcion}"/>
+								<!--<Text text="{Cantidad}"/>-->
+								<Text text="{ path: 'Cantidad', formatter: '.formatter.addDot' }"/>
+								<Text text="{Almacen}"/>
+								<Text text="{Batch}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm layout="ResponsiveGridLayout" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2" labelSpanM="2"
+					labelSpanS="5">
+					<f:content>
+						<Label text="Costo por Litro" design="Bold"/>
+						<!--<Text id="costo" text="{Costo}"/>-->
+						<Text id="costo" text="{ path: 'Costo', formatter: '.formatter.addDot' }"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Liberar" press="onLiberar"/>
+		</semantic:positiveAction>
+		<!--<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>-->
+	</semantic:DetailPage>
+</mvc:View>

@@ -1,0 +1,30 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:layout="sap.ui.layout" controllerName="zac.grc.risk.cust.controller.Main" displayBlock="true" encoding="utf-8">
+	<App id="idAppControl">
+		<pages>
+			<Page xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" title="{i18n>titleg}" showHeader="true" showFooter="false" showNavButton="true" navButtonPress="onNavBack">
+			<viz:VizFrame vizProperties="{ title: {text : 'Riesgos Comparaci&#243;n - Periodos', visible : true}, dataLabel: {visible: true,style: {fontWeight: 'bold'}},
+            plotArea: {colorPalette :['#add7ff','#ff0000','#ffa500']}}" id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="100%" width="100%" vizType="combination">
+
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{/RiesgoGraficoSet}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Periodo" value="{Periodo}"/>
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Total" value="{Total}"/>
+                            <viz.data:MeasureDefinition name="Critico" value="{Critico}"/>
+                            <viz.data:MeasureDefinition name="Alto" value="{Alto}"/>
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Total"/>
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Critico"/>
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Alto"/>
+                    <viz.feeds:FeedItem id="feedCategoryAxis" uid="categoryAxis" type="Dimension" values="Periodo"/>
+                </viz:feeds>
+                </viz:VizFrame>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

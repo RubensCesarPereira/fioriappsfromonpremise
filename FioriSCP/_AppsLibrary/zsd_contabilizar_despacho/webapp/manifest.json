@@ -1,0 +1,222 @@
+{
+    "_version": "1.9.0",
+    "sap.app": {
+        "id": "conchaytoro.cl.zsd_contabilizar_despacho",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZOBJ_SEM_CONT_DESPACHO",
+                    "action": "display",
+                    "title": "{{appTitle}}",
+                    "info": " ",
+                    "subTitle": " ",
+                    "icon": "sap-icon://add-product",
+                    "indicatorDataSource": {
+                        "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV/PedidoSet/$count",
+                        "refresh":60,
+                        "dataSource":"FIORI_BGW_HTTP"
+                    }
+                }
+            }
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/FioriSCP.conchaytoroclzsd_contabilizar_despacho/sap/opu/odata/sap/ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService2": {
+                "uri": "/FioriSCP.conchaytoroclzsd_contabilizar_despacho/sap/opu/odata/sap/ZMM_CREAR_DESPACHO_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService3": {
+                "uri": "/FioriSCP.conchaytoroclzsd_contabilizar_despacho/sap/opu/odata/sap/ZMM_AYUDAS_BUSQUEDAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService4": {
+                "uri": "/FioriSCP.conchaytoroclzsd_contabilizar_despacho/sap/opu/odata/sap/ZMM_CARACTERISTICAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.2masterdetail",
+            "version": "1.52.7"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://detail-view",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "conchaytoro.cl.zsd_contabilizar_despacho.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.42.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/Style.css"
+                }
+            ]
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "conchaytoro.cl.zsd_contabilizar_despacho.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "dos": {
+                "dataSource": "mainService2",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "tres": {
+                "dataSource": "mainService3",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "cuatro": {
+                "dataSource": "mainService4",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "conchaytoro.cl.zsd_contabilizar_despacho.view",
+                "controlId": "idAppControl",
+                "controlAggregation": "detailPages",
+                "bypassed": {
+                    "target": [
+                        "master",
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "master",
+                    "target": [
+                        "object",
+                        "master"
+                    ]
+                },
+                {
+                    "pattern": "PedidoSet/{objectId}",
+                    "name": "object",
+                    "target": [
+                        "master",
+                        "object"
+                    ]
+                }
+            ],
+            "targets": {
+                "master": {
+                    "viewName": "Master",
+                    "viewLevel": 1,
+                    "viewId": "master",
+                    "controlAggregation": "masterPages"
+                },
+                "object": {
+                    "viewName": "Detail",
+                    "viewId": "detail",
+                    "viewLevel": 2
+                },
+                "detailObjectNotFound": {
+                    "viewName": "DetailObjectNotFound",
+                    "viewId": "detailObjectNotFound"
+                },
+                "detailNoObjectsAvailable": {
+                    "viewName": "DetailNoObjectsAvailable",
+                    "viewId": "detailNoObjectsAvailable"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zmm_contdesp/webapp",
+        "_version": "1.1.0"
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zsd_contabilizar_despacho"
+            ]
+        } 
+}

@@ -1,0 +1,52 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout"
+	controllerName="ui.s2p.mm.purchorder.approve.view.ItemServiceLimit">
+	
+	<!-- View for S9 screen of Service Limit -->
+	<Page
+		id="limitdetail"
+		class="sapUiFioriObjectPage"
+		enableScrolling="true">
+	    
+	    <!-- Header of Service Limit (ItemServiceLimitHeader) -->
+ 		<ObjectHeader
+ 			id="Header"
+			introActive="false"
+			title="{LimitDescription}"
+			number="{parts : [{path : 'ExpectedValue'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.formatAmount'}"
+			numberUnit="{Currency}">
+     		<attributes>
+				<ObjectAttribute
+					id="HeaderAttributeExpectedValue"
+					text="{parts : [{path : 'ExpectedValue'}, {path : 'Currency'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.expectedValueFormatter'}"
+					active="false">
+				</ObjectAttribute>
+				<ObjectAttribute
+					id="HeaderAttributeValueLimit"
+					text="{parts : [{path : 'ValueLimit'}, {path : 'IsValueUnLimited'}, {path : 'Currency'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.valueLimitFormatter'}" 
+					active="false">
+				</ObjectAttribute>
+			</attributes>
+
+			<!-- @ExtensionPoint extServiceLimitHeaderInfo: limit information -->
+			<core:ExtensionPoint name="extServiceLimitHeaderInfo" />
+		</ObjectHeader>
+		<!-- end of Header of Service Limit (ItemServiceLimitHeader) -->
+
+		<!-- Accounting Table of Service Limit (ItemServiceLimitAccounting) -->
+ 		<mvc:XMLView
+			viewName="ui.s2p.mm.purchorder.approve.view.AccountAssignmentTable"
+			id="AccountAssignmentCommonView">
+		</mvc:XMLView>
+		<!-- end of Accounting Table of Service Limit (ItemServiceLimitAccounting) -->
+		
+	</Page>
+</core:View>

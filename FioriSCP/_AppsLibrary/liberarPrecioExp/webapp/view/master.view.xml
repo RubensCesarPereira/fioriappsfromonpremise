@@ -1,0 +1,71 @@
+<mvc:View controllerName="liberarPrecioExp.controller.inicio"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout">
+	<Page title="Liberación de Condiciones Comerciales"
+		enableScrolling="true">
+		<IconTabBar expanded="true" headerMode="Inline" expandable="false">
+			<items>
+				<IconTabFilter key="CL" 
+					icon="/liberarPrecioExp/img/cyt-logo.jpeg" count="{=${DataModel>/PList}.length}"
+					selectedKey="CL" visible="true">
+					<List growing="true" id="cl-list" items="{DataModel>/PList}" selectionChange="onSelectionChange" includeItemInSelection="false"
+						mode="MultiSelect">
+						<headerToolbar>
+							<Toolbar id="list-toolbar">
+								<ToggleButton id="selection-toggle-button" icon="sap-icon://multiselect-all"
+									press="onToggleSelect" />
+								<ToolbarSpacer />
+								<SearchField id="search-field" liveChange="onLiveChange" />
+								<Button text="filtrar" icon="sap-icon://add-filter"
+									press="openFilterWizard" />
+							</Toolbar>
+						</headerToolbar>
+						<infoToolbar>
+							<Toolbar id="vsdFilterBar" visible="false">
+								<Text id="vsdFilterLabel" />
+							</Toolbar>
+						</infoToolbar>
+						<ObjectListItem title="{DataModel>Maktx} | {DataModel>Matnr} "
+							type="Active" press="onlistItemPress" class="divObjectList"
+							icon="" number="{DataModel>Datab}" selected="{DataModel>selected}">
+							<attributes>
+								<ObjectAttribute text="{DataModel>Name1} {=${DataModel>Zkunwe} ? '| ' + ${DataModel>NameZkunwe} + ' ': ''}| {DataModel>Landx}" />
+								<ObjectAttribute title="Cond. Comercial" text="{DataModel>TKschl}" />
+							</attributes>
+							<firstStatus>
+							<ObjectStatus class="DivobjectStatus" state="Success" title="Nueva Cond"
+									text="{DataModel>Kbetr} {DataModel>Konwa} {DataModel>Kmein}" />
+							</firstStatus>
+							<secondStatus>
+								<ObjectStatus title="Ant Cond" state="Warning" text="{DataModel>KbetrOld} {DataModel>KonwaOld} {DataModel>KmeinOld}" />
+							</secondStatus>
+						</ObjectListItem>
+					</List>
+				</IconTabFilter>
+				<IconTabSeparator />
+				<IconTabFilter key="AR" text="Trivento"
+					icon="/liberarPrecioExp/img/ar.png" count="10"
+					visible="true" id="ar-list">
+					<List noDataText="Sin Pendientes" height="100%">
+					</List>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button type="Accept" text="Aceptar" icon="sap-icon://paid-leave"
+					press="onOpenApproveDialog">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<Button type="Reject" text="Rechazar" icon="sap-icon://unpaid-leave"
+					press="onOpenRejectDialog">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

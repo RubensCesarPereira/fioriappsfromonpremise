@@ -1,0 +1,53 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZMM_RFC_CREA_MERMAS_VINO_SRV" xml:lang="es" sap:schema-version="1">
+			<EntityType Name="AutorizarMerma" sap:content-version="1">
+				<Key><PropertyRef Name="Rsnum"/><PropertyRef Name="Rspos"/></Key><Property Name="Rsnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Reserva" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Rspos" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Posición" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Autorizado" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Autorizado"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="HeaderMerma" sap:content-version="1">
+				<Key><PropertyRef Name="Rsnum"/></Key><Property Name="Rsnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false"
+					sap:label="Número de la reserva/las necesidades secundarias" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="MoveType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Cl.movimiento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Kostl" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Centro coste" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Motivo" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Motivo del mov."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Fedoc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha documento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Nombre" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Fecon" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha contabilizacion"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="MermaToPosiciones" Relationship="ZMM_RFC_CREA_MERMAS_VINO_SRV.MermaPosiciones" FromRole="FromRole_MermaPosiciones"
+					ToRole="ToRole_MermaPosiciones"/></EntityType>
+			<EntityType Name="PosMerma" sap:content-version="1">
+				<Key><PropertyRef Name="Rsnum"/><PropertyRef Name="Rspos"/></Key><Property Name="Rsnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false"
+					sap:label="Número de la reserva/las necesidades secundarias" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="Rspos" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false"
+					sap:label="Número de posición de reserva/necesidades secundarias" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StoreLoc" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Almacén" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Batch" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lote" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Quantity" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false"
+					sap:label="Cantidad en unidad de medida de entrada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="UM entrada" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Fedoc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha documento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Nombre" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Fecon" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fecha contabilizacion"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Motiivo" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Motivo del movimiento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Autorizado" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false"
+					sap:label="Indicador de autorización efectuada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Makt" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Texto breve de material"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="MermaPosiciones" sap:content-version="1"><End Type="ZMM_RFC_CREA_MERMAS_VINO_SRV.HeaderMerma" Multiplicity="1" Role="FromRole_MermaPosiciones"/><End Type="ZMM_RFC_CREA_MERMAS_VINO_SRV.PosMerma" Multiplicity="*" Role="ToRole_MermaPosiciones"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_MermaPosiciones"><PropertyRef Name="Rsnum"/></Principal>
+					<Dependent Role="ToRole_MermaPosiciones"><PropertyRef Name="Rsnum"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZMM_RFC_CREA_MERMAS_VINO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="AutorizarMermaSet" EntityType="ZMM_RFC_CREA_MERMAS_VINO_SRV.AutorizarMerma" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="HeaderMermaSet" EntityType="ZMM_RFC_CREA_MERMAS_VINO_SRV.HeaderMerma" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="PosMermaSet" EntityType="ZMM_RFC_CREA_MERMAS_VINO_SRV.PosMerma" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="MermaPosicionesSet" Association="ZMM_RFC_CREA_MERMAS_VINO_SRV.MermaPosiciones" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="HeaderMermaSet" Role="FromRole_MermaPosiciones"/><End EntitySet="PosMermaSet" Role="ToRole_MermaPosiciones"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZMM_RFC_CREA_MERMAS_VINO_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZMM_RFC_CREA_MERMAS_VINO_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout">
+	<Dialog title="Características" contentWidth="50%">
+		<content>
+			<Table id="charact">
+				<columns>
+					<!--<Column width="8em">
+						<Text text="Material"/>
+					</Column>
+					<Column width="8em">
+						<Text text="IUpdkz"/>
+					</Column>-->
+					<Column width="6em">
+						<Text text=""/>
+					</Column>
+					<Column width="4em">
+						<Text text=""/>
+					</Column>
+					<Column width="8em" visible="false">
+						<Text text="Updkz"/>
+					</Column>
+					<Column width="8em" visible="false">
+						<Text text="IMatnr"/>
+					</Column>
+					<Column width="6em" visible="false">
+						<Text text="Char"/>
+					</Column>
+				</columns>
+			</Table>
+			<!--<f:SimpleForm id="formAddItem" layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024" maxContainerCols="4" labelSpanXL="4"
+				labelSpanL="4" labelSpanM="12" labelSpanS="12" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+				columnsM="1" editable="true">
+				<Label text="Denominación Origen"></Label>
+				<Input id="deOrigen" enabled="false"></Input>
+				<Label text="Aptitud"></Label>
+				<Input id="aptitud" enabled="false"></Input>
+				<Label text="Grado Alcohólico"></Label>
+				<Input id="grado" type="Number" placeholder="Ej: 13"></Input>
+			</f:SimpleForm>-->
+		</content>
+		<beginButton>
+			<!--<Button type="Accept" id="btnGuardar" text="Guardar" press="onGuardar">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>-->
+		</beginButton>
+		<endButton>
+			<Button type="Reject" text="Cerrar" press="onCancel">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

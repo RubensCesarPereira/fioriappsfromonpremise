@@ -1,0 +1,41 @@
+[{
+	"Orden": "900000253",
+	"Material": "M2206-2018",
+	"Description": "CABERNET SAUVIGNON RIBERAS",
+	"Cantidad": 140.456,
+	"Almacen": "0005",
+	"Lote": "0000412536",
+	"Cosecha": 2018
+}, {
+	"Orden": "900000105",
+	"Material": "M2206-2018",
+	"Description": "CABERNET SAUVIGNON RIBERAS",
+	"Cantidad": 40.456,
+	"Almacen": "0005",
+	"Lote": "0000412345",
+	"Cosecha": 2017
+}, {
+	"Orden": "900000100",
+	"Material": "M1106-2018",
+	"Description": "SAUVIGNON CASILLERO",
+	"Cantidad": 340.456,
+	"Almacen": "0005",
+	"Lote": "0000412345",
+	"Cosecha": 2016
+}, {
+	"Orden": "900000110",
+	"Material": "M2250-2018",
+	"Description": "CABERNET SAUVIGNON RIBERAS",
+	"Cantidad": 50.456,
+	"Almacen": "0005",
+	"Lote": "0000412345",
+	"Cosecha": 2018
+}, {
+	"Orden": "900000140",
+	"Material": "M2250-2018",
+	"Description": "CABERNET SAUVIGNON RIBERAS",
+	"Cantidad": 300.456,
+	"Almacen": "0005",
+	"Lote": "0000412536",
+	"Cosecha": 2017
+}]

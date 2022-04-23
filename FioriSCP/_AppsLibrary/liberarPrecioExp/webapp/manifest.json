@@ -1,0 +1,128 @@
+{
+	"_version": "1.4.0",
+   "sap.app":{
+      "id":"liberarPrecioExp",
+      "type":"application",
+      "title": "Liberación Condiciones Comerciales",
+      "resources": "resources.json",
+      "applicationVersion":{
+         "version":"1.6.0"
+      },
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZSD_SO_LIB_PREC_EXP",
+                "action": "display",
+                "title": "Liberación Condiciones Comerciales",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://employee",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZODATA_SD_LIB_PRECIOS_EXPORT_SRV/CondPendSet/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+   },
+   "sap.cloud": {
+ 	"public": true,
+ 	"service": "FioriSCP"
+   },
+   "sap.ui": {
+        "_version": "1.1.0",
+        "technology": "UI5",
+        "deviceTypes": { 
+            "desktop": true, 
+            "tablet": true, 
+            "phone": true 
+        },
+	    "supportedThemes": [
+	        "sap_hcb",
+	        "sap_bluecrystal"
+	    ]        
+    },
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.60.0",
+			"libs": {
+				"sap.ui.core": {
+					
+				},
+				"sap.m": {
+					
+				},
+				"sap.f": {
+					
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "liberarPrecioExp.view.ppal",
+			"type": "XML"
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.f.routing.Router",
+				"viewType": "XML",
+				"viewPath": "liberarPrecioExp.view",
+				"controlId": "layout",
+				"controlAggregation": "beginColumnPages",
+				"async": true
+			},
+			"routes": [
+				{
+					"name": "inicio",
+					"pattern": "",
+					"titleTarget": "",
+					"greedy": false,
+					"target": "inicio"
+				},
+				{
+					"name": "detalleCondicion",
+					"pattern": "detalleCondicion/{id}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"detalleCondicion",
+						"inicio"
+					]
+				}
+			],
+			"targets": {
+				"detalleCondicion": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 3,
+					"viewName": "detalleCondicion",
+					"controlAggregation": "midColumnPages"
+				},
+				"inicio": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 1,
+					"viewName": "inicio"
+				}
+			}
+		}
+	},
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.liberarPrecioExp"
+            ]
+        }      
+}

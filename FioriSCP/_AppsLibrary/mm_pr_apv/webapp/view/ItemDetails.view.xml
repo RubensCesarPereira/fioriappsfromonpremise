@@ -1,0 +1,539 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout"
+	controllerName="ui.s2p.mm.requisition.approve.view.ItemDetails">
+
+	<!-- S4 screen - Item Detail -->
+	<Page
+		id="itemdetail"
+		class="sapUiFioriObjectPage"
+		enableScrolling="true">
+
+		<!-- ItemDetailHeader -->
+		<!-- Material -->
+		<ObjectHeader
+			id="HeaderMaterial"
+			introActive="false"
+			visible="{parts : [{path : 'HdItmProductDetails/ItemType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.materialVisibilityTrigger'}"
+			title="{Description}"
+			number="{parts: [{path : 'Value'}, {path : 'ItemCategory'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatNumberItemType'}"
+			numberUnit="{Currency}">
+			<attributes>
+				<ObjectAttribute
+					id="MaterialObjectHeaderAttributeQuantity"
+					text="{parts : [{path : 'Quantity'}, {path : 'UnitDescription'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.quantityFormatter'}"
+					active="false">
+				</ObjectAttribute>
+				<ObjectAttribute
+					id="MaterialObjectHeaderAttributePricePerUnit"
+					text="{parts : [{path : 'QuantityForPPU'}, {path : 'UnitForPPUDescription'}, {path : 'PricePerUnit'}, {path : 'CurrencyForPPU'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.quantityPerUnitItemCategory'}"
+					active="false">
+				</ObjectAttribute>
+				<ObjectAttribute
+					id="MaterialObjectHeaderAttributeItemCategory"
+					text="{ItemCategoryDescription}"
+					active="false">
+				</ObjectAttribute>
+			</attributes>
+
+			<!-- @ExtensionPoint extMaterialHeaderInfo: material information -->
+			<core:ExtensionPoint name="extMaterialHeaderInfo" />
+		</ObjectHeader>
+
+		<!-- Service -->
+		<ObjectHeader
+			id="HeaderService"
+			introActive="false"
+			visible="{parts : [{path : 'HdItmProductDetails/ItemType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.serviceVisibilityTrigger'}"
+			title="{Description}"
+			number="{parts : [{path : 'Value'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAmount'}"
+			numberUnit="{Currency}">
+			<attributes>
+				<ObjectAttribute
+					id="ServiceObjectHeaderAttributeNumberServiceLines"
+					text="{parts : [{path : 'NumberServiceLines'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.serviceLinesFormatter'}"
+					active="false">
+				</ObjectAttribute>
+			</attributes>
+
+			<!-- @ExtensionPoint extServiceHeaderInfo: service information -->
+			<core:ExtensionPoint name="extServiceHeaderInfo" />
+		</ObjectHeader>
+		<!-- end of Header -->
+
+		<!-- Information area -->
+		<form:Form
+			id="ItemDetailInfoFormGeneral"
+			title="{i18n>view.PurchaseRequisition.information}">
+			<form:layout>
+				<form:ResponsiveLayout></form:ResponsiveLayout>
+			</form:layout>
+ 			<form:FormContainer	>
+				<form:layoutData>
+					<layout:ResponsiveFlowLayoutData
+						linebreak="true"
+						margin="false">
+					</layout:ResponsiveFlowLayoutData>
+				</form:layoutData>
+				<form:formElements>
+					<form:FormElement
+						id="ItemDetailInfoMaterial"
+						visible="{parts : [{path : 'HdItmProductDetails/MaterialID'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.materialIDVisibilityTrigger'}">
+							<form:layoutData>
+								<layout:ResponsiveFlowLayoutData
+									linebreak="true" 
+									margin="false">
+								</layout:ResponsiveFlowLayoutData>
+							</form:layoutData>
+							<form:label>
+								<Label
+									text="{i18n>view.PurchaseRequisition.material}">
+								</Label>
+							</form:label>
+							<form:fields>
+								<Text text="{HdItmProductDetails/MaterialID}">
+									<layoutData>
+										<layout:ResponsiveFlowLayoutData
+											weight="2"
+											alignItems="End">
+										</layout:ResponsiveFlowLayoutData>
+									</layoutData>
+								</Text>
+							</form:fields>
+					</form:FormElement>
+					<form:FormElement
+						id="ItemDetailInfoMaterialGroup"
+						visible="{parts : [{path : 'HdItmProductDetails/ItemType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.materialVisibilityTrigger'}">
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						<form:label>
+							<Label
+								text="{i18n>view.PurchaseRequisition.materialGroup}">
+							</Label>
+						</form:label>
+						<form:fields>
+							<Text text="{parts : [{path : 'HdItmProductDetails/MaterialGroup'}, {path : 'HdItmProductDetails/MaterialGroupDescription'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.materialGroupFormatter'}">
+								<layoutData>
+									<layout:ResponsiveFlowLayoutData
+										weight="2"
+										alignItems="End">
+									</layout:ResponsiveFlowLayoutData>
+								</layoutData>
+							</Text>
+						</form:fields>
+					</form:FormElement>
+					<form:FormElement
+						id="ItemDetailInfoServiceGroup"
+						visible="{parts : [{path : 'HdItmProductDetails/ItemType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.serviceVisibilityTrigger'}">
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						<form:label>
+							<Label
+								text="{i18n>view.PurchaseRequisition.serviceGroup}">
+							</Label>
+						</form:label>
+						<form:fields>
+							<Text text="{parts : [{path : 'HdItmProductDetails/MaterialGroup'}, {path : 'HdItmProductDetails/MaterialGroupDescription'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.materialGroupFormatter'}">
+								<layoutData>
+									<layout:ResponsiveFlowLayoutData
+										weight="2"
+										alignItems="End">
+									</layout:ResponsiveFlowLayoutData>
+								</layoutData>
+							</Text>
+						</form:fields>
+					</form:FormElement>
+				</form:formElements>
+			</form:FormContainer>
+		</form:Form>
+		
+		
+		<form:Form
+			id="ItemDetailInfoFormDelivery"
+			title="{parts : [{path : 'DeliveryDate'}, {path : 'DeliveryDateAlsoLater'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.deliveryHeaderFormatter'}">
+			<form:layout>
+				<form:ResponsiveLayout></form:ResponsiveLayout>
+			</form:layout>
+			<form:formContainers>
+				<form:FormContainer>
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						
+					<form:formElements>
+					<form:FormElement
+						id="ItemDetailInfoDeliveryPlant"
+						visible="{parts : [{path : 'HdItmDeliveryAddress/PlantName'}, {path : 'HdItmDeliveryAddress/CustomerName'}, {path : 'HdItmDeliveryAddress/CustomerId'}, {path : 'HdItmDeliveryAddress/ItemType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.plantVisibilityTrigger'}">
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						<form:label>
+							<Label
+								text="{i18n>view.PurchaseRequisition.plant}">
+							</Label>
+						</form:label>
+						<form:fields>
+							<Text 
+								text="{parts : [{path : 'HdItmDeliveryAddress/PlantName'}, {path : 'HdItmDeliveryAddress/Plant'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.commonIDFormatter'}">
+								<layoutData>
+									<layout:ResponsiveFlowLayoutData
+										weight="2"
+										alignItems="End">
+									</layout:ResponsiveFlowLayoutData>
+								</layoutData>
+							</Text>
+						</form:fields>
+					</form:FormElement>
+					
+					<form:FormElement
+							id="ItemDetailInfoName"
+							visible="{parts:[{path : 'HdItmDeliveryAddress/CustomerName' }, {path : 'HdItmDeliveryAddress/CustomerId'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.freestyleNameVisibilityTrigger'}">
+							<form:layoutData>
+								<layout:ResponsiveFlowLayoutData
+									linebreak="true" 
+									margin="false">
+								</layout:ResponsiveFlowLayoutData>
+							</form:layoutData>
+							<form:label>
+								<Label
+									text="{i18n>view.PurchaseRequisition.freestyleAdressLabel}"></Label>
+							</form:label>
+							<form:fields>
+								<Text
+									text="{HdItmDeliveryAddress/CustomerName}">
+									<layoutData>
+										<layout:ResponsiveFlowLayoutData
+											weight="2"
+											alignItems="End">
+										</layout:ResponsiveFlowLayoutData>
+									</layoutData>
+								</Text>
+							</form:fields>
+						</form:FormElement>
+						
+						
+						
+						<form:FormElement
+							id="ItemDetailInfoCustomer"
+							visible="{parts:[{path : 'HdItmDeliveryAddress/CustomerName' }, {path : 'HdItmDeliveryAddress/CustomerId'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.customerNameVisibilityTrigger'}">
+							<form:layoutData>
+								<layout:ResponsiveFlowLayoutData
+									linebreak="true" 
+									margin="false">
+								</layout:ResponsiveFlowLayoutData>
+							</form:layoutData>
+							<form:label>
+								<Label
+									text="{i18n>view.PurchaseRequisition.customerLabel}"></Label>
+							</form:label>
+							<form:fields>
+								<Text
+									text="{parts:[{path : 'HdItmDeliveryAddress/CustomerName' }, {path : 'HdItmDeliveryAddress/CustomerId'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.customerNameFormatter'}">
+									<layoutData>
+										<layout:ResponsiveFlowLayoutData
+											weight="2"
+											alignItems="End">
+										</layout:ResponsiveFlowLayoutData>
+									</layoutData>
+								</Text>
+							</form:fields>
+						</form:FormElement>
+						
+					
+					<form:FormElement
+						id="ItemDetailInfoDeliveryAddress"
+						visible="{parts : [{path : 'HdItmDeliveryAddress/AddressString'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.commonFieldVisibilityTrigger'}">
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						<form:label>
+							<Label
+								text="{i18n>view.PurchaseRequisition.deliveryAddress}"></Label>
+						</form:label>
+						<form:fields>
+							<Text
+								text="{HdItmDeliveryAddress/AddressString}">
+								<layoutData>
+									<layout:ResponsiveFlowLayoutData
+										weight="2"
+										alignItems="End">
+									</layout:ResponsiveFlowLayoutData>
+								</layoutData>
+							</Text>
+						</form:fields>
+					</form:FormElement>
+					
+					
+					<form:FormElement
+						id="ItemDetailInfoSupplierName"
+						visible="{path : 'SupplierName', formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.commonFieldVisibilityTrigger'}">
+						<form:layoutData>
+							<layout:ResponsiveFlowLayoutData
+								linebreak="true" 
+								margin="false">
+							</layout:ResponsiveFlowLayoutData>
+						</form:layoutData>
+						<form:label>
+							<Label
+								text="{i18n>view.PurchaseRequisition.supplierName}">
+							</Label>
+						</form:label>
+						<form:fields>
+							<Link
+								press="onSupplierPress"
+								active="true"
+								text="{SupplierName}"
+								visible="{path:'SupplierName', formatter:'ui.s2p.mm.requisition.approve.util.Conversions.commonFieldVisibilityTrigger'}">
+								<layoutData>
+									<layout:ResponsiveFlowLayoutData
+										weight="2"
+										alignItems="End">
+									</layout:ResponsiveFlowLayoutData>
+								</layoutData>
+							</Link>
+						</form:fields>
+					</form:FormElement>
+
+					<!-- @ExtensionPoint extInformation: information area -->
+					<core:ExtensionPoint name="extInformation" />
+				</form:formElements>
+			</form:FormContainer>
+		  </form:formContainers>
+		</form:Form>
+		<!-- end of Information area -->
+
+		<!-- Tables area -->
+		<!-- Item Notes -->  
+		<List
+			id="ListItemNotes"
+			items="{Notes}"
+			showSeparators="None"
+			headerDesign="Plain"
+			headerText="{i18n>view.PurchaseRequisition.notes}"
+			visible="{parts : [{path : 'NumberOfNotes'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.ItemNoteVisibilityTrigger'}">
+			<FeedListItem
+				id="NoteTemplate"
+				sender="{parts : [{path : 'NoteIsApproverNote'}, {path : 'CreatedByName'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.approverNoteValueFormatter'}"
+				timestamp="{parts : [{path : 'NoteIsApproverNote'}, {path : 'CreatedAt'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.noteDateFormatter'}"
+				text="{Text}"
+				senderPress="onSenderPress"
+				info="{TypeDescription}">
+			</FeedListItem>
+		</List>
+
+		<!--Item Attachments -->  
+		<List
+			id="ListItemAttachments"
+			items="{Attachments}"
+			headerText="{i18n>view.PurchaseRequisition.attachments}" 
+			showSeparators="None"
+			headerDesign="Plain"
+			visible="{parts : [{path : 'NumberOfAttachments'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.ItemAttachmentVisibilityTrigger'}">
+			<StandardListItem
+				title="{parts : [{path : 'Description'}, {path : 'MimeType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAttachmentDesc'}"
+				icon="{parts : [{path : 'MimeType'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAttachmentIcon'}"
+				description="{parts : [{path : 'FileSize'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAttachmentSize'}"
+				iconInset="false"
+				press="onAttachment"
+				type="Active"
+				info="{parts : [{path : 'CreatedAt'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.attachmentDateFormatter'}">
+			</StandardListItem>
+	    </List>
+
+	    <!-- Limit -->
+	    <Table
+	    	id="LimitTable"
+	    	noDataText="{i18n>view.PurchaseRequisition.placeholder}" 
+			headerText="{i18n>view.PurchaseRequisition.limit}" 
+			items="{Limits}"
+			headerDesign="Plain"
+			visible="{parts : [{path : 'Limits'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.ItemLimitVisibilityTrigger'}">
+			 <columns>
+	 			<Column
+	 				id="LimitTableColumnDescription"
+	 				alignItems="Start"
+	 				demandPopin="true">
+	 				<header>
+	 					<Label
+	 						text="{i18n>view.DetailItemLimitView.desc}">
+	 					</Label>
+	 				</header>
+	 			</Column>
+	 			<Column
+	 				id="LimitTableColumnLimitValue"
+	 				alignItems="End"
+	 				hAlign="Right"
+	 				demandPopin="true"
+	 				minScreenWidth="Tablet">
+	 				<header>
+	 					<Label
+							text="{i18n>view.PurchaseRequisition.limitValue}">
+						</Label>
+	 				</header>
+	 			</Column>
+	 			<Column
+	 				id="LimitTableColumnExpectedValue"
+	 				alignItems="End"
+	 				hAlign="Right"
+	 				demandPopin="true"
+	 				minScreenWidth="Tablet">
+	 				<header>
+	 					<Label
+	 						text="{i18n>view.PurchaseRequisition.expValue}">
+	 					</Label>
+	 				</header>
+	 			</Column>
+	 		</columns>
+			<ColumnListItem
+	 			type="Navigation"
+	 			press="onServiceLimitPress">
+				<cells>
+					<ObjectIdentifier
+						title="{LimitDescription}">
+					</ObjectIdentifier>
+					<Text
+						text="{parts : [{path : 'ValueLimit'}, {path : 'IsValueUnLimited'}, {path : 'Currency'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.valueLimitWithoutLabelFormatter'}">
+					</Text>
+					<ObjectNumber
+						number="{parts : [{path : 'ExpectedValue'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAmount'}"
+						numberUnit="{Currency}">
+					</ObjectNumber>
+				</cells>
+			</ColumnListItem>
+		</Table>
+
+		<!-- Service Lines NumberServiceLines -->
+		<Table
+			id="NumberServiceLinesTable"
+			headerText="{parts : [{path : 'NumberServiceLines'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.serviceLinesTableHeader'}"
+			visible="{parts : [{path : 'NumberServiceLines'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.ItemServiceLineVisibilityTrigger'}"
+			noDataText="{i18n>view.PurchaseRequisition.placeholder}" 
+			headerDesign="Plain"
+			items="{ServiceLines}">
+			<columns>
+	 			<Column
+	 				id="NumberServiceLinesTableColumnDescription"
+	 				alignItems="Start"
+	 				demandPopin="true">
+	 				<header>
+	 					<Label
+	 						text="{i18n>view.DetailItemServiceView.desc}">
+	 					</Label>
+	 				</header>
+	 			</Column>
+	 			<Column
+	 				id="NumberServiceLinesTableColumnQuantity"
+	 				alignItems="End"
+	 				hAlign="Right"
+	 				demandPopin="true"
+	 				minScreenWidth="Tablet">
+	 				<header>
+	 					<Label
+	 						text="{i18n>view.PurchaseRequisition.quantity}">
+	 					</Label>
+	 				</header>
+	 			</Column>
+	 			<Column
+	 				id="NumberServiceLinesTableColumnSubtotal"
+	 				alignItems="End"
+	 				hAlign="Right"
+	 				demandPopin="true"
+	 				minScreenWidth="Tablet">
+	 				<header>
+	 					<Label
+	 						text="{i18n>view.DetailItemServiceView.subTotal}">
+	 					</Label>
+	 				</header>
+	 			</Column>
+			</columns>
+			<ColumnListItem
+	 			type="Navigation"
+	 			press="onServiceItemPress">
+	 			<cells>
+	 				<ObjectIdentifier
+	 					title="{Description}">
+	 				</ObjectIdentifier>
+	 				<Text 
+	 					text="{parts : [{path : 'Quantity'}, {path : 'UnitDescription'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.quantityFormatter'}">
+	 				</Text>
+	 				<ObjectNumber 
+	 					number="{parts : [{path : 'Value'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.formatAmount'}"
+	 					numberUnit="{Currency}">
+	 				</ObjectNumber>
+	 			</cells>
+	 		</ColumnListItem>
+		</Table>
+
+		<!-- Account Assignment -->
+		<layout:VerticalLayout
+			visible="{parts : [{path : 'Accountings'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.ItemAccountAssignmentVisibilityTrigger'}"
+			width="100%">
+			<mvc:XMLView
+				id="AccountAssignmentCommonView"
+				viewName="ui.s2p.mm.requisition.approve.view.AccountAssignmentTable">
+			</mvc:XMLView>
+		</layout:VerticalLayout>
+		<!-- end of Account Assignment -->
+
+		<!-- Subcontracting -->
+		<Table
+			id="SubcontractingTable"
+			headerText="{i18n>view.PurchaseRequisition.components}"
+			noDataText="{i18n>view.PurchaseRequisition.placeholder}"
+			visible="{parts:[{path : 'ItemCategory'}], formatter : 'ui.s2p.mm.requisition.approve.util.Conversions.componentVisibilityTrigger'}"
+			headerDesign="Plain"
+			class="purchaseRequisitionTable">
+			<columns>
+				<Column
+					id="ComponentDescription"
+					alignItems="Start"
+					demandPopin="true"
+					minScreenWidth="Tablet">
+					<header>
+						<Label
+							text="{i18n>view.PurchaseRequisition.descriptionLabel}">
+						</Label>
+					</header>
+				</Column>
+				<Column
+					id="ComponentQuantity"
+					alignItems="End"
+					hAlign="Right"
+					demandPopin="true"
+					minScreenWidth="Tablet">
+					<header>
+						<Label
+							text="{i18n>view.PurchaseRequisition.quantity}">
+						</Label>
+					</header>
+				</Column>
+			</columns>
+		</Table>
+
+	</Page>
+</core:View>

@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Grupo Compra"
+		noDataText="No se encontrarón grupos"		
+		multiSelect="true"
+		class="sapUiPopupWithPadding"
+		items="{gcModel>/results}"
+		search="_handleValueHelpSearchGC"
+		confirm="handleConfirmGC"
+		cancel="handleCloseGC">
+		<StandardListItem			
+			iconDensityAware="false"
+			type="Active" 
+			iconInset="false"
+			title="{gcModel>Ekgrp}"
+			description="{gcModel>Eknam}" />
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,91 @@
+{
+    "_version": "1.3.0",
+    "sap.app": {
+        "_version": "1.3.0",
+        "id": "ui.s2p.mm.ses.approve",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title":"{{MASTER_TITLE}}",
+        "applicationVersion": {
+            "version": "1.5.43"
+        },
+        "ach": "MM-FIO-PUR",
+        "dataSources": {
+            "GBAPP_POAPPROVAL": {
+                "uri": "/FioriSCP.uis2pmmsesapprove/sap/opu/odata/sap/MM_SES_APPROVE/",
+                "settings": {
+                }
+            }
+        },
+        "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ServiceEntrySheet",
+                "action": "display",
+                "title": "{{MASTER_TITLE}}",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://sales-order-item",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/MM_SES_APPROVE/Workitems/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "_version": "1.3.0",
+        "technology": "UI5",
+        "deviceTypes": { 
+
+            "desktop": true, 
+
+            "tablet": true, 
+
+            "phone": true 
+
+        }
+    },
+    "sap.ui5": {
+        "_version": "1.1.0",
+        "contentDensities": { 
+
+            "compact": true, 
+
+            "cozy": false    
+
+        },
+        "dependencies": {
+            "minUI5Version": "1.28.5",
+            "libs": {
+                "sap.ca.scfld.md": {
+                },
+                "sap.m": {                  
+            }
+            },
+            "components": {
+            }
+        },
+        "models": {
+        "i18n": {
+          "type": "sap.ui.model.resource.ResourceModel",
+          "uri": "i18n/i18n.properties"
+        }
+        }
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.mm_ses_apv"
+            ]
+        } 
+}

@@ -1,0 +1,31 @@
+.sapUiSizeCompact .sapMColumnHeader {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    width: fit-content;
+}
+.side-navigation-demo {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    max-width: 15rem;
+}
+.debugger{
+	border: 1px solid red;
+}
+.newValue{
+	color: #82b74b;
+}
+.lastValue{
+	color: #f18973;
+}
+.headerTable{
+	background-color: #f0f0f0;
+}

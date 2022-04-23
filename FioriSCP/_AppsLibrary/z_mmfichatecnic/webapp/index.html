@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+<script 
+    src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"  
+    id="sap-ui-bootstrap"
+	data-sap-ui-libs="sap.m" 
+	data-sap-ui-compatVersion="edge"      
+    data-sap-ui-async="true"
+    data-sap-ui-versionedLibCss="true"
+	data-sap-ui-theme="Custom_VCT_V1"
+    data-sap-ui-theme-roots='{"Custom_VCT_V1" : "/themerun/themeroot/v1/UI5"}'
+	data-sap-ui-resourceroots='{"z_mmfichatecnic": "./"}'></script>
+<script>
+	sap.ui.getCore().attachInit(function() {
+		var shell = new sap.m.Shell({
+			app : new sap.ui.core.ComponentContainer({
+				height : "100%",
+				name : "z_mmfichatecnic"
+			})
+		}).placeAt("content");
+	});
+</script>
+	
+<script src="js/util.js"></script>
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+</html>

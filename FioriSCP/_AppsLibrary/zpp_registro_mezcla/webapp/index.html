@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>zpp_registro_mezcla</title>
+
+	<!-- Bootstrapping UI5 -->
+	<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+            id="sap-ui-bootstrap"		
+            data-sap-ui-libs="sap.m"		
+			data-sap-ui-xx-bindingSyntax="complex" 
+			data-sap-ui-async="true"
+            data-sap-ui-versionedLibCss="true"
+            data-sap-ui-theme="Custom_VCT_V1"                
+            data-sap-ui-theme-roots='{"Custom_VCT_V1" : "/themerun/themeroot/v1/UI5"}'
+            data-sap-ui-resourceroots='{"cl.conchaytoro.zpp_registro_mezcla": "."}'>
+	</script>
+
+	<script>
+		sap.ui.getCore().attachInit(function () {
+			sap.ui.require([
+				"sap/m/Shell",
+				"sap/ui/core/ComponentContainer"
+			], function (Shell, ComponentContainer) {
+				// initialize the UI component
+				new Shell({
+					app: new ComponentContainer({
+						height: "100%",
+						name: "cl.conchaytoro.zpp_registro_mezcla",
+						settings: {
+							id: "zpp_registro_mezcla"
+						}
+					})
+				}).placeAt("content");
+			});
+		});
+	</script>
+
+</head>
+
+<!-- UI Content -->
+<body class="sapUiBody" id="content">
+</body>
+</html>

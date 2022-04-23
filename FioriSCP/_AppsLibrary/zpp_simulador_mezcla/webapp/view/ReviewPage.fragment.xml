@@ -1,0 +1,132 @@
+<core:FragmentDefinition id="fragmentReviewPage" height="100%" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Page id="wizardReviewPage" showHeader="false">
+		<content>
+			<form:SimpleForm title="1. Datos de Mezcla" minWidth="1024" editable="false" layout="ResponsiveGridLayout" adjustLabelSpan="false"
+				labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+				columnsL="3" columnsM="3" singleContainerFullSize="false">
+				<form:content>
+					<Label text="Código Mezcla"/>
+					<Text id="mezcla" text="{ViewModel>/codigoMezcla}"/>
+					<Label text="Descripción"/>
+					<Text id="desc" text="{ViewModel>/descripcion}"/>
+					<Label text="Cantidad"/>
+					<Text id="cantidad" text="{ViewModel>/cantidad}"/>
+					<Label text="Bodega"/>
+					<Text id="bodega" text="{ViewModel>/centro}"/>
+					<Link press="editStepOne" text="Edit"/>
+				</form:content>
+			</form:SimpleForm>
+			<form:SimpleForm title="2. Componentes" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+				<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+					<Table id="reviewComponentes" class="sapUiResponsiveMargin" width="auto">
+						<headerToolbar>
+							<Toolbar>
+								<Title id="title1" text=""/>
+								<ToolbarSpacer/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="7em">
+								<Text text="Origen"/>
+							</Column>
+							<Column width="4em">
+								<Text text="Cuba"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Bodega"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Código"/>
+							</Column>
+							<Column width="15em">
+								<Text text="Descripción"/>
+							</Column>
+							<Column width="8em">
+								<Text text="Calidad"/>
+							</Column>
+							<Column width="6em">
+								<Text text="Variedad"/>
+							</Column>
+							<Column width="8em">
+								<Text text="D.O"/>
+							</Column>
+							<Column width="6em">
+								<Text text="Cosecha"/>
+							</Column>
+							<Column width="10em">
+								<Text text="Lts. Requeridos"/>
+							</Column>
+							<Column width="8em">
+								<Text text="Precio"/>
+							</Column>
+							<Column width="8em">
+								<Text text="Stock"/>
+							</Column>
+							<Column width="6em">
+								<Text text="%"/>
+							</Column>
+							<Column width="2em">
+								<Text text=""/>
+							</Column>
+						</columns>
+					</Table>
+				</ScrollContainer>
+			</form:SimpleForm>
+			<form:SimpleForm title="3. Análisis Químico" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+				<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+					<Table id="reviewAnalisis">
+						<headerToolbar>
+							<Toolbar>
+								<Title id="title2" text=""/>
+								<ToolbarSpacer/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="4em">
+								<Text text="Bodega"/>
+							</Column>
+							<Column width="4em">
+								<Text text="Cuba"/>
+							</Column>
+							<Column width="9em">
+								<Text text="Componente"/>
+							</Column>
+							<Column width="5em">
+								<Text text="A°"/>
+							</Column>
+							<Column width="5em">
+								<Text text="AT"/>
+							</Column>
+							<Column width="5em">
+								<Text text="AV"/>
+							</Column>
+							<Column width="5em">
+								<Text text="SO2 L"/>
+							</Column>
+							<Column width="5em">
+								<Text text="SO2 T"/>
+							</Column>
+							<Column width="5em">
+								<Text text="MR"/>
+							</Column>
+							<Column width="5em">
+								<Text text="pH"/>
+							</Column>
+							<Column width="5em">
+								<Text text="Color"/>
+							</Column>
+						</columns>
+					</Table>
+				</ScrollContainer>
+			</form:SimpleForm>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button text="Resultados" press="handleWizardSubmit"></Button>
+					<Button text="Volver" press="handleWizardCancel"></Button>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:FragmentDefinition>

@@ -1,0 +1,14 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m" 
+xmlns:l="sap.ui.layout" 
+controllerName="z_figesacrelib.controller.confirmaPopup" 
+displayBlock="true">
+	<FlexBox alignItems="Center" justifyContent="Center">
+		<l:VerticalLayout class="sapUiContentPadding" width="100%">
+			<l:content>
+				<Label id="msj" text="Liberación."/>
+			</l:content>
+		</l:VerticalLayout>
+	</FlexBox>
+</mvc:View>

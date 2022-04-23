@@ -1,0 +1,85 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_crea_reclasificacion.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>title}">
+				<content>
+					<VBox class="sapUiMediumMargin">
+						<f:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024" maxContainerCols="4" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							editable="true">
+							<Label text="Motivo Reclasificación" required="true"/>
+							<ComboBox id="motivo" showSecondaryValues="true" filterSecondaryValues="true" items="{ path: 'motivo>/MotivReclasifSet'}">
+								<core:ListItem key="{motivo>CodReclasif}" text="{motivo>DescripReclasific}"/>
+							</ComboBox>
+							<Label text="Bodega Origen" required="true"/>
+							<ComboBox id="centro" change="_clearMatnr" showSecondaryValues="true" filterSecondaryValues="true"
+								items="{ path: '/CentroSet', sorter: { path: 'Werks' } }">
+								<core:ListItem key="{Werks}" text="{Werks} - {Name1}" additionalText="{Werks}"/>
+							</ComboBox>
+							<Label text="Código Vino Origen" required="true"/>
+							<Input id="codOrigen" liveChange="_inputMaterial"/>
+							<Label text="Descripción"/>
+							<Input id="descripcion" enabled="false"/>
+							<Label text="Almacén" required="true"/>
+							<ComboBox id="almacen" change="selectAlmacen" showSecondaryValues="true" filterSecondaryValues="true"></ComboBox>
+							<Label text="Lote" required="true"/>
+							<ComboBox id="lote" change="selectLote" showSecondaryValues="true" filterSecondaryValues="true"></ComboBox>
+							<Label text="Responsable"/>
+							<Input id="enologo" required="false" enabled="false"/>
+							<Label text="Cantidad Total"/>
+							<Input id="cantidad" enabled="false"/>
+						</f:SimpleForm>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<f:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024">
+							<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+								<Table id="posTable" updateFinished="onUpdateFinished">
+									<headerToolbar>
+										<Toolbar>
+											<Title id="title" text=""/>
+											<ToolbarSpacer/>
+											<OverflowToolbarButton icon="sap-icon://add" press="onAdd"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column width="8em">
+											<Text text="Código Vino Destino"/>
+										</Column>
+										<Column width="20em">
+											<Text text="Descripción"/>
+										</Column>
+										<Column width="8em">
+											<Text text="Cantidad"/>
+										</Column>
+										<Column width="3em">
+											<Text text="ud."/>
+										</Column>
+										<Column width="8em">
+											<Text text="Almacén"/>
+										</Column>
+										<Column width="8em">
+											<Text text="Año Cosecha"/>
+										</Column>
+										<Column width="3em"></Column>
+									</columns>
+								</Table>
+							</ScrollContainer>
+						</f:SimpleForm>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar id="otbFooter">
+						<ToolbarSpacer/>
+						<Button type="Accept" text="Crear" press="onSave" id="btnCrear">
+							<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+						</Button>
+						<!--<Button type="Reject" text="Cancelar">
+							<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+						</Button>-->
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

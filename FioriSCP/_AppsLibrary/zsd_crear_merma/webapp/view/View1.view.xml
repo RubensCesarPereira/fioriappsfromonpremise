@@ -1,0 +1,85 @@
+<mvc:View controllerName="conchaytoro.cl.zsd_crear_merma.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true" xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+	<App id="idAppControl">
+		<pages>
+			<Page title="Nuevo Registro Merma">
+				<content>
+					<VBox class="sapUiSmallMargin">
+						<f:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024" maxContainerCols="4" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							editable="true">
+							<Label text="Tipo Merma" required="true"></Label>
+							<ComboBox id="movimiento" items="{mm>/merma}">
+								<core:Item key="{mm>name}" text="{mm>value}"></core:Item>
+							</ComboBox>
+							<Label text="Bodega" required="true"></Label>
+							<ComboBox id="centro" change="_clearMatnr" showSecondaryValues="true" filterSecondaryValues="true"
+								items="{ path: '/CentroSet', sorter: { path: 'Werks' } }">
+								<core:ListItem key="{Werks}" text="{Werks} - {Name1}"/>
+							</ComboBox>
+							<Label text="Centro Costo" required="true"></Label>
+							<ComboBox id="costo" showSecondaryValues="true" filterSecondaryValues="true" items="{ path: '/CecosSet', sorter: { path: 'Kostl' } }">
+								<core:ListItem key="{Kostl}" text="{Kostl} - {Name1}"/>
+							</ComboBox>
+							<!--<MaskInput id="costo" mask="9999999" placeholderSymbol="" placeholder="Ej:1020207"/>-->
+							<Label text="Motivo Merma" required="true"></Label>
+							<ComboBox id="motivo" items="{pp>/motivo}">
+								<core:Item key="{pp>name}" text="{pp>value}"></core:Item>
+							</ComboBox>
+						</f:SimpleForm>
+					</VBox>
+					<VBox>
+						<f:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024">
+							<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+								<Table id="posTable" updateFinished="onUpdateFinished">
+									<headerToolbar>
+										<Toolbar>
+											<Title id="title" text=""/>
+											<ToolbarSpacer/>
+											<OverflowToolbarButton icon="sap-icon://add" press="onAdd"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column width="4em">
+											<Text text="Posición"/>
+										</Column>
+										<Column width="8em">
+											<Text text="Material"/>
+										</Column>
+										<Column width="20em">
+											<Text text=""/>
+										</Column>
+										<Column width="8em">
+											<Text text="Cantidad"/>
+										</Column>
+										<Column width="3em">
+											<Text text="ud."/>
+										</Column>
+										<Column width="15em">
+											<Text text="Almacén"/>
+										</Column>
+										<Column width="15em">
+											<Text text="Lote"/>
+										</Column>
+										<Column width="3em"></Column>
+									</columns>
+								</Table>
+							</ScrollContainer>
+						</f:SimpleForm>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar id="otbFooter">
+						<ToolbarSpacer/>
+						<Button type="Accept" text="Crear" press="onSave">
+							<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+						</Button>
+						<!--<Button type="Reject" text="Cancelar">
+							<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+						</Button>-->
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

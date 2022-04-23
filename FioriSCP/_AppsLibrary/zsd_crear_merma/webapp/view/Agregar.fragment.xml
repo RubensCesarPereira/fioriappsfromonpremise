@@ -1,0 +1,39 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout">
+	<Dialog title="Agregar" contentWidth="550px">
+		<content>
+			<f:SimpleForm id="formAddItem" layout="ResponsiveGridLayout" adjustLabelSpan="false" minWidth="1024" maxContainerCols="4" labelSpanXL="4"
+				labelSpanL="4" labelSpanM="12" labelSpanS="12" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+				columnsM="1" editable="true">
+				<Label text="Material" required="true"></Label>
+				<Input id="mat" maxLength="9" validationError="handleValidationError" validationSuccess="handleValidationSuccess"
+					value="{path: 'aux>/name', type: 'sap.ui.model.type.String', constraints: { search: '^\\d{4}-?\\d{4}$' }}" valueLiveUpdate="true"
+					placeholder="Ej: 1112-2006"/>
+				<Label text="Descripción"></Label>
+				<Text id="descrip" text=""/>
+				<Label text="Cantidad"></Label>
+				<Input id="cant" required="true" maxLength="12" validationError="handleValidationError2" validationSuccess="handleValidationSuccess2"
+					value="{path: 'aux>/cant', type: 'sap.ui.model.type.String', constraints: { search: '^.*,?\\d+$' }}" valueLiveUpdate="true"
+					placeholder="Ej: 5.000"/>
+				<Label text="Almacén"></Label>
+				<ComboBox id="almacen" required="true" showSecondaryValues="true" filterSecondaryValues="true"
+					items="{ path: '/AlmacenSet', sorter: { path: 'Lgort' } }">
+					<core:ListItem key="{Lgort}" text="{Lgobe}" additionalText="{Lgort}"/>
+				</ComboBox>
+				<Label text="Lote"></Label>
+				<MaskInput id="lote" mask="9999999999" placeholderSymbol="" placeholder="Ej: 0000456789" required="true"/>
+				<!--<Input id="lote" type="Number" required="true"/>-->
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button id="btnAceptar" type="Accept" text="Crear" press="onAddNewRow">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>
+		</beginButton>
+		<endButton>
+			<Button type="Reject" text="Cancelar" press="onCancel">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

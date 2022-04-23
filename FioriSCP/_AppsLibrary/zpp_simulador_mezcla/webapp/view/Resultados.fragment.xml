@@ -1,0 +1,208 @@
+<core:FragmentDefinition id="fragmentResultPage" height="auto" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Page id="resultPage" title="Resultados">
+		<content>
+			<VBox>
+				<form:SimpleForm id="rcostosForm" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+					labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar id="rTB1">
+							<Title id="rTitle1" text="Costos" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content>
+						<core:Title text="" level="H3"/>
+						<Label text="Precio Ponderado"/>
+						<Input id="rponderado" editable="false"/>
+						<Label text="Mezcla Anterior"/>
+						<Input id="rmezcla" editable="false"/>
+						<Label text="Mosto Concentrado"/>
+						<Input id="rmosto" editable="false"/>
+						<Label text="Costo Teórico"/>
+						<Input id="rteorico" editable="false"/>
+					</form:content>
+				</form:SimpleForm>
+			</VBox>
+			<VBox>
+				<!--<form:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle2" text="Variedad" level="H3" titleStyle="H3"/>
+						</Toolbar>
+					</form:toolbar>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Table id="variedadTable" items="{variedad>/}" width="200px">
+							<headerToolbar>
+								<Toolbar></Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="15em">
+									<Text text="Denominación"/>
+								</Column>
+								<Column width="6em">
+									<Text text="% Cepa"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{variedad>Cepa}"/>
+										<Text text="{variedad>Porcentaje}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</FlexBox>
+					<form:content></form:content>
+				</form:SimpleForm>-->
+				<form:SimpleForm id="rvariedadForm" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+					labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle2" text="Variedad" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content></form:content>
+				</form:SimpleForm>
+			</VBox>
+			<VBox>
+				<form:SimpleForm id="rorigenForm" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+					labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle4" text="Denominación Origen" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content></form:content>
+				</form:SimpleForm>
+				<!--<form:SimpleForm>
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle0" text="Denominación Origen" level="H3" titleStyle="H3"/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content>
+						<Table id="denomOrigen" items="{origen>/}">
+							<headerToolbar>
+								<Toolbar></Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="8em">
+									<Text text="Material"/>
+								</Column>
+								<Column width="15em">
+									<Text text="Denominación"/>
+								</Column>
+								<Column width="15em">
+									<Text text="Región"/>
+								</Column>
+								<Column width="10em">
+									<Text text="Subregión"/>
+								</Column>
+								<Column width="8em">
+									<Text text="Zona"/>
+								</Column>
+								<Column width="8em">
+									<Text text="Area"/>
+								</Column>
+								<Column width="6em">
+									<Text text="% Cepa"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{origen>Matnr}"/>
+										<Text text="{origen>Cepa}"/>
+										<Text text="{origen>Region}"/>
+										<Text text="{origen>Subregion}"/>
+										<Text text="{origen>Zona}"/>
+										<Text text="{origen>Area}"/>
+										<Text text="{origen>Porcentaje}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</form:content>
+				</form:SimpleForm>-->
+			</VBox>
+			<VBox>
+				<!--<form:SimpleForm layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+					emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle3" text="Cosecha" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<FlexBox alignItems="Center" justifyContent="Center">
+						<Table id="cosechaTable" items="{cosecha>/}" width="200px">
+							<headerToolbar>
+								<Toolbar></Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column width="15em">
+									<Text text="Cosecha"/>
+								</Column>
+								<Column width="6em">
+									<Text text="% Cepa"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{cosecha>Cosecha}"/>
+										<Text text="{cosecha>Porcentaje}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</FlexBox>
+					<form:content></form:content>
+				</form:SimpleForm>-->
+				<form:SimpleForm id="rcosechaForm" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+					labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle3" text="Cosecha" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content></form:content>
+				</form:SimpleForm>
+			</VBox>
+			<VBox>
+				<form:SimpleForm id="rcalidadForm" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+					labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+					singleContainerFullSize="false">
+					<form:toolbar>
+						<Toolbar>
+							<Title id="rTitle5" text="Calidad" level="H3" titleStyle="H3"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</form:toolbar>
+					<form:content></form:content>
+				</form:SimpleForm>
+				<!--<MessageStrip text="Mezcla No Cumple para ser creada." id="msg" type="Error" showIcon="true" showCloseButton="false"-->
+				<!--	class="sapUiTinyMarginBottom"></MessageStrip>-->
+			</VBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="crear" type="Accept" text="Crear Simulación" press="onSave"></Button>
+					<Button type="Reject" text="Volver" press="editStepOne"></Button>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:FragmentDefinition>

@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{currencyValue:function(r){if(!r){return""}return parseFloat(r).toFixed(2)},removeZero:function(r){return Number(r).toString()}}});

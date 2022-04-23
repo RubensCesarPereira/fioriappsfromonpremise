@@ -1,0 +1,66 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_descomponer_mezcla.controller.Materiales" class="sapUiSizeCompact" displayBlock="true"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page id="materiales" title="Lista de Materiales por Orden de Proceso" showFooter="true" showNavButton="true"
+		navButtonPress="_onPageNavButtonPress">
+		<content>
+			<Table id="tablaMateriales" items="{materiales>/}" width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="100px">
+						<Title text=""/>
+						<ToolbarSpacer/>
+						<Label text="Orden:" design="Bold"/>
+						<Text id="orden" text=""/>
+						<Label width="50px"/>
+						<Label text="Stock Disponible:" design="Bold"/>
+						<Input id="cantidad" width="150px" liveChange="addDot" submit="calculaComponente"/>
+						<ToolbarSpacer/>
+						<!--<OverflowToolbarButton icon="sap-icon://add" press="onAddAnalisis"/>-->
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="3em">
+						<Text text="Posición"/>
+					</Column>
+					<Column width="7em">
+						<Text text="Material"/>
+					</Column>
+					<Column width="12em">
+						<Text text="Descripción"/>
+					</Column>
+					<Column width="5em">
+						<Text text="Cantidad"/>
+					</Column>
+					<Column width="4em">
+						<Text text="Almacén"/>
+					</Column>
+					<Column width="6em">
+						<Text text="Lote"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{materiales>Posicion}"/>
+							<Text text="{materiales>Codigo2}"/>
+							<Text text="{materiales>Descripcion}"/>
+							<Text text="{path: 'materiales>Cantidad', formatter: '.formatter.addDot'}">
+								<customData>
+									<core:CustomData key="IniCant" value=""/>
+								</customData>
+							</Text>
+							<Text text="{materiales>LGORT}"/>
+							<Text text="{materiales>Lote}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer/>
+				<Button id="descomponer" type="Accept" text="Descomponer" press="onSave"/>
+				<!--<Button type="Reject" text="Cancelar" press="onCloseDialog"/>-->
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

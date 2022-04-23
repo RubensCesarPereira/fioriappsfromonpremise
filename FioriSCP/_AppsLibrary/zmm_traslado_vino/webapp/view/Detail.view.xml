@@ -1,0 +1,91 @@
+<mvc:View controllerName="cl.conchaytoro.zmm_traslado_vino.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" showFooter="true" navButtonPress="onNavBack" showNavButton="true" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{i18n>detailDeliveryTitle}" condensed="true" number="{Vbeln}" numberUnit="{Erdat}"/>
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm id="SimpleForm" editable="true" maxContainerCols="3" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+					layout="ResponsiveGridLayout" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1"
+					columnsL="1" columnsM="1" singleContainerFullSize="false">
+					<Label text="Fecha Documento"/>
+					<DatePicker id="erdat" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" editable="false"/>
+					<Label text="Fecha Contabilización" required="true"/>
+					<DatePicker id="fechaConta" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" editable="true"/>
+					<Label text="Centro Suministrador"/>
+					<Input id="werks" type="Text" value="{Werks}" editable="false"/>
+				</f:SimpleForm>
+			</VBox>
+			<!--En items: se coloca el nombre del atributo de navegacion del Entity de Cabecera (HeaderToItems) -->
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" inset="false" alternateRowColors="true" width="auto" items="{EntregaToPosiciones}"
+					updateFinished=".onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column minScreenWidth="Tablet" width="4em" demandPopin="true" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDUecha}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDMatnr}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" width="15em" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDArktx}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDLfimg}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" width="2em" demandPopin="true" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDMeins}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" width="4em" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDWerks}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" width="4em" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDLgort}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDCharg}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" width="4em" hAlign="Left">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+							<Text text="{i18n>detailLineItemTableIDCheck}"/>
+						</Column>
+						<Column visible="false">
+							<Text text="{i18n>detailLineItemTableIDPosnr}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{ path: 'Uecha', formatter: '.formatter.ltrim' }"/>
+								<Text text="{ path: 'Matnr', formatter: '.formatter.ltrim' }"/>
+								<Text text="{Arktx}"/>
+								<Text text="{ path: 'Lfimg', formatter: '.formatter.formatNumber' }"/>
+								<ObjectNumber unit="{Meins}"/>
+								<Text text="{Werks}"/>
+								<Text text="{Lgort}"/>
+								<Text text="{Charg}"/>
+								<Text text="{Gjahr}"/>
+								<CheckBox id="check" tooltip="Autorizar"/>
+								<Text text="{ path: 'Posnr', formatter: '.formatter.ltrim' }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Contabilizar" press=".onContabilizarPress"/>
+		</semantic:positiveAction>
+		<!--		<semantic:negativeAction>
+			<semantic:NegativeAction text="Cancelar" press=".onCancelarPress"/>
+		</semantic:negativeAction>-->
+	</semantic:DetailPage>
+</mvc:View>

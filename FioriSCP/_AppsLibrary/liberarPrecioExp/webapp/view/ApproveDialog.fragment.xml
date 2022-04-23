@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog title="Confirmación de Aprobación">
+		<VBox alignItems="Center" justifyContent="Center" visible="false"
+			class="sapUiMediumMarginBottom sapUiTinyMargin">
+			<BusyIndicator text="Aprobando..." />
+			<ProgressIndicator width="300px" />
+		</VBox>
+		<VBox 
+			class="sapUiTinyMargin">
+			<Text text="Se aprobarón {=${Sview>/SelItems}.length} elementos seleccionados!" class="sapUiMediumMarginBottom" width="100%" textAlign="Center"/>
+		</VBox>
+		<beginButton>
+			<Button text="Aceptar" press="onApprovePress" />
+		</beginButton>
+		<endButton>
+			<Button text="Cancelar" press="onCloseDialogA" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

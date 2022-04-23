@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog title="Confirmación de Rechazo">
+		<VBox id="execu-progres" alignItems="Center" justifyContent="Center" visible="{Sview>/exec}"
+			class="sapUiMediumMarginBottom sapUiTinyMargin">
+			<BusyIndicator text="Rechazando..." />
+			<ProgressIndicator width="300px" percentValue="{Sview>/progress}"/>
+		</VBox>
+		<VBox  visible="{=!${Sview>/exec}}" class="sapUiTinyMargin">
+			<Text text="Se rechazaran {=${Sview>/SelItems}.length} elementos seleccionados!" class="sapUiMediumMarginBottom" width="100%" textAlign="Center"/>
+			<Label text="Indique motivo: " width="100%" />
+			<Select forceSelection="true" id="lista" selectedKey="{Sview>/key}"
+				change="handleSelectChange" items="{
+						path: 'Sview>/RecjList'}">
+				<core:Item key="{Sview>Motivo_Rechazo}" text="{Sview>DescMotivoRechazo}" />
+			</Select>
+			<TextArea id="motOtro" state="Disabled" value="{Sview>/reason}"
+				placeholder="Indique otro motivo(obligatorio)" maxLength="60" width="100%"
+				showExceededText="false" liveChange="handleLiveChange"
+				visible="{=${Sview>/key} === '06' ? true : false}" />
+			<VBox visible="{=${Sview>/key} !== '06' ? true : false}">
+				<Label text="Indique Valor Correcto: " textAlign="Begin"/>
+				<Input liveChange="onInputLiveChange" id="corr-value" value="{Sview>/validValue}" />
+			</VBox>
+		</VBox>
+		<beginButton>
+			<Button visible="{=!${Sview>/exec}}" text="Aceptar" press="onAcceptRejectPress" />
+		</beginButton>
+		<endButton>
+			<Button visible="true" text="Cancelar" press="onCloseDialog" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

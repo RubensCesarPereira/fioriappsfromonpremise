@@ -1,0 +1,144 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:me="sap.me" 
+          controllerName="fcg.grc.accessrequest.approve.view.RoleDetails">
+	<Page id="AccessRequestDetails" enableScrolling="true">
+		<customHeader>
+			<Bar id="cartBtnBar">
+               <contentLeft>
+                  <Button
+                     id="backBtn"
+                     type="Back"
+                     press="onBackBtnPressed" ></Button>
+                </contentLeft>			
+				<contentMiddle>
+					<Label text="{i18n>ACCESS_DETAILS_TEXT}"></Label>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<ObjectHeader title="{ShortDescription}" id="headerInfo">				
+				<attributes>
+						<ObjectAttribute text="{path:'AccessType', formatter:'.formatAccessType'}"></ObjectAttribute>
+				</attributes>
+				<statuses>
+					<ObjectStatus id="attStatus" text="" state="Error"></ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<IconTabBar id="TABCONT_ROLE_INFO">
+				<items>
+					<IconTabFilter id = "itfRisks" icon="sap-icon://alert" key="Risks" text="{i18n>RISKS_COL_LBL}" count="{RiskCount}" iconColor="Critical" >
+					 <content>
+						<Table id="riskList" 
+							items="{Risks}" inset="true" growing="true" growingThreshold="10" growingScrollToLoad="false" 
+							 visible="true" noDataText="{i18n>NO_ACCESS_RISKS_FOUND_TEXT}">
+							 
+							<columns>
+							    <Column hAlign="Left" header="Description"  width="80%" ><header><Label text="{i18n>DESCRIPTION_LBL}" design="Bold"></Label></header></Column>
+								<Column hAlign="Left" header="Level"  width="20%" ><header><Label text="{i18n>LEVEL_LBL}" design="Bold"></Label></header></Column>
+							</columns>
+							<items>
+								<ColumnListItem press="handleLineItemPress">
+									<cells>
+									    <Text text="{RiskDesc}"></Text>
+									</cells>
+									<cells>
+										<Text text="{LevelName}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					 </content>
+					</IconTabFilter>
+					<IconTabFilter id = "itfActions" icon="sap-icon://menu" key="Actions" text="{i18n>ACTIONS_TEXT}" count="{ActionCount}">
+					 <content>
+						<Table id="actionList" 
+							items="{Actions}" inset="true" growing="true" growingThreshold="10" growingScrollToLoad="false" 
+							 visible="true" noDataText="{i18n>NO_ACTIONS_FOUND_TEXT}">
+							<columns>
+								<Column hAlign="Left" header="Description"><header><Label text="{i18n>DESCRIPTION_LBL}" design="Bold"></Label></header></Column>
+							</columns>
+							<items>
+								<ColumnListItem press="handleLineItemPress">
+									<cells>
+										<Text text="{Description}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					 </content>
+					</IconTabFilter>
+
+					<IconTabFilter icon="sap-icon://hint" key="Info" text="{i18n>INFO_LBL}">
+					 <content>
+					 
+						<form:SimpleForm id="INFO_FORM" minWidth="300">
+							<form:content>
+								<Label id="BusinessProcess_lbl" text="{i18n>BUS_PROC_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="BusinessProcess_txt" text="{BusinessProcess}"
+									visible="false"></Text>
+			
+								<Label id="FunctionalArea_lbl" text="{i18n>FUN_AREA_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="FunctionalArea_txt" text="{FunctionalArea}"
+									visible="false"></Text>
+			
+								<Label id="Company_lbl" text="{i18n>COMPANY_TEXT}" design="Bold"
+									visible="false"></Label>
+								<Text id="Company_txt" text="{Company}" visible="false"></Text>
+			
+								<Label id="Prerequisite_lbl" text="{i18n>PRE_REQ_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="Prerequisite_txt" text="{Prerequisite}" visible="false"></Text>
+			
+								<Label id="RoleName_lbl" text="{i18n>ROLE_TECH_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="RoleName_txt" text="{RoleName}" visible="false"></Text>
+								
+								<Label id="System_lbl" text="{i18n>SYSTEM_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="System_txt" text="{System}" visible="false"></Text>
+								
+								<Label id="ItemType_lbl" text="{i18n>ITEM_TYPE_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="ItemType_txt" text="{RoleTypeDesc}" visible="false"></Text>
+                                <!-- Valid From Added -->  
+								<Label id="Validityfrom_lbl" text="{i18n>VALIDITY_FROM_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="Validityfrom_txt" text="{parts:[{path:'ValidFrom'},{path:'i18n>MAX_VALIDITY_TEXT'}], formatter:'.formatValidityFromDate'}" visible="false"></Text>								
+								
+								<Label id="Validity_lbl" text="{i18n>VALIDITY_TO_TEXT}"
+									design="Bold" visible="false"></Label>
+								<Text id="Validity_txt" text="{parts:[{path:'ValidTo'},{path:'i18n>MAX_VALIDITY_TEXT'}], formatter:'.formatValidityDate'}" visible="false"></Text>
+							</form:content>
+						</form:SimpleForm>
+						
+						<Table id="roleDescription" headerText="{i18n>DESCRIPTION_LBL}"
+						 inset="true" growing="false" visible="false">
+			  				<columns>
+								<Column hAlign="Left" header=""></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text id="longDescription" text="{LongDescription}" editable="false"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+
+		<footer>
+			<Bar id="detailFooter">
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

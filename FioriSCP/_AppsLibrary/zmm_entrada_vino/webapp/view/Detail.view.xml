@@ -1,0 +1,80 @@
+<mvc:View controllerName="cl.conchaytoro.zmm_entrada_vino.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" showFooter="true" navButtonPress="onNavBack" showNavButton="true" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{i18n>detailDeliveryPlanTitle}" condensed="true" number="{Ebeln}" numberUnit="{Aedat}"/>
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm editable="true" maxContainerCols="2" labelSpanM="2" labelSpanS="2" columnsXL="2" columnsL="2" columnsM="2">
+					<Label text="Fecha Documento"/>
+					<DatePicker id="fecha" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" editable="false"/>
+				</f:SimpleForm>
+			</VBox>
+			<!--En items: se coloca el nombre del atributo de navegacion del Entity de Cabecera (HeaderToItems) -->
+			<Table id="lineItemsList" width="auto" items="{HeaderToItems}" updateFinished=".onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="5em">
+						<Text text="{i18n>detailLineItemTableIDPosnr}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" width="6em" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>detailLineItemTableIDMatnr}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" width="20em" hAlign="Left">
+						<Text text="{i18n>detailLineItemTableIDArktx}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>detailLineItemTableIDMenge}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" width="3em" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>detailLineItemTableIDMeins}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Text text="Cosecha"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>detailLineItemTableIDCheck}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{ path: 'Ebelp', formatter: '.formatter.ltrim' }"/>
+							<Text text="{ path: 'Matnr', formatter: '.formatter.ltrim' }"/>
+							<Text text="{Txz01}"/>
+							<!--							<Text text="{ 
+								parts:[ 
+									{path:'Menge', formatter: '.formatter.formatNumber'}, 
+									{path:'Meins'} 
+									] 
+								}"/>
+-->
+							<Text text="{ path: 'Menge', formatter: '.formatter.formatNumber' }"/>
+							<ObjectNumber unit="{Meins}"/>
+							<Input liveChange="yearInput" maxLength="4"/>
+							<CheckBox id="check" tooltip="Autorizar"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Contabilizar" press=".onContabilizarPress"/>
+		</semantic:positiveAction>
+		<!--<semantic:negativeAction>
+			<semantic:NegativeAction text="Cancelar" press=".onCancelarPress"/>
+		</semantic:negativeAction>-->
+		<!-- Definiciones de botones en fomra de iconos -->
+		<!--
+		<semantic:customFooterContent>
+			<OverflowToolbarButton icon="sap-icon://save" text="Contabilizar" press=".onSavePress"/>
+			<OverflowToolbarButton icon="sap-icon://cancel" text="Cancelar" press=".onCancelPress"/>
+		</semantic:customFooterContent>
+		-->
+	</semantic:DetailPage>
+</mvc:View>

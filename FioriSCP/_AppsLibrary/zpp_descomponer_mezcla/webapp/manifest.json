@@ -1,0 +1,178 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "cl.conchaytoro.zpp_descomponer_mezcla",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZOBJ_SEM_DESCOMP_MEZCLA",
+                    "action": "display",
+                    "title": "{{appTitle}}",
+                    "info": " ",
+                    "subTitle": " ",
+                    "icon": "sap-icon://example"                    
+                }
+            }
+        },
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "dataSources": {
+            "mainService": {
+                "uri": "/FioriSCP.clconchaytorozpp_descomponer_mezcla/sap/opu/odata/sap/ZMM_AYUDAS_BUSQUEDAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService2": {
+                "uri": "/FioriSCP.clconchaytorozpp_descomponer_mezcla/sap/opu/odata/sap/ZPP_DESCOMPONER_MEZCLA_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "version": "1.38.11"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "cl.conchaytoro.zpp_descomponer_mezcla.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "dependencies": {
+            "minUI5Version": "1.60.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "cl.conchaytoro.zpp_descomponer_mezcla.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "dos": {
+                "dataSource": "mainService2",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "cl.conchaytoro.zpp_descomponer_mezcla.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteView1",
+                    "pattern": "",
+                    "target": [
+                        "TargetView1"
+                    ]
+                },
+                {
+                    "name": "Materiales",
+                    "pattern": "Materiales/{Orden}/{Cantidad}",
+                    "target": [
+                        "Materiales"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View1",
+                    "viewName": "View1"
+                },
+                "Materiales": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Materiales",
+                    "viewName": "Materiales"
+                },
+                "App": {
+                    "viewType": "XML",
+                    "viewName": "App"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zpp_descom/webapp",
+        "_version": "1.1.0"
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zpp_descomponer_mezcla"
+            ]
+        } 
+}

@@ -1,0 +1,372 @@
+
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.uxap"
+		   xmlns:layout="sap.ui.layout"
+		   xmlns:m="sap.m"
+		   xmlns:sample="sap.uxap.sample.AnchorBar.block"
+		   controllerName="z_figestionacreedores.controller.menu" 
+		   xmlns:blockcolor="sap.uxap.sample.SharedBlocks"
+		   	xmlns:f="sap.ui.layout.form"
+		   height="100%"
+		>
+ 
+	<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" class="sapUiTinyMargin sapUiTinyPadding">
+		
+ <headerTitle>
+			<ObjectPageHeader objectTitle="Grupo de cuentas">
+			<actions>
+					<m:Button id="btnValida" icon="sap-icon://accept" text="Validar" type="Accept" press="valida"/>
+					<m:Button id="btnGuarda" icon="sap-icon://save" text="Guardar" type="Emphasized" press="onSave"/>
+				</actions>
+			</ObjectPageHeader>
+		</headerTitle>
+		<headerContent width="auto" class="sapUiTinyMargin sapUiTinyPadding">
+				<m:FlexBox
+					height="70px"
+					alignItems="Center"
+					justifyContent="Center">
+					<m:items>
+					<m:Select
+					id="selectGrpCta"
+					required="true"
+					forceSelection="true"
+					selectedKey="AVRS"
+					items="{GrpCta>/GrpCta}"
+					change="onChangeGrpCta">
+					<core:ListItem key="{GrpCta>KTOKK}" text="{GrpCta>KTOKK_DESC}" otro="{GrpCta>ZTERM}"/></m:Select>
+					</m:items>
+				</m:FlexBox>
+		</headerContent>
+ 
+		<sections>
+			<ObjectPageSection title="General">
+				<subSections>
+					<ObjectPageSubSection title="Datos Generales ">
+						<blocks>
+							<layout:HorizontalLayout class="sapUiSmallMargin">
+		<f:SimpleForm id="formDG" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Tratamiento" class="sapUiMiddleAlign" design="Bold"/>
+				<m:Select 
+				id="selectTrat"
+				width="30%"
+				autoAdjustWidth="true"
+				forceSelection="false"
+				selectedKey="">
+				<core:ListItem key="Sr." text="SR." />
+				<core:ListItem key="Sra." text="SRA." />
+				<core:ListItem key="Señores" text="Señores" />
+				<core:ListItem key="Empresa" text="Empresa" />
+				<core:ListItem key="Estimados" text="Estimados" />
+				<core:ListItem key="Fondo de Inversión" text="Fondo de Inversión" />
+				<core:ListItem key="Persona Jurídica" text="Persona Jurídica" />
+				<core:ListItem key="Persona Natural" text="Persona Natural" /></m:Select>
+				<m:Label text="Nombre" design="Bold"/>
+				<m:Input id="name1" />
+				<m:Label text="Concepto" design="Bold"/>
+				<m:Input id="concep" />
+				<m:Label text="Teléfono" design="Bold"/>
+				<m:Input id="telf" width="100%"/>
+				<m:Label text="E-mail " design="Bold"/>
+				<m:Input id="email1" width="100%"/>
+				<m:Label text="E-mail cobranza" design="Bold"/>
+				<m:Input id="email2" width="100%"/>
+			</f:content>
+		</f:SimpleForm>
+		
+				
+		</layout:HorizontalLayout>
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection title="Dirección">
+						<blocks>
+							<f:SimpleForm id="frmDD" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Calle/N°" wrapping="true" design="Bold"/>
+				<m:Input id="direc" width="100%"/>
+				<m:Label text="Ciudad" design="Bold"/>
+				<m:Input id="txtCiudad" width="100%"/>
+				<m:Label text="País" design="Bold"/>
+				<m:Select
+				id="selectPais"
+				forceSelection="false"
+                selectedKey="CL"
+				items="{/Paises}"
+				change="onChangePais">
+				<core:Item key="{LAND1}" text="{LAND1_DESC}" /></m:Select>
+				<m:Label text="Comuna" design="Bold"/>
+				<m:Input id="txtComuna" width="100%"/>
+				
+				<m:Label text="Región" design="Bold"/>
+				<m:Select
+					id="selectRegion"
+					forceSelection="false"
+					items="{/Regiones}">
+						<core:Item key="{REGIO}" text="{REGIO_DESC}" />
+						</m:Select>
+				
+							
+			</f:content>
+		</f:SimpleForm>	
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Datos Sociedad">
+			<subSections>
+					<ObjectPageSubSection title="Sociedad">
+						<blocks>
+				
+			<f:SimpleForm id="formDC" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="false"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="4"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Sociedad(es)"  design="Bold"/>
+					<m:MultiComboBox 
+					id="selectSociedades"  
+					enableMultiLineMode="true"
+					items="{/Sociedades}">
+					<core:Item key="{BUKRS}" text="{BUKRS_DESC}"  />
+					
+				</m:MultiComboBox>
+				
+				<m:Label text="N° Id.fiscal" design="Bold"/>
+				<m:Input id="stcd1" />
+				<m:Label text="N.I.F." design="Bold"/>
+				<m:Input id="nif" />
+				<m:Label text="Deudor" design="Bold"/>
+				<m:Input id="kunnr" />
+				<m:Label text="Fab. Externo" design="Bold"/>
+				<m:Input id="emnfr" ></m:Input>
+				<m:Label text="Cond. Pago" design="Bold"/>
+				<m:Select
+					id="selectCondPagoS"
+					forceSelection="false"
+					selectedKey=""						
+					items="{/CondPago}">
+					<core:Item key="{ZTERM}" text="{ZTERM_DESC}" /></m:Select>
+			</f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection title="Bancario">
+					<blocks>
+					<f:SimpleForm id="frmDB" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Dato Ban. País" wrapping="true" design="Bold"/>
+				<m:Select
+					id="selectPaiBank"
+					forceSelection="false"
+					selectedKey="{dataModel>/BANKS}"
+					items="{/Paises}">
+					<core:Item key="{LAND1}" text="{LAND1_DESC}" /></m:Select>
+				<m:Label text="Clave Banco" design="Bold"/>
+				<m:Select
+					id=""	
+					forceSelection="false"
+					selectedKey=""
+					items="{
+						path: '/Ciudad',
+						sorter: { path: 'Name' }
+					}"><core:Item key="{ciudId}" text="{ciudName}" /></m:Select>
+						
+					<m:Label text="Cta. Bancaria" design="Bold"/><m:Input id="cta"></m:Input>
+					<m:Label text="Titular Cta." design="Bold"/><m:Input id="titcta"></m:Input>
+					<m:Label text="IBAN" design="Bold"/><m:Input id="iban"></m:Input>
+			</f:content>
+		</f:SimpleForm>	
+					</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Datos Compra">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+							<f:SimpleForm id="frmDBa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			<m:Label text="Grupo de Compras" design="Bold"/>
+			<m:MultiComboBox
+			id="selectGrpComp"
+			width="400px"
+			items="{/GrpComp}">
+			<core:Item key="{EKORG}" text="{EKORG_DESC}" />
+			</m:MultiComboBox>
+			<m:Label text="Moneda del Pedido" design="Bold" />
+			<m:Select
+			id="selectMoneda"
+					forceSelection="false"
+					selectedKey="{dataModel>/WAERS}"
+					items="{/Monedas}">
+					<core:Item key="{WAERS}" text="{WAERS_DESC}" /></m:Select>
+		<m:Label text="Condición Pago" design="Bold"/>
+			<m:Select
+			id="selectCondPagoC"
+			width="300px"
+			forceSelection="false"
+			items="{/CondPago}"><core:Item key="{ZTERM}" text="{ZTERM_DESC}" /></m:Select></f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Anexos">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+							<f:SimpleForm id="frmDBaa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			<m:UploadCollection
+			id="UploadCollection"
+			maximumFilenameLength="55"
+			maximumFileSize="10"
+			multiple="true"
+			sameFilenameAllowed="true"
+			instantUpload="false"
+			noDataDescription="Arrastre archivos o presione en el botón &quot;+&quot; "
+			change="onChange"
+			fileDeleted="onFileDeleted"
+			filenameLengthExceed="onFilenameLengthExceed"
+			fileSizeExceed="onFileSizeExceed"
+			typeMissmatch="onTypeMissmatch"
+			uploadComplete="onUploadComplete"
+			beforeUploadStarts="onBeforeUploadStarts"
+			noDataText="Sin archivos." 
+			uploadUrl=""/></f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Observaciones">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+						<f:SimpleForm id="frmDBaat" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+							
+			<m:TextArea id="textAreaWithBinding2" value="{/value}" showExceededText="true" maxLength="200" width="100%" valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }" valueLiveUpdate="false" liveChange="handleLiveChange" />
+						</f:content></f:SimpleForm></blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+ 
+		</sections>
+ 
+	</ObjectPageLayout>
+</core:View>

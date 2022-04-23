@@ -1,0 +1,54 @@
+{
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.52.35"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.52.35"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.52.35"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.52.35"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/CYT_CC",
+      "target": {
+        "type": "destination",
+        "name": "CYT_CC"
+      },
+      "description": "SCP to CYT"
+    }
+  ],
+  "welcomeFile": "/index.html",
+  "sendWelcomeFileRedirect": true
+}

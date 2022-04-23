@@ -1,0 +1,100 @@
+<core:FragmentDefinition id="fragmentComponentPage" height="100%" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog id="compPage" title="Seleccionar Componentes-Aptitud" afterClose="dialogAfterclose">
+		<content>
+			<Table id="selectAptitud" mode="MultiSelect" items="{componentes>/}">
+				<headerToolbar>
+					<Toolbar height="70px">
+						<Title text="Filtros de Búsqueda"/>
+						<ToolbarSpacer/>
+						<Label text="Bodega:"/>
+						<MultiComboBox id="Bodega" width="150px" items="{rr>/bodega}" selectionFinish="handleSelectionFinish"
+							selectionChange="handleSelectionChange">
+							<core:Item key="{rr>name}" text="{rr>value}"></core:Item>
+						</MultiComboBox>
+						<Label text="Cosecha:"/>
+						<MultiComboBox id="Cosecha_p" width="150px" items="{cc>/cosecha}" selectionFinish="handleSelectionFinish1"
+							selectionChange="handleSelectionChange1">
+							<core:Item key="{cc>name}" text="{cc>value}"></core:Item>
+						</MultiComboBox>
+						<ToolbarSpacer/>
+						<!--<OverflowToolbarButton icon="sap-icon://add" press="onAddAnalisis"/>-->
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="10em">
+						<Text text="Bodega"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Código"/>
+					</Column>
+					<Column width="15em">
+						<Text text="Descripción"/>
+					</Column>
+					<Column width="5em">
+						<Text text="Cosecha"/>
+					</Column>
+					<Column width="4em">
+						<Text text="Aptitud"/>
+					</Column>
+					<Column width="6em">
+						<Text text="Calidad"/>
+					</Column>
+					<Column width="10em">
+						<Text text="Variedad"/>
+					</Column>
+					<Column width="8em">
+						<Text text="D.O"/>
+					</Column>
+					<Column width="6em">
+						<Text text="Precio"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Stock en Bodega"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Almacén"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Lote"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{componentes>Bodega}"/>
+							<Text text="{componentes>Codigo}"/>
+							<Text text="{componentes>Descripcion}"/>
+							<Text text="{componentes>Cosecha}"/>
+							<Text text="{componentes>CodAptitud}"/>
+							<Text text="{componentes>Calidad}"/>
+							<Text text="{componentes>Variedad}"/>
+							<Text text="{componentes>DenomOrigen}"/>
+							<Text text="{componentes>Precio}"/>
+							<Text text="{componentes>Stock}"/>
+							<Text text="{componentes>Lgort}"/>
+							<!--<Text text="{path: 'componentes>Stock', formatter: '.formatter.addDot'}"/>-->
+							<Text text="{componentes>Lote}"/>
+							<!--<Text text="{mm>Bodega}"/>
+							<Text text="{mm>Codigo}"/>
+							<Text text="{mm>Description}"/>
+							<Text text="{mm>Cosecha}"/>
+							<Text text="{mm>Aptitud}"/>
+							<Text text="{mm>Calidad}"/>
+							<Text text="{mm>Variedad}"/>
+							<Text text="{mm>DO}"/>
+							<Text text="{mm>Precio}"/>
+							<Text text="{mm>Stock}"/>
+							<Text text="{mm>Lote}"/>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button type="Accept" text="Guardar" press="onAddCompo"/>
+		</beginButton>
+		<endButton>
+			<Button type="Reject" text="Cerrar" press="onCloseDialog"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

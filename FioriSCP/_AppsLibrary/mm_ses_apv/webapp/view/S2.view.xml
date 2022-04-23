@@ -1,0 +1,31 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core"
+	xmlns="sap.m" controllerName="ui.s2p.mm.ses.approve.view.S2">
+	<Page id="page">
+		<content>
+			<List id="list" items="{path:'/Workitems', sorter: {path: 'CreatedAt',descending: true}}" mode="{device>/listMode}" select="_handleSelect"
+					growing="true" growingThreshold="50" growingScrollToLoad="false">
+				<ObjectListItem id="MAIN_LIST_ITEM" type="{device>/listItemType}" press="_handleItemPress"
+					title="{Description}"
+                    number="{parts:['ActualValue','ActualValueCurrency'], 
+                     formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatCurrencyAmountShort'}"
+                    numberUnit="{ActualValueCurrency}">
+					<attributes>
+						<ObjectAttribute id="ATTR1" text="{CreatedByName}" />
+						<ObjectAttribute id="ATTR2" text="{ServiceProviderName}" />
+					</attributes>
+					<firstStatus>
+					    <ObjectStatus id="STATUS1" text=""/>
+					</firstStatus>
+					<secondStatus>  
+                        <ObjectStatus id="STATUS2" text="{parts:['CreatedAt'], formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatDaysAgo'}"/>
+					</secondStatus>
+				</ObjectListItem>
+			</List>
+		</content>
+	</Page>
+</core:View>

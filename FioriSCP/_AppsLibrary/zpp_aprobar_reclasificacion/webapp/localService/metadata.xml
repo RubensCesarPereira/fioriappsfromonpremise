@@ -1,0 +1,60 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPP_LIBERA_ORD_RECLASIFICACION_SRV" xml:lang="es"
+			sap:schema-version="1">
+			<EntityType Name="BuscCabecera" sap:content-version="1">
+				<Key><PropertyRef Name="Aufnr"/></Key><Property Name="IAction" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Carácter 1" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="IAufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MatnrOrigen" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Cl.doc.ventas" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Batch" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lote" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CodReclasif" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false"
+					sap:label="Componente del número de versión" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="DescripCab" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Denominación"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CantCab" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Tamaño de lote"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="VeraaUser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario respons."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="FechaModif" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Fecha" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="OrdenToPosiciones" Relationship="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.OrdenPosiciones"
+					FromRole="FromRole_OrdenPosiciones" ToRole="ToRole_OrdenPosiciones"/></EntityType>
+			<EntityType Name="BuscPosicione" sap:content-version="1">
+				<Key><PropertyRef Name="Aufnr"/></Key><Property Name="MatnrOrigen" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MatnrDestino" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Batch" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lote" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="DescripPos" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Denominación"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CantPos" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Tamaño de lote"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="UM base" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="LiberaReclasi" sap:content-version="1">
+				<Key><PropertyRef Name="Aufnr"/></Key><Property Name="IAction" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Carácter 1" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="IAufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="MatnrOrigen" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Aufnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Cl.doc.ventas" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Batch" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Lote" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CodReclasif" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false"
+					sap:label="Componente del número de versión" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="DescripCab" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Denominación"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CantCab" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Tamaño de lote"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="VeraaUser" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Usuario respons."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StatusLiberado" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Carácter 1"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StatusRechazado" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Carácter 1"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="OrdenPosiciones" sap:content-version="1"><End Type="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.BuscCabecera" Multiplicity="1" Role="FromRole_OrdenPosiciones"/><End Type="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.BuscPosicione" Multiplicity="*" Role="ToRole_OrdenPosiciones"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_OrdenPosiciones"><PropertyRef Name="Aufnr"/></Principal>
+					<Dependent Role="ToRole_OrdenPosiciones"><PropertyRef Name="Aufnr"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZPP_LIBERA_ORD_RECLASIFICACION_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="BuscCabeceraSet" EntityType="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.BuscCabecera" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="BuscPosicioneSet" EntityType="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.BuscPosicione" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="LiberaReclasiSet" EntityType="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.LiberaReclasi" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="OrdenPosicionesSet" Association="ZPP_LIBERA_ORD_RECLASIFICACION_SRV.OrdenPosiciones" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="BuscCabeceraSet" Role="FromRole_OrdenPosiciones"/><End EntitySet="BuscPosicioneSet" Role="ToRole_OrdenPosiciones"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPP_LIBERA_ORD_RECLASIFICACION_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPP_LIBERA_ORD_RECLASIFICACION_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

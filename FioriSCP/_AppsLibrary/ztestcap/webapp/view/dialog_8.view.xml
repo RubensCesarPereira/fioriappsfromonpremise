@@ -1,0 +1,56 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ztestcap.controller.dialog_8" xmlns:m="sap.m">
+	<m:Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="Tipo de Imputación" type="Standard"
+		verticalScrolling="true">
+		<m:content>
+		
+			<m:Table id="idLibs"  items="{commonModel>/TipoCollection}"
+		inset="false">
+		<m:headerToolbar>
+			<m:Toolbar>
+				<m:Title text="" level="H2"/>
+			</m:Toolbar>
+		</m:headerToolbar>
+		<m:columns>
+			<m:Column
+				width="12em">
+				<m:Text text="Código" />
+			</m:Column>
+			<m:Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<m:Text text="Denominación" />
+			</m:Column>
+			
+		</m:columns>
+		<m:items>
+		
+								
+			
+		 <m:ColumnListItem>					
+				<m:cells>
+					<m:ObjectIdentifier
+						title=""
+						text="{commonModel>col1}"/>
+					
+					<m:ObjectIdentifier
+						title=""
+						text="{commonModel>col2}"/>									
+				</m:cells>					
+			</m:ColumnListItem>  																		
+				
+		</m:items>
+	</m:Table>
+		
+		</m:content>
+		<m:beginButton/>
+		<m:buttons>
+			<m:Button text="OK" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="false" iconDensityAware="false"
+				press="_onButtonPress"  />
+			<m:Button text="Cancelar " type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+				press="_onButtonPress1"/>
+		</m:buttons>
+		<m:customHeader/>
+		<m:endButton/>
+		<m:subHeader/>
+	</m:Dialog>
+</mvc:View>

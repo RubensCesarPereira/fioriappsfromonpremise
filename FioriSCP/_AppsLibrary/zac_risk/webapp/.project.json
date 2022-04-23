@@ -1,0 +1,22 @@
+{
+    "dataBinding": {
+        "/webapp/view/Page1.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/RiesgosAll.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/Launchpad.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/RiesgosTi.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/RiesgosAg.view.xml": {
+            "entitySet": ""
+        }, 
+        "/webapp/view/Page6.view.xml": {
+            "entitySet": ""
+        } 
+    }
+}

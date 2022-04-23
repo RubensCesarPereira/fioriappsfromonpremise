@@ -1,0 +1,70 @@
+_schema-version: "3.2"
+ID: z_sdconsultabet
+version: 0.0.4
+modules:
+- name: z-sdconsultabet-approuter
+  type: approuter.nodejs
+  path: z-sdconsultabet-approuter
+  requires:
+  - name: z_sdconsultabet_html_repo_runtime
+  - name: uaa_z_sdconsultabet
+  - name: dest_z_sdconsultabet
+  - name: conn_z_sdconsultabet
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: z_sdconsultabet_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: z_sdconsultabet_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - Z_SDConsultaBET-content.zip
+      name: Z_SDConsultaBET
+      target-path: resources/
+- name: Z_SDConsultaBET
+  type: html5
+  path: Z_SDConsultaBET
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: z_sdconsultabet_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: z_sdconsultabet_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_z_sdconsultabet
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: z_sdconsultabet-xsuaa-service
+    service-plan: application
+- name: conn_z_sdconsultabet
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
+- name: dest_z_sdconsultabet
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

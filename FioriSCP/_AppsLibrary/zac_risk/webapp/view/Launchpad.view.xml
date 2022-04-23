@@ -1,0 +1,27 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="zac.grc.risk.cust.controller.Launchpad" xmlns="sap.m">
+    <Page showHeader="false" title="Responsive Page Title" showFooter="false" showNavButton="false">
+        <content>
+            <GenericTile header="Riesgos por Gerencia" subheader="" frameType="OneByOne" press="_onGenericTilePress">
+                <tileContent>
+                    <TileContent footer="" unit="Riesgos">
+                        <content>
+                            <NumericContent value="600K" valueColor="Neutral" indicator="None" icon="sap-icon://business-objects-experience"/>
+                        </content>
+                    </TileContent>
+                </tileContent>
+            </GenericTile>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                    <Button text="Save" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                    <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

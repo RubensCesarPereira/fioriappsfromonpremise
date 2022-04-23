@@ -1,0 +1,422 @@
+_schema-version: "3.2"
+ID: FioriSCP
+version: 0.0.50
+modules:
+- name: fioriscp-approuter
+  type: approuter.nodejs
+  path: fioriscp-approuter
+  requires:
+  - name: FioriSCP_html_repo_runtime
+  - name: uaa_FioriSCP
+  - name: dest_FioriSCP
+  - name: conn_FioriSCP
+  - name: portal_resources_FioriSCP
+  - name: Custom_VCT_V1
+  parameters:
+    disk-quota: 1024M
+    memory: 1024M
+    routes:
+    - route: ${space}.cfapps.us10.hana.ondemand.com
+- name: FioriSCP-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: uaa_FioriSCP
+    parameters:
+      service-key:
+        name: uaa_FioriSCP-key
+  - name: FioriSCP_html_repo_host
+    parameters:
+      service-key:
+        name: FioriSCP_html_repo_host-key
+  - name: FioriSCP-destination-service
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: FioriSCP_html_repo_host
+          ServiceInstanceName: FioriSCP_html_repo_host
+          ServiceKeyName: FioriSCP_html_repo_host-key
+          sap.cloud.service: FioriSCP
+        - Authentication: OAuth2UserTokenExchange
+          Name: FioriSCP_uaa_FioriSCP
+          ServiceInstanceName: FioriSCP-xsuaa-service
+          ServiceKeyName: uaa_FioriSCP-key
+          sap.cloud.service: FioriSCP
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true        
+- name: FioriSCP_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: FioriSCP_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - zsm_myreq-content.zip
+      name: zsm_myreq
+      target-path: resources/
+    - artifacts:
+      - grc_acreq_apr-content.zip
+      name: grc_acreq_apr
+      target-path: resources/
+    - artifacts:
+      - zac_risk-content.zip
+      name: zac_risk
+      target-path: resources/
+    - artifacts:
+      - liberarPrecioExp-content.zip
+      name: liberarPrecioExp
+      target-path: resources/
+    - artifacts:
+      - z_mmfichatecnic-content.zip
+      name: z_mmfichatecnic
+      target-path: resources/
+    - artifacts:
+      - z_figestionacreedores-content.zip
+      name: z_figestionacreedores
+      target-path: resources/
+    - artifacts:
+      - z_figesacrelib-content.zip
+      name: z_figesacrelib
+      target-path: resources/
+    - artifacts:
+      - mm_po_apv-content.zip
+      name: mm_po_apv
+      target-path: resources/
+    - artifacts:
+      - mm_pr_apv-content.zip
+      name: mm_pr_apv
+      target-path: resources/
+    - artifacts:
+      - mm_ses_apv-content.zip
+      name: mm_ses_apv
+      target-path: resources/
+    - artifacts:
+      - ztestcap-content.zip
+      name: ztestcap
+      target-path: resources/
+    - artifacts:
+      - zpp_crea_reclasificacion-content.zip
+      name: zpp_crea_reclasificacion
+      target-path: resources/
+    - artifacts:
+      - zpp_aprobar_reclasificacion-content.zip
+      name: zpp_aprobar_reclasificacion
+      target-path: resources/
+    - artifacts:
+      - zsd_crear_merma-content.zip
+      name: zsd_crear_merma
+      target-path: resources/
+    - artifacts:
+      - zsd_autorizar_merma-content.zip
+      name: zsd_autorizar_merma
+      target-path: resources/
+    - artifacts:
+      - zmm_entrada_vino-content.zip
+      name: zmm_entrada_vino
+      target-path: resources/
+    - artifacts:
+      - zpp_simulador_mezcla-content.zip
+      name: zpp_simulador_mezcla
+      target-path: resources/
+    - artifacts:
+      - zpp_elaboracion_mezcla-content.zip
+      name: zpp_elaboracion_mezcla
+      target-path: resources/
+    - artifacts:
+      - zpp_registro_mezcla-content.zip
+      name: zpp_registro_mezcla
+      target-path: resources/
+    - artifacts:
+      - zmm_traslado_vino-content.zip
+      name: zmm_traslado_vino
+      target-path: resources/
+    - artifacts:
+      - zpp_descomponer_mezcla-content.zip
+      name: zpp_descomponer_mezcla
+      target-path: resources/
+    - artifacts:
+      - zpp_libera_descomposicion-content.zip
+      name: zpp_libera_descomposicion
+      target-path: resources/
+    - artifacts:
+      - zpp_notifica_descomposicion-content.zip
+      name: zpp_notifica_descomposicion
+      target-path: resources/
+    - artifacts:
+      - zsd_crear_solicitud_vino-content.zip
+      name: zsd_crear_solicitud_vino
+      target-path: resources/
+    - artifacts:
+      - zsd_contabilizar_despacho-content.zip
+      name: zsd_contabilizar_despacho
+      target-path: resources/
+- name: FioriSCPLaunchpad
+  type: com.sap.portal.content
+  path: FioriSCPLaunchpad
+  requires:
+  - name: portal_resources_FioriSCP
+  - name: FioriSCP_html_repo_host
+  - name: FioriSCP_ui_deployer
+  - name: uaa_FioriSCP
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
+- name: zsm_myreq
+  type: html5
+  path: _AppsLibrary/zsm_myreq
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: grc_acreq_apr
+  type: html5
+  path: _AppsLibrary/grc_acreq_apr
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zac_risk
+  type: html5
+  path: _AppsLibrary/zac_risk
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: liberarPrecioExp
+  type: html5
+  path: _AppsLibrary/liberarPrecioExp
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: z_mmfichatecnic
+  type: html5
+  path: _AppsLibrary/z_mmfichatecnic
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: z_figestionacreedores
+  type: html5
+  path: _AppsLibrary/z_figestionacreedores
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: z_figesacrelib
+  type: html5
+  path: _AppsLibrary/z_figesacrelib
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: mm_po_apv
+  type: html5
+  path: _AppsLibrary/mm_po_apv
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: mm_pr_apv
+  type: html5
+  path: _AppsLibrary/mm_pr_apv
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: mm_ses_apv
+  type: html5
+  path: _AppsLibrary/mm_ses_apv
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: ztestcap
+  type: html5
+  path: _AppsLibrary/ztestcap
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_crea_reclasificacion
+  type: html5
+  path: _AppsLibrary/zpp_crea_reclasificacion
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_aprobar_reclasificacion
+  type: html5
+  path: _AppsLibrary/zpp_aprobar_reclasificacion
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zsd_crear_merma
+  type: html5
+  path: _AppsLibrary/zsd_crear_merma
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zsd_autorizar_merma
+  type: html5
+  path: _AppsLibrary/zsd_autorizar_merma
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zmm_entrada_vino
+  type: html5
+  path: _AppsLibrary/zmm_entrada_vino
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_simulador_mezcla
+  type: html5
+  path: _AppsLibrary/zpp_simulador_mezcla
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_elaboracion_mezcla
+  type: html5
+  path: _AppsLibrary/zpp_elaboracion_mezcla
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_registro_mezcla
+  type: html5
+  path: _AppsLibrary/zpp_registro_mezcla
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zmm_traslado_vino
+  type: html5
+  path: _AppsLibrary/zmm_traslado_vino
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_descomponer_mezcla
+  type: html5
+  path: _AppsLibrary/zpp_descomponer_mezcla
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_libera_descomposicion
+  type: html5
+  path: _AppsLibrary/zpp_libera_descomposicion
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zpp_notifica_descomposicion
+  type: html5
+  path: _AppsLibrary/zpp_notifica_descomposicion
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zsd_crear_solicitud_vino
+  type: html5
+  path: _AppsLibrary/zsd_crear_solicitud_vino
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: zsd_contabilizar_despacho
+  type: html5
+  path: _AppsLibrary/zsd_contabilizar_despacho
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: FioriSCP-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-name: FioriSCP-destination-service
+    service-plan: lite
+- name: Custom_VCT_V1
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: theming
+    service-plan: standard
+- name: FioriSCP_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: FioriSCP_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      sizeLimit: 40
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_FioriSCP
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: FioriSCP-xsuaa-service
+    service-plan: application
+- name: conn_FioriSCP
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
+- name: dest_FioriSCP
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-plan: lite
+- name: portal_resources_FioriSCP
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

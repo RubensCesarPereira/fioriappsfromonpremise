@@ -1,0 +1,76 @@
+<core:View xmlns:core="sap.ui.core" height="100%" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt" xmlns:ux="sap.uxap" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified" xmlns:blockcolor="sap.uxap.sample.SharedBlocks"
+	xmlns:f="sap.ui.layout.form" controllerName="z_figestionacreedores.controller.master">
+	<App id="RootView">
+		<tnt:ToolPage id="toolPage">
+			<tnt:sideContent>
+				<tnt:SideNavigation expanded="true" itemSelect="onItemSelect"
+					id="sideNavigation">
+					<tnt:item>
+						<tnt:NavigationList>
+							<tnt:NavigationListItem id="homeItem"
+								icon="sap-icon://home" text="Home" key="home" />
+							<tnt:NavigationListItem icon="sap-icon://add-activity-2"
+								text="Ingresar Solicitud" key="">
+								<tnt:NavigationListItem icon="sap-icon://add-activity-2"
+									text="Crear Acreedor" key="creaAcreedorPag2" select="crear_showCrear"
+									id="vistaCrear" />
+								<tnt:NavigationListItem icon="sap-icon://add-contact"
+									text="Modificar Acreedor" key="modifAcreedor" select="modif_showModif"
+									id="vistaModif" />
+								<tnt:NavigationListItem icon="Ampliar Acreedor"
+									key="amplAcreedor" text="Ampliar Acreedor" select="ampliar_showAmpliar"
+									id="vistaAmp" />
+								<tnt:NavigationListItem icon="sap-icon://add-contact"
+									text="Bloquear/Desbloquear" key="borrAcreedor" select="borr_showBorrado"
+									id="vistaBorr" />
+							</tnt:NavigationListItem>
+							<tnt:NavigationListItem icon="sap-icon://activity-individual"
+								text="Mis Solicitudes" key="misSol2" select="misol_getListado"
+								id="vistaLista">
+							</tnt:NavigationListItem>
+							<tnt:NavigationListItem icon="sap-icon://activity-individual"
+								text="Administración Solicitudes" key="admsol" select="adm_getListado"
+								id="vistaAdm">
+							</tnt:NavigationListItem>
+						</tnt:NavigationList>
+					</tnt:item>
+				</tnt:SideNavigation>
+			</tnt:sideContent>
+			<tnt:mainContents height="100%" id="mainContents">
+				<NavContainer id="pageContainer">
+					<ScrollContainer id="home" horizontal="true"
+						vertical="true" height="100%">
+						<FlexBox height="500px" alignItems="Center"
+							justifyContent="Center">
+							<items>
+								<Image src="/FioriSCP.z_figestionacreedores/img/logo.png"
+									densityAware="false" width="{/imageWidth}">
+								</Image>
+							</items>
+						</FlexBox>
+					</ScrollContainer>
+					<!-- INI - CREA ACREEDOR -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.crea"
+						type="XML" />
+					<!-- INI - MODIFICA ACREEDOR -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.modifica"
+						type="XML" />
+					<!-- INI - AMPLIAR ACREEDOR -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.ampliar"
+						type="XML" />
+					<!-- INI - BORRADO -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.borrar"
+						type="XML" />
+					<!-- INI - MIS SOLICITUDES -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.missolicitudes"
+						type="XML" />
+					<!-- INI - ADMINISTRACION -->
+					<core:Fragment fragmentName="z_figestionacreedores.view.administracion"
+						type="XML" />
+				</NavContainer>
+			</tnt:mainContents>
+		</tnt:ToolPage>
+	</App>
+</core:View>

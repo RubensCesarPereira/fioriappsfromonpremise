@@ -1,0 +1,251 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:caui="sap.ca.ui" 
+	controllerName="ui.s2p.mm.ses.approve.view.S3">
+	<Page>
+		<content>
+			<ObjectHeader id = "sesSelected" 
+			              title="{Description}"
+						  number="{parts:['ActualValue','ActualValueCurrency'],                                      	
+                            formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatCurrencyAmountStandard'}" 
+						  numberUnit="{ActualValueCurrency}">
+				<attributes>
+					<ObjectAttribute text = "{parts:[{path:'i18n>TEXT_CREATED_BY'}, {path:'CreatedByName'}], formatter:'ui.s2p.mm.ses.approve.util.Formatter.getConcatenatedText'}"
+					               active = "true" press = "onCreatedByLinkPress"></ObjectAttribute>
+					<ObjectAttribute text = "{parts:[{path:'i18n>TEXT_PROVIDED_BY'}, {path:'ServiceProviderName'}], formatter:'ui.s2p.mm.ses.approve.util.Formatter.getConcatenatedText'}"></ObjectAttribute>							
+				</attributes>
+				<statuses>
+					<ObjectStatus text="{parts:[{path:'i18n>TEXT_CREATED_ON'},{path:'i18n>TEXT_CREATED'},{path:'CreatedAt'}], formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCreatedOnText'}"/>
+				</statuses>						  
+		    </ObjectHeader>
+
+			<IconTabBar>
+				<items>
+					<IconTabFilter
+					    icon ="sap-icon://hint">
+						<content>
+							<form:SimpleForm>
+								<form:content>
+									<Label id= "InfoLabelServiceEntrySheet" text= "{i18n>LABEL_SERVICE_ENTRY_SHEET}"></Label>
+								 	<Text  id= "InfoTextServiceEntrySheet" text ="{sesHeaderDetail>SESNumber}"></Text>
+								 	
+								 	<Label visible="{path:'sesHeaderDetail>ExternalNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}" 
+								 	       id= "InfoLabelExternalNumber" text="{i18n>LABEL_EXTERNAL_NUMBER}"></Label>
+								 	<Text  visible="{path:'sesHeaderDetail>ExternalNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+                                           id= "InfoTextExternalNumber" text="{sesHeaderDetail>ExternalNumber}"></Text>
+
+								 	<Label id= "InfoLabelPurchaseOrderItem" text= "{i18n>LABEL_PURCHASE_ORDER_ITEM}"></Label>
+								 	<Text  id= "InfoTextPurchaseOrderItem"  text = "{parts:[{path:'sesHeaderDetail>PONumber'}, {path:'sesHeaderDetail>POItemNumber'}], formatter:'ui.s2p.mm.ses.approve.util.Formatter.getConcatenatedTextWithSlash'}"></Text>
+
+								 	<Label visible="{path:'sesHeaderDetail>ServiceLocation', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+								 	       id= "InfoLabelServiceLocation" text="{i18n>LABEL_SERVICE_LOCATION}"></Label>
+								 	<Text visible="{path:'sesHeaderDetail>ServiceLocation', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+								 	       id= "InfoTextServiceLocation" text="{sesHeaderDetail>ServiceLocation}"></Text>
+									
+									<Label id= "InfoLabelServicePeriod" text="{i18n>LABEL_FOR_PERIOD}"></Label>
+									<Text  id= "InfoTextServicePeriod" text ="{parts:[{path:'i18n>TEXT_NO_PERIOD'},{path:'sesHeaderDetail>PeriodStartDate'},{path:'sesHeaderDetail>PeriodEndDate'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getPeriodText'}"></Text>
+									                   
+								 	<Label visible="{path:'sesHeaderDetail>PersonResponsible', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+								 		   id= "InfoLabelResponisblePerson" text= "{i18n>LABEL_PERSON_RESPONSIBLE}"></Label>
+								 	<Text  visible="{path:'sesHeaderDetail>PersonResponsible', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+								 		   id= "InfoTextResponisblePerson" text = "{sesHeaderDetail>PersonResponsible}"></Text>
+
+								 	<Label id= "InfoLabelPlant" text= "{i18n>LABEL_PLANT}"></Label>
+								 	<Text  id= "InfoTextPlant" text = "{parts:[{path:'sesHeaderDetail>Plant'},{path:'sesHeaderDetail>PlantDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text>
+								 	
+								 	<!--<Label visible="{path:'sesHeaderDetail>SESAccountings/AccountAssignmentNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibilityByNumString'}"
+								 	       id= "InfoLabelAccountassignmentRow1" text="{i18n>LABEL_ACCOUNT_ASSIGNMENT}"></Label>
+								 	<Text visible="{path:'sesHeaderDetail>SESAccountings/AccountAssignmentNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibilityByNumString'}"
+							 	           id= "InfoTextAccountassignmentRow1" 
+								 	         text="{parts:[{path:'sesHeaderDetail>SESAccountings/AccountNumber'},{path:'sesHeaderDetail>SESAccountings/AccountNumberDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text> -->
+                                    <!--accounting objects -->
+                                    <!-- cost center -->
+                                    <Label  id= "InfoLabelCostCentre" text="{i18n>LABEL_ACCOUNT_ASSIGNMENT}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/CostCentre', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text   id= "InfoTextCostCentre"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_COST_CENTRE'},{path:'sesHeaderDetail>SESAccountings/CostCentre'},{path:'sesHeaderDetail>SESAccountings/CostCentreDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/CostCentre', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+                                    <!-- WBS Element -->
+                                    <Label id= "InfoLabelWBSElement" text=""
+                                            visible="{path:'sesHeaderDetail>SESAccountings/WBSElement', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text id= "InfoTextWBSElement"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_WBS_ELEMENT'},{path:'sesHeaderDetail>SESAccountings/WBSElement'},{path:'sesHeaderDetail>SESAccountings/WBSElementDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/WBSElement', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+                                    <!-- Network -->
+                                    <Label id= "InfoLabelNetwork" text=""
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Network', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text id= "InfoTextNetwork"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_NETWORK'},{path:'sesHeaderDetail>SESAccountings/Network'},{path:'sesHeaderDetail>SESAccountings/NetworkDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Network', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+                                    <!-- Order -->
+                                    <Label id= "InfoLabelOrder" text=""
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Order', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text id= "InfoTextOrder"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_ORDER'},{path:'sesHeaderDetail>SESAccountings/Order'},{path:'sesHeaderDetail>SESAccountings/OrderDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Order', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+                                    <!-- Sales Order -->
+                                    <Label id= "InfoLabelSalesOrder" text=""
+                                            visible="{path:'sesHeaderDetail>SESAccountings/SalesOrder', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text id= "InfoTextSalesOrder"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_SALES_ORDER'},{path:'sesHeaderDetail>SESAccountings/SalesOrder'},{path:'sesHeaderDetail>SESAccountings/SalesOrderDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/SalesOrder', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+                                    <!-- Asset -->
+                                    <Label id= "InfoLabelAsset" text=""
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Asset', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Label>
+                                    <Text id= "InfoLabelCostCenter"
+                                            text="{parts:[{path:'i18n>ACCOUNT_ASSIGNMENT_ASSET'},{path:'sesHeaderDetail>SESAccountings/Asset'},{path:'sesHeaderDetail>SESAccountings/AssetDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"
+                                            visible="{path:'sesHeaderDetail>SESAccountings/Asset', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"></Text>
+								 	<!-- end of accounting objects -->
+								 	
+								 	<Label visible="{path:'sesHeaderDetail>SESAccountings/AccountAssignmentNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibilityByNumString'}"
+								 	       id= "InfoLabelAccountassignmentRow2"    text=""></Label>
+								 	<Text visible="{path:'sesHeaderDetail>SESAccountings/AccountAssignmentNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibilityByNumString'}"
+		                                   id= "InfoTextAccountassignmentRow2" 
+										   text="{parts:[{path:'i18n>TABLE_ACCOUNT_ASSIGNMENT_COLUMN_GL_ACCOUNT'},{path:'sesHeaderDetail>SESAccountings/GLAccount'},{path:'sesHeaderDetail>SESAccountings/GLAccountDescription'}],
+									                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAccountingObjectS3Format'}"></Text>
+								 	         
+									<Label id= "InfoLabelPercentageOfConsumption" text= "{i18n>LABEL_PERCENTAGE_OF_PLANNED_VALUE}"></Label>
+								    <ProgressIndicator width="30%" height = "0.875rem"
+                                            id= "InfoProgressIndicatorPercentageOfConsumption"
+											displayValue="{parts:[{path:'sesHeaderDetail>ActualValue'},{path:'sesHeaderDetail>PlannedValue'}], 
+											                    formatter:'ui.s2p.mm.ses.approve.util.Formatter.getProgressPercentageText'}"
+											percentValue="{parts:[{path:'sesHeaderDetail>ActualValue'},{path:'sesHeaderDetail>PlannedValue'}], 
+											                    formatter:'ui.s2p.mm.ses.approve.util.Formatter.getProgressPercentageValue'}">
+									</ProgressIndicator> 
+									
+									<Label id= "InfoLabelConsumedValue" text= "{i18n>LABEL_CONSUMED_VALUE}"></Label>
+								 	<Text  id= "InfoTextConsumedValue" text ="{parts:[{path:'sesHeaderDetail>ActualValue'}, {path:'sesHeaderDetail>ValueCurrency'}], 
+								 	                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAmountWithCurrency'}"></Text>
+								 	<Label id= "InfoLabelPlannedValue" text= "{i18n>LABEL_PLANNED_VALUE_HEADER_DETAIL}"></Label>
+								 	<Text  id= "InfoTextPlannedValue" text ="{parts:[{path:'sesHeaderDetail>PlannedValue'}, {path:'sesHeaderDetail>ValueCurrency'}], 
+								 	                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAmountWithCurrency'}"></Text>
+								 	                   
+								 	<Label id= "InfoLabelLimit" text= "{i18n>LABEL_LIMIT}"></Label>
+								 	<Text  id= "InfoTextLimit" text ="{parts:[{path:'sesHeaderDetail>Limit'}, {path:'sesHeaderDetail>LimitCurrency'}, {path:'i18n>LABEL_NO_LIMIT'}], 
+								 	                   formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAmountWithCurrency'}"></Text>
+                                    <!-- Extends the Information  -->
+									<core:ExtensionPoint name="extMoreInfo" />
+								</form:content>
+							</form:SimpleForm>
+						</content>
+					</IconTabFilter>
+			    	<IconTabFilter
+				    	icon="sap-icon://attachment"
+					    key="contentAttachments"
+			     		visible = "{parts:[{path:'sesHeaderDetail>Attachments'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.isAttachmentsVisible'}">
+					   <content>
+							<form:Form>
+								<form:layout>
+								<form:ResponsiveGridLayout></form:ResponsiveGridLayout>
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer>
+										<form:formElements>
+											<form:FormElement>
+												<caui:FileUpload id="idFileUpload" items="/Attachments"
+													editMode="false" uploadEnabled="false" fileName="name" size="size"
+													url="url" uploadedDate="uploadedDate" contributor="contributor" 
+													mimeType="mimeType" fileId="fileId" >
+												</caui:FileUpload>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>					   
+					  </content>
+            		</IconTabFilter>						
+					<IconTabFilter 
+					     icon ="sap-icon://notes"
+   					     key="contentNotes"
+   					     visible = "{parts:[{path:'sesHeaderDetail>Notes'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.isNotesVisible'}">
+						<content> 
+							<caui:Notes growing="false" showNoteInput="false" items="{NotesModel>/Notes}"
+								textMaxLength="255" addNote="handleAddNote">
+								<caui:ExpansibleFeedListItem senderActive="true" senderPress="onNoteCreatedByLinkPress"
+									showIcon="false" sender="{NotesModel>CreatedByUserName}" text="{NotesModel>NoteText}"
+									timestamp="{parts :[{path: 'NotesModel>CreationUtcDateTime'}],
+									        formatter: 'ui.s2p.mm.ses.approve.util.Formatter.formatNoteDateTime'}">
+								</caui:ExpansibleFeedListItem>
+							</caui:Notes>
+						</content>
+					</IconTabFilter>
+                    <!-- Add new IconTabfilters  -->
+                    <core:ExtensionPoint name="extTabQuantities" />
+				</items>
+			</IconTabBar>
+   		    <VBox>
+<!--       				  headerText="{path:{i18n>SERVICE_LINE_TITLE}, formatter:'.getServiceLineCountTitle'}"> headerText="{i18n>SERVICE_LINE_TITLE}">  -->
+<!--  						for pageing                          -->
+<!--  						growingThreshold="3"                 -->
+<!-- 						growingScrollToLoad="false" 	     -->									
+ 				<Table 	id = "ServiceItemList" 
+ 				     	growing="true"
+						growingThreshold="20"
+						growingTriggerText="{i18n>TABLE_SES_LINES_MORE_DATA}"
+						growingScrollToLoad="true"
+						inset="true" items="{path:'sesHeaderDetail>SESItems'}" noDataText="{i18n>TABLE_SES_LINES_NO_DATA}" 
+						updateFinished="handleUpdateFinished"
+					    headerText="{i18n>TABLE_SERVICE_LINES_TITLE}">
+						<columns>
+							<Column hAlign="Left" id= "SESLinesColumnDescription">
+								<header>
+									<Label text="{i18n>TABLE_SES_LINES_COLUMN_DESCRIPTION}" ></Label>
+								</header>
+							</Column>
+							<Column hAlign="Right" id= "SESLinesColumnServiceQunatity" demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Label text="{i18n>TABLE_SES_LINES_SERVICE_QUANTITY}" ></Label>
+								</header>
+							</Column>
+							<Column hAlign="Right" id= "SESLinesColumnSubtotalValue" demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Label text="{i18n>TABLE_SES_LINES_SUBTOTAL_VALUE}"></Label>
+								</header>
+							</Column>
+							<Column hAlign="Right" id= "SESLinesColumnServiceStatus" demandPopin="true" minScreenWidth="Medium">
+								<header>
+									<Label text="{i18n>TABLE_SES_LINES_SERVICE_STATUS}"></Label>
+								</header>
+							</Column>
+                            <!-- Add new columns to the ServiceItemList  -->							
+							<core:ExtensionPoint name="extMoreServiceItemListColumns" />
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="handleNavToSubDetail">
+								<cells>
+									<ObjectIdentifier id= "SESLinesCellDescription" title="{sesHeaderDetail>Description}" badgePeople ="false"></ObjectIdentifier>
+									<ObjectNumber id= "SESLinesCellServiceQunatity"
+									              number="{parts:[{path:'sesHeaderDetail>ActualQuantity'}],       
+				                                          formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatNumberQuantity'}"
+									              numberUnit="{sesHeaderDetail>ActualQuantityUnit}"></ObjectNumber>
+									<ObjectNumber id= "SESLinesCellSubtotalValue"
+									              number="{parts:[{path:'sesHeaderDetail>ActualValue'},{path:'sesHeaderDetail>ActualValueCrcy'}],
+									                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatCurrencyAmountStandard'}" numberUnit="{sesHeaderDetail>ActualValueCrcy}">
+									</ObjectNumber>
+									              
+									<Text id= "SESLinesCellServiceStatus" text="{parts:[{path:'sesHeaderDetail>Status'}], formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatStatus'}"></Text>
+                                    <!-- Add new cells to the ServiceItemList  -->
+									<core:ExtensionPoint name="extMoreServiceItemListCells" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<!-- Add new task lists to the detail screen  -->
+					<core:ExtensionPoint name="extTaskList" />
+				</VBox> 			
+		</content>
+	</Page>
+</core:View>

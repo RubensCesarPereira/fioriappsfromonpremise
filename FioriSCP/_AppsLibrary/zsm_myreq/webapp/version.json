@@ -1,0 +1,8 @@
+{ "application": "MyIncidents",
+  "version": "1.6.0",
+  "buildNumber": "7",
+  "buildId": "2017-07-27_10-58-01",
+  "branch": "origin/stage/rel-1.6",
+  "revision": "878ba840a0a85056137217954fbbb78e9580719d",
+  "GitURL": ""
+}

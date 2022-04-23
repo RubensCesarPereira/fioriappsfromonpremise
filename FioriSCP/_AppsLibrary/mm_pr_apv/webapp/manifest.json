@@ -1,0 +1,92 @@
+{
+    "_version": "1.1.0",
+    "sap.app": {
+        "_version": "1.1.0",
+        "id": "ui.s2p.mm.requisition.approve",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{DETAIL_TITLE}}",
+        "resources": "resources.json",
+        "applicationVersion": {
+            "version": "1.5.43"
+        },
+        "ach": "MM-FIO-PUR",
+        "dataSources": {
+            "GBAPP_PRAPPROVAL": {
+                "uri": "/FioriSCP.uis2pmmrequisitionapprove/sap/opu/odata/sap/GBAPP_PRAPPROVAL/",
+                "settings": {
+                }
+            }
+        },
+        "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "PurchaseRequisition",
+                "action": "approve",
+                "title": "{{DETAIL_TITLE}}",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://bar-code",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/GBAPP_PRAPPROVAL/WorkflowTaskCollection/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "_version": "1.1.0",
+        "technology": "UI5",
+        "deviceTypes": { 
+
+            "desktop": true, 
+
+            "tablet": true, 
+
+            "phone": true 
+
+        }
+    },
+    "sap.ui5": {
+        "_version": "1.1.0",
+        "contentDensities": { 
+
+            "compact": true, 
+
+            "cozy": false    
+
+        },
+        "dependencies": {
+            "minUI5Version": "1.28.5",
+            "libs": {
+                "sap.ca.scfld.md": {
+                },
+                "sap.m": {                  
+            }
+            },
+            "components": {
+            }
+        },
+        "models": {
+        "i18n": {
+          "type": "sap.ui.model.resource.ResourceModel",
+          "uri": "i18n/i18n.properties"
+        }
+        }
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.mm_pr_apv"
+            ]
+        } 
+}

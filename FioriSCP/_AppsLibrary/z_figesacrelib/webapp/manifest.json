@@ -1,0 +1,109 @@
+{
+  "_version": "1.12.0",
+
+  "sap.app":{
+    
+    "resources": "resources.json",
+    "type":"application",
+    "id":"z_figesacrelib",
+    "title": "Aprobación Solicitudes Acreedores",
+    "applicationVersion":{
+       "version":"1.6.0"
+    },
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZFI_SO_GESTION_ACREED_LIB",
+                "action": "display",
+                "title": "Aprobación Solicitudes Acreedores",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://Chart-Tree-Map",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZODATA_FI_GEST_ACREEDOR_LIB_SRV/SolicitudesPendientesSet/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+  },
+  "sap.cloud": {
+	"public": true,
+	"service": "FioriSCP"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },  
+  "sap.ui5": {
+	"rootView": {
+			"viewName": "z_figesacrelib.view.ppal",
+			"type": "JS"
+		},
+     "contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+    "dependencies": {
+      "minUI5Version": "1.66.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },  
+	"models": {
+	
+	},
+	"routing": {
+	  "config": {
+		"routerClass": "sap.m.routing.Router",
+		"viewType": "XML",
+		"viewPath": "z_figesacrelib.view",
+		"controlId": "RootView",
+		"controlAggregation": "pages",
+		"async": true
+	  },
+	  "routes": [
+		{
+			"name": "master",
+				"pattern": "master",
+				"titleTarget": "",
+				"greedy": false,
+				"target": "master"
+			}
+	  ],
+	  "targets": {
+		"master": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 1,
+					"viewName": "listado"
+		}
+	  }
+	}
+  },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zfigesacrelib"
+            ]
+        }     
+}

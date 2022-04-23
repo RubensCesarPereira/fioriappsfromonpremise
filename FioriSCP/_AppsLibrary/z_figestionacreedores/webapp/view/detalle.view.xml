@@ -1,0 +1,52 @@
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.m"
+		   xmlns:layout="sap.ui.layout"
+		 
+		   xmlns:sample="sap.uxap.sample.AnchorBar.block"
+		   controllerName="z_figestionacreedores.controller.detalle" 
+		   
+		   	xmlns:f="sap.ui.layout.form"
+		   height="100%"
+		>
+ <Page title="Detalle Solicitud" showNavButton="true" navButtonPress="backPress">
+	
+		<Button
+				text="Open View Settings Dialog"
+				press="handleOpenDialog" />
+		
+
+		<f:SimpleForm id="formDG" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<Label text="Id. Proceso " design="Bold"/>
+				
+				<Text id="ID_PROCESO"  />
+				
+				
+				<Label text="Tipo de Proceso" design="Bold" />
+				<Text id="TIPO_PROCESO"  />
+				
+			</f:content>
+		</f:SimpleForm>
+		
+</Page>				
+		
+						
+ 
+	
+</core:View>

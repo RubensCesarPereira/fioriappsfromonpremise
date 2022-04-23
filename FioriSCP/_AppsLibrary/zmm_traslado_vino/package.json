@@ -1,0 +1,21 @@
+{
+  "name": "zmm_traslado_vino",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@sapui5/ts-types": "1.71.x",
+    "@ui5/cli": "2.2.6",
+    "@sap/ui5-builder-webide-extension": "1.0.x",
+    "bestzip": "2.1.4",
+    "rimraf": "3.0.2"
+  },
+  "scripts": {
+    "build": "npm run clean && ui5 build --include-task=generateManifestBundle generateCachebusterInfo && npm run zip",
+    "zip": "cd dist && npx bestzip ../zmm_traslado_vino-content.zip *",
+    "clean": "npx rimraf zmm_traslado_vino-content.zip dist"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ui5-builder-webide-extension"
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+{
+    "_version": "1.1.0",
+    "sap.app": {
+        "_version": "1.1.0",
+        "id": "ui.s2p.mm.purchorder.approve",
+        "type": "application",        
+        "i18n": "i18n/i18n.properties",
+        "resources": "resources.json",
+        "applicationVersion": {
+            "version": "1.5.43"
+        },
+        "ach": "MM-FIO-PUR",
+        "dataSources": {
+            "GBAPP_POAPPROVAL": {
+                "uri": "/FioriSCP.uis2pmmpurchorderapprove/sap/opu/odata/sap/GBAPP_POAPPROVAL/",
+                "settings": {
+                }
+            }
+        },
+        "title": "{{appTitle}}",
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "PurchaseOrder",
+                    "action": "approve",
+                    "title": "{{appTitle}}",
+                    "info": " ",
+                    "subTitle": " ",
+                    "icon": "sap-icon://sales-quote",
+                    "indicatorDataSource": {
+                        "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/GBAPP_POAPPROVAL/WorkflowTaskCollection/$count",
+                        "refresh":60,
+                        "dataSource":"FIORI_BGW_HTTP"
+                    }
+                }
+            }
+        }
+
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "_version": "1.1.0",
+        "technology": "UI5",
+        "deviceTypes": { 
+
+            "desktop": true, 
+
+            "tablet": true, 
+
+            "phone": true 
+
+        }
+    },
+    "sap.ui5": {
+        "_version": "1.1.0",
+        "contentDensities": { 
+
+            "compact": true, 
+
+            "cozy": false    
+
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                "bundleName": "jui.s2p.mm.purchorder.approve.i18n.i18n"
+                }
+            }
+            },
+        
+          "":{
+          "dataSource": "main",
+          "type": "sap.ui.model.odata.v2.ODataModel",
+          "settings": {
+            "loadMetadataAsync": false,
+            "json": true,
+            "bJSON": true,
+            "defaultBindingMode": "TwoWay",
+            "useBatch": true,
+            "refreshAfterChange": false,
+            "disableHeadRequestForToken": true
+           }
+          },
+        "dependencies": {
+            "minUI5Version": "1.28.5",
+            "libs": {
+                "sap.ca.scfld.md": {
+                },
+                "sap.m": {                  
+            }
+            },
+            "components": {
+            }
+        }
+      },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.mm_po_apv"
+            ]
+        } 
+       
+}

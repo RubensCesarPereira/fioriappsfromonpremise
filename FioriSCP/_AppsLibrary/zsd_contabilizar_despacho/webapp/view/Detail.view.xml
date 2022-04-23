@@ -1,0 +1,223 @@
+<mvc:View controllerName="conchaytoro.cl.zsd_contabilizar_despacho.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<Page showHeader="true" title="Crear y Contabilizar Despacho" showFooter="true" showNavButton="false" navButtonPress="_onPageNavButtonPress">
+		<content>
+			<ObjectHeader id="objectHeader" binding="" title="{Name1}" condensed="true" number="{Purchaseorder}" numberUnit="Solicitud">
+				<attributes>
+					<ObjectAttribute text="Centro Suministrador"/>
+				</attributes>
+			</ObjectHeader>
+			<!--<ObjectHeader id="objectHeader" title="N° Solicitud:" number="{Purchaseorder}" numberUnit="{CreatDate}"></ObjectHeader>
+						<layout:VerticalLayout width="100%" visible="true">
+				<layout:content/>
+			</layout:VerticalLayout>-->
+			<HBox alignItems="Stretch" direction="Row" width="950.98828125px" height="38.999996185302734px" justifyContent="Start" renderType="Div"
+				visible="true" class="sapUiTinyMargin">
+				<items></items>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" width="950.98828125px" height="38.999996185302734px" justifyContent="Start" renderType="Div"
+				visible="true" class="sapUiTinyMargin">
+				<items>
+					<Label text="Transporte:" design="Standard" width="90px" required="true" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<ComboBox id="trans" change="selecPatCamion" width="150px" class="sapUiTinyMargin"
+						items="{ path: 'tres>/TransportistaSet', sorter: { path: 'Ktokk' }, filters : [ { path : 'Ktokk', operator : 'EQ', value1 : 'TRAN'} ]}">
+						<core:ListItem key="{tres>Lifnr}" text="{tres>Name1}" additionalText="{tres>Ktokk}"/>
+					</ComboBox>
+					<Label text="Camión:" design="Standard" width="90px" required="true" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<ComboBox items="{cam>/}" id="patenteCam" change="selectPatCarro" showSecondaryValues="true" filterSecondaryValues="true" width="150px"
+						class="sapUiTinyMargin">
+						<core:ListItem key="{cam>Lifnr}" text="{cam>Name1}"/>
+					</ComboBox>
+					<Label text="Capacidad:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="capacidad" width="150px" class="sapUiTinyMargin" type="Text" enabled="false"/>
+				</items>
+				<layoutData/>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Label text="Carro:" design="Standard" width="90px" required="true" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<ComboBox items="{car>/}" id="patenteCar" showSecondaryValues="true" filterSecondaryValues="true" width="150px" class="sapUiTinyMargin">
+						<core:ListItem key="{car>Lifnr}" text="{car>Name1}"/>
+					</ComboBox>
+					<Label text="Chofer:" design="Standard" width="90px" required="true" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="chofer" width="150px" class="sapUiTinyMargin" type="Text"></Input>
+					<Label text="RUT:" design="Standard" width="90px" required="true" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="rut" width="150px" class="sapUiTinyMargin"/>
+				</items>
+				<layoutData/>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Label text="Cuba Origen:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="cubaOri" width="150px" class="sapUiTinyMargin" type="Text"></Input>
+					<Label text="Densidad:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="densidad" width="150px" class="sapUiTinyMargin" liveChange="addDot"></Input>
+					<Label text="Peso Tara:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input id="pesoTara" width="150px" class="sapUiTinyMargin" liveChange="addDot"></Input>
+				</items>
+				<layoutData/>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<Label text="Peso Bruto:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+					class="sapUiSmallMargin"/>
+				<Input id="pesoBru" width="150px" class="sapUiTinyMargin" liveChange="addDot"></Input>
+				<Label text="Sellos:" design="Standard" width="90px" required="false" textAlign="Begin" textDirection="Inherit" visible="true"
+					class="sapUiSmallMargin"/>
+				<Input id="sellos" width="150px" class="sapUiTinyMargin"></Input>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="20.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Text id="codCentro" text="{SupplPlnt}" visible="false"/>
+				</items>
+			</HBox>
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" width="auto" items="{PedidoToPosiciones}" updateFinished="onListUpdateFinished"
+					noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+							<!--<ToolbarSpacer/>
+							<OverflowToolbarButton icon="sap-icon://add" press="onAdd"/>-->
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="5em">
+							<Text text="Posición"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Material"/>
+						</Column>
+						<Column width="20em">
+							<Text text="Descripción"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Almacén"/>
+						</Column>
+						<Column width="10em">
+							<Text text="Lote"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Despacho"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Pendiente"/>
+						</Column>
+						<Column width="2em">
+							<Text text="ud."/>
+						</Column>
+						<Column width="7em">
+							<Text text="Fecha"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Partición"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Grado A°"/>
+						</Column>
+						<Column width="3em">
+							<Text text=""/>
+						</Column>
+						<!--<Column>
+						<Text text="Entrega"/>
+					</Column>-->
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="0{PoItem}"/>
+								<ObjectIdentifier title="{Material}"/>
+								<Text text="{ShortText}"/>
+								<Text text=""/>
+								<Text text=""/>
+								<Text text="{Gjahr}"/>
+								<Text text=""/>
+								<!--<Input value="" liveChange="addDot" maxLength="12"/>-->
+								<Text text="{ path: 'Quantity', formatter: '.formatter.addDot' }"/>
+								<ObjectNumber unit="{PoUnit}"/>
+								<Text text="{Eindt}"/>
+								<Button icon="sap-icon://expand" press="onAdd"/>
+								<Input liveChange="addDot"/>
+								<!--<Button text="" type="Default" press="viewDetail" icon="sap-icon://search" iconFirst="true" width="auto" enabled="true" visible="true"
+									iconDensityAware="false"/>-->
+								<CheckBox select="validaCheck"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="40.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items></items>
+			</HBox>
+		</content>
+		<footer>
+			<OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+				<content>
+					<ToolbarSpacer width=""/>
+					<!--<Button text="TEST" type="Accept" press="_TEST" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+					<Button id="btnConta" text="Contabilizar" type="Accept" press="onContabilizar" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false"/>
+					<!--<Button text="Cancelar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+				</content>
+			</OverflowToolbar>
+		</footer>
+		<headerContent/>
+		<subHeader/>
+		<customHeader/>
+	</Page>
+	<!--	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" title="{Purchaseorder}" numberUnit="{CreatDate}"></ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"></IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"></IconTabFilter>
+				</items>
+			</IconTabBar>
+			<Table id="lineItemsList" width="auto" items="{PedidoToPosiciones}" updateFinished="onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{Purchaseorder}" text="{PoItem}"/>
+							<ObjectNumber unit="{PoUnit}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+	</semantic:DetailPage>-->
+</mvc:View>

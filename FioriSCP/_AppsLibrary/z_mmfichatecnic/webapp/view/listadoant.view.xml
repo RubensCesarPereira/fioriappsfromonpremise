@@ -1,0 +1,72 @@
+<mvc:View controllerName="z_mmfichatecnic.controller.listadoant"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:smartList="sap.ui.comp.smartlist" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="pag" title="Ficha Técnica" enableScrolling="false"
+		showNavButton="true" navButtonPress="onNavBack" busyIndicatorDelay="0">
+		<FlexBox alignContent="Center" alignItems="Center"
+			justifyContent="Center">
+			<Image src="{GM>/imgPath}img/bannerHis.png" densityAware="false"
+				widrh="100%" />
+		</FlexBox>
+		<VBox class="divmarginpage">
+			<html:hr></html:hr>
+			<HBox alignContent="Center" alignItems="Center" justifyContent="Center">
+				<Label text="Fecha:" class="sapUiSmallMarginEnd sapUiSmallMarginEnd" />
+				<DateRangeSelection width="230px" id="range-his-date"
+					delimiter="@" displayFormat="yyyy/MM/dd" change="handleChange" />
+				<Label text="Código ficha:" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" />
+				<Input id="his-cod" value="" placeholder="Indique código..."
+					liveChange="consultar"></Input>
+				<Label text="Estado:" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" />
+				<Select id="state-his-select" selectedKey="">
+					<core:Item key="" text="Todo" />
+					<core:Item key="03" text="En Revisión" />
+					<core:Item key="04" text="Anulada" />
+					<core:Item key="05" text="Aprobada" />
+				</Select>
+				<Button type="Emphasized" text="Consultar" icon="sap-icon://inspection"
+					width="170px" press="getListH" class="sapUiSmallMarginBegin" />
+			</HBox>
+			<html:hr></html:hr>
+			<ScrollContainer height="345px" width="100%"
+				vertical="true">
+				<List id="ItemsST" headerText="Fichas (Clic para detalle)"
+					width="100%"
+					items="{HISTLIST>/}">
+					<items>
+						<CustomListItem class="stateClass" press="onPress"
+							type="Navigation">
+							<HBox width="100%">
+								<FlexBox width="8px" height="63px" class="sapMLIBHighlightSuccess" />
+								<FlexBox alignContent="Center" alignItems="Center"
+									justifyContent="Center">
+									<core:Icon src="{HISTLIST>ICON}" size="20px"
+										class="sapMSLIInfoSuccess sapUiSmallMarginBegin sapUiTinyMarginEnd" />
+								</FlexBox>
+								<VBox width="100%" justifyContent="Center">
+									<Title wrapping="true"
+										text="CÓD.: {HISTLIST>MATNR} - {HISTLIST>MAKTX} - {HISTLIST>TIPO_SOLICITUD_VB} " />
+									<Text text="FECHA: {HISTLIST>ERSDA} COSECHA: {HISTLIST>COSECHA} " />
+								</VBox>
+								<FlexBox alignContent="Center" alignItems="Center"
+									justifyContent="Center">
+									<Button visible="{=${HISTLIST>ESTADO} === '05' ? true : false}"
+										icon="sap-icon://create" type="Ghost" press="onSelectPdfLanguage" />
+								</FlexBox>
+								<FlexBox alignContent="Center" alignItems="Center"
+									width="150px" justifyContent="Center">
+									<ObjectStatus text="{HISTLIST>STSTEXT}" state="Success" />
+								</FlexBox>
+							</HBox>
+							<customData>
+								<core:CustomData xmlns:core="sap.ui.core"
+									key="{HISTLIST>CUSSTATE}" value="" writeToDom="true" />
+							</customData>
+						</CustomListItem>
+					</items>
+				</List>
+			</ScrollContainer>
+		</VBox>
+	</Page>
+</mvc:View>

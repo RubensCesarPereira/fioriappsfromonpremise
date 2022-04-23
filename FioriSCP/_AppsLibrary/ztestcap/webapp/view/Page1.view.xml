@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns:m="sap.m" xmlns:smartTable="sap.ui.comp.smarttable" controllerName="com.sap.build.standard.ztestcap.controller.Page1">
+   <m:Page showHeader="false" title="" showFooter="true" showNavButton="false">
+      <m:content>
+         <m:BusyDialog id="BusyDialog" visible="true" title="Realizando búsqueda" text="Espera unos segundos..." />
+         <!--   title="Actualización Prevista"  text="En estos momentos se está actualizando el componente. Favor espere..." -->
+         <l:VerticalLayout width="100%">
+            <fb:FilterBar reset="onReset" showGoOnFB="false" showFilterConfiguration="false" showRestoreOnFB="false" showClearOnFB="false" showGoButton="false" search="onFilterA" showRestoreButton="false" showClearButton="false">
+               <fb:filterItems>
+                  <fb:FilterItem name="A" label="Tipo Consulta">
+                     <fb:control>
+                        <m:RadioButton id="RB3-1" text="OC" select="selectOC" />
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="D" label="">
+                     <fb:control>
+                        <m:RadioButton id="RB3-2" text="Solped" select="selectSP" />
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="E" label="">
+                     <fb:control>
+                        <m:RadioButton id="RB3-3" text="HES" select="selectHES" />
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="F" label="">
+                     <fb:control>
+                        <m:RadioButton id="RB3-4" text="Facturas" select="selectFB" />
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="T6" label="Selec.Todos.GC" labelTooltip="" mandatory="true">
+                     <fb:control>
+                        <m:CheckBox id="RB3-10" text="Todos (GC)" select="selectAllGC" />
+                        <!--  	<m:Input visible="false"
+				id="IEkgrp2"
+				type="Text"
+				placeholder="Ingrese Grupo Compra ..."
+				showSuggestion="true"
+				showValueHelp="true"
+				valueHelpRequest="handleValueHelpGC"
+				suggestionItems="{gcModel>/results}" >
+				<m:suggestionItems>
+					<core:Item text="{gcModel>Ekgrp} - {gcModel>Eknam}" />
+				</m:suggestionItems>
+			</m:Input>  -->
+                        <!-- 	<m:MultiComboBox   id="IEkgrp2"  selectionFinish="handleSelectionFinishIEkgrp2" width="500px"
+		items="{gcModel>/results}">
+		<core:Item key="{gcModel>Ekgrp}" text="{gcModel>Ekgrp} - {gcModel>Eknam}" />
+	</m:MultiComboBox>   -->
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="T62" label="Activar Rango" labelTooltip="" mandatory="true">
+                     <fb:control>
+                        <m:CheckBox id="RB3-11" text="Buscar por rango" select="selectAllGC" />
+                        <!--  	<m:Input visible="false"
+				id="IEkgrp2"
+				type="Text"
+				placeholder="Ingrese Grupo Compra ..."
+				showSuggestion="true"
+				showValueHelp="true"
+				valueHelpRequest="handleValueHelpGC"
+				suggestionItems="{gcModel>/results}" >
+				<m:suggestionItems>
+					<core:Item text="{gcModel>Ekgrp} - {gcModel>Eknam}" />
+				</m:suggestionItems>
+			</m:Input>  -->
+                        <!-- 	<m:MultiComboBox   id="IEkgrp2"  selectionFinish="handleSelectionFinishIEkgrp2" width="500px"
+		items="{gcModel>/results}">
+		<core:Item key="{gcModel>Ekgrp}" text="{gcModel>Ekgrp} - {gcModel>Eknam}" />
+	</m:MultiComboBox>   -->
+                     </fb:control>
+                  </fb:FilterItem>
+                  <!--
+				<fb:FilterItem name="C" label="Grupo de Compra" labelTooltip="Tooltip Example" mandatory="true">												
+					<fb:control>	
+								
+				    <m:ComboBox placeholder="Grp. Compra" id="IEkgrp"  selectionChange="onChange"
+						width="100%" items="{gcModel>/results}">
+						<m:items>
+							<core:Item text="{gcModel>Ekgrp} - {gcModel>Eknam}"
+								key="{gcModel>Ekgrp}" enabled="true" />
+						</m:items>
+					</m:ComboBox>					
+								
+					</fb:control>
+				</fb:FilterItem>
+				
+				
+			<fb:FilterItem name="C2" label="" labelTooltip="Tooltip Example" mandatory="true">												
+					<fb:control>
+													
+				    <m:ComboBox placeholder="Grp. Compra" id="IEkgrp2"  selectionChange="onChange"
+						width="100%" items="{gcModel>/results}">
+						<m:items>
+							<core:Item text="{gcModel>Ekgrp} - {gcModel>Eknam}"
+								key="{gcModel>Ekgrp}" enabled="true" />
+						</m:items>
+					</m:ComboBox>					
+								
+					</fb:control>
+				</fb:FilterItem>	
+				
+				
+				-->
+                  <fb:FilterItem name="T5" label="Grupo de Compra" labelTooltip="" mandatory="true">
+                     <fb:control>
+                        <m:MultiInput id="IEkgrp" type="Text" liveChange="cambiaMultiInput" placeholder="Ingrese Grupo Compra ..." showSuggestion="true" showValueHelp="true" valueHelpRequest="handleValueHelpGC" suggestionItems="{gcModel&gt;/results}">
+                           <m:suggestionItems>
+                              <core:Item text="{gcModel&gt;Ekgrp} - {gcModel&gt;Eknam}" />
+                           </m:suggestionItems>
+                        </m:MultiInput>
+                        <!-- 	<m:MultiComboBox   id="IEkgrp"  selectionFinish="handleSelectionFinishIEkgrp" width="500px"
+		items="{gcModel>/results}">
+		<core:Item key="{gcModel>Ekgrp}" text="{gcModel>Ekgrp} - {gcModel>Eknam}" />
+	</m:MultiComboBox> -->
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="B" label="Org. Compra Ini" labelTooltip="Tooltip Example" mandatory="true">
+                     <fb:control>
+                        <!-- selectionChange="onChangeOb" -->
+                        <m:ComboBox placeholder="Org. Compra" id="IEkorg" width="100%" items="{ocModel&gt;/results}">
+                           <m:items>
+                              <core:Item text="{ocModel&gt;Ekorg} - {ocModel&gt;Ekotx}" key="{ocModel&gt;Ekorg}" enabled="true" />
+                           </m:items>
+                        </m:ComboBox>
+                     </fb:control>
+                  </fb:FilterItem>
+                  <fb:FilterItem name="B2" label="Org. Compra Fin" labelTooltip="Tooltip Example" mandatory="true">
+                     <fb:control>
+                        <!-- selectionChange="onChange" -->
+                        <m:ComboBox placeholder="Org. Compra" id="IEkorg2" selected="false" width="100%" items="{ocModel&gt;/results}">
+                           <m:items>
+                              <core:Item text="{ocModel&gt;Ekorg} - {ocModel&gt;Ekotx}" key="{ocModel&gt;Ekorg}" enabled="true" />
+                           </m:items>
+                        </m:ComboBox>
+                     </fb:control>
+                  </fb:FilterItem>
+                  <!-- 		
+			<fb:FilterItem name="T2" label="" labelTooltip="" mandatory="true">
+					<fb:control>
+				
+				
+					<m:Input
+				id="IEkorg"
+				type="Text"
+				placeholder="Ingrese Org. Compra ..."
+				showSuggestion="true"
+				showValueHelp="true"
+				valueHelpRequest="handleValueHelpOC"
+				suggestionItems="{ocModel>/results}" >
+				<m:suggestionItems>
+					<core:Item text="{ocModel>Ekorg} - {ocModel>Ekotx}" />
+				</m:suggestionItems>
+			</m:Input>
+				
+					</fb:control>				
+					
+					
+				</fb:FilterItem>				
+											
+
+			<fb:FilterItem name="T3" label="" labelTooltip="" mandatory="true">
+					<fb:control>
+				
+				
+					<m:Input
+				id="IEkorg2"
+				type="Text"
+				placeholder="Ingrese Org. Compra ..."
+				showSuggestion="true"
+				showValueHelp="true"
+				valueHelpRequest="handleValueHelpOC"
+				suggestionItems="{ocModel>/results}" >
+				<m:suggestionItems>
+					<core:Item text="{ocModel>Ekorg} - {ocModel>Ekotx}" />
+				</m:suggestionItems>
+			</m:Input>
+				
+					</fb:control>				
+					
+					
+				</fb:FilterItem>				
+
+
+ -->
+                  <fb:FilterItem name="M" label="" visible="true">
+                     <fb:control>
+                        <m:Button icon="sap-icon://search" type="Emphasized" width="50px" press="onFilterA" />
+                     </fb:control>
+                  </fb:FilterItem>
+               </fb:filterItems>
+               <!--  <fb:filterGroupItems>
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="A" label="labelA" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+						<m:Input type="Text"/>
+					</fb:control>				
+				</fb:FilterGroupItem>
+				
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="B" label="labelB">
+					<fb:control>
+						<m:Input type="Text"/>
+					</fb:control>				
+				</fb:FilterGroupItem>				
+				
+				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="A2" label="labelA2" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+						<m:Input type="Text"/>
+					</fb:control>				
+				</fb:FilterGroupItem>
+				
+				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="B2" label="labelB2">
+					<fb:control>
+						<m:Input type="Text"/>
+					</fb:control>				
+				</fb:FilterGroupItem>					
+			</fb:filterGroupItems> -->
+            </fb:FilterBar>
+         </l:VerticalLayout>
+         <m:ScrollContainer height="100%" width="100%" horizontal="true" vertical="false" focusable="true"> 
+           	
+            <m:Table width="100%" id="idDetalleTable" fixedLayout="false" noDataText="Sin Datos" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{listModel&gt;/results}">
+               <m:headerToolbar>
+                  <m:OverflowToolbar>
+                     <m:SearchField width="80%" selectOnFocus="false" liveChange="onFilter" placeholder="Refinar búsqueda por Grupo o Estrategia" />
+                     <m:ToolbarSpacer />
+                     <m:Button icon="sap-icon://excel-attachment" press="onExport2" type="Accept" />
+                     <m:Button visible="false" icon="sap-icon://action-settings" press="onPersoButtonPressed">
+                        <m:layoutData>
+                           <m:OverflowToolbarLayoutData priority="NeverOverflow" />
+                        </m:layoutData>
+                     </m:Button>
+                  </m:OverflowToolbar>
+               </m:headerToolbar>
+               <m:columns>
+                  <m:Column id="co1" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch1">
+                        <m:Text id="v1" text="Grup Lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="c31" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch31">
+                        <m:Text id="v31" text="Est L" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co2" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch2">
+                        <m:Text id="v2" text="Nombre" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co4" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch4">
+                        <m:Text id="v4" text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co5" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch5">
+                        <m:Text id="v5" text="Org. Comp." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co6" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch6">
+                        <m:Text id="v6" text="Clase.Ped." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co7" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch7">
+                        <m:Text id="v7" text="Grp.Compras" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co8" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch8">
+                        <m:Text id="v8" text="Valor Prev. Acum." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co9" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch9">
+                        <m:Text id="v9" text="Valor Neto Total" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="c32" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch32">
+                        <m:Text id="32" text="Campo de usuario formato Carac" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co10" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch10">
+                        <m:Text id="v10" text="Grp.Art" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co11" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch11">
+                        <m:Text id="v11" text="Tipo.Input" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co18" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch18">
+                        <m:Text id="v18" text="Lib1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co33" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch33">
+                        <m:Text id="v33" text="CodUsr1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co20" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch20">
+                        <m:Text id="v20" text="Lib2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co34" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch34">
+                        <m:Text id="v34" text="CodUsr2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co22" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch22">
+                        <m:Text id="v22" text="Lib3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co35" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch35">
+                        <m:Text id="v35" text="CodUsr3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co24" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch24">
+                        <m:Text id="v24" text="Lib4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co36" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch36">
+                        <m:Text id="v36" text="CodUsr4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co26" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch26">
+                        <m:Text id="v26" text="Lib5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co37" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch37">
+                        <m:Text id="v37" text="CodUsr5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co28" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch28">
+                        <m:Text id="v28" text="Lib6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co38" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch38">
+                        <m:Text id="v38" text="CodUsr6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co30" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch30">
+                        <m:Text id="v30" text="Lib7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co39" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch39">
+                        <m:Text id="v39" text="CodUsr7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co32" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch32">
+                        <m:Text id="v32" text="Lib8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co40" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch40">
+                        <m:Text id="v40" text="CodUsr8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co41" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch41">
+                        <m:Text id="v41" text="Usuario-1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co42" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch42">
+                        <m:Text id="v42" text="Usuario-2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co43" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch43">
+                        <m:Text id="v43" text="Usuario-TI" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co444" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch444">
+                        <m:Text id="v444" text="Cod/lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+               </m:columns>
+               <m:items>
+                  <m:ColumnListItem type="Active">
+                     <m:cells>
+                        <m:Text text="{listModel&gt;Frggr}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgsx}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgxt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Werks}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Ekorg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Bsart}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--   <m:Text text="{listModel>Ekgrp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPress" width="200px" />
+                        <m:Text text="{path: 'listModel&gt;Ktwrt', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.formatMoneda2'  }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{path: 'listModel&gt;Gnetw', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.formatMoneda2'  }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Fusuario}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Matkl}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Knttp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc1}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc2}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc3}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid3}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc4}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid4}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc5}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid5}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc6}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid6}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc7}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid7}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc8}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid8}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Button text="" type="Default" icon="sap-icon://kpi-managing-my-area" class="sapUiSmallMarginBottom" press="dialogLib" width="40px" />
+                     </m:cells>
+                  </m:ColumnListItem>
+               </m:items>
+            </m:Table>
+            <m:Table width="100%" id="idDetalleTableSP" fixedLayout="false" noDataText="Sin Datos" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{listModel&gt;/results}">
+               <m:headerToolbar>
+                  <m:OverflowToolbar>
+                     <m:SearchField width="80%" selectOnFocus="false" liveChange="onFilter" placeholder="Refinar búsqueda por Grupo o Estrategia" />
+                     <m:ToolbarSpacer />
+                     <m:Button icon="sap-icon://excel-attachment" press="onExport2" type="Accept" />
+                     <m:Button visible="false" icon="sap-icon://action-settings" press="onPersoButtonPressed">
+                        <m:layoutData>
+                           <m:OverflowToolbarLayoutData priority="NeverOverflow" />
+                        </m:layoutData>
+                     </m:Button>
+                  </m:OverflowToolbar>
+               </m:headerToolbar>
+               <m:columns>
+                  <m:Column id="spco1" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch1">
+                        <m:Text id="spv1" text="Grup Lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spc31" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch31">
+                        <m:Text id="spv31" text="Est L" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco2" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch2">
+                        <m:Text id="spv2" text="Nombre" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco4" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch4">
+                        <m:Text id="spv4" text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco10" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch10">
+                        <m:Text id="spv10" text="Grp.Art" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco11" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch11">
+                        <m:Text id="spv11" text="Tipo.Input" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="sspco11" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="sspch11">
+                        <m:Text id="sspv11" text="Valor Total Posición" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco5" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch5">
+                        <m:Text id="spv5" text="Org. Comp." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco7" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch7">
+                        <m:Text id="spv7" text="Grp.Compras" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco18" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch18">
+                        <m:Text id="spv18" text="Lib1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco33" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch33">
+                        <m:Text id="spv33" text="CodUsr1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco20" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch20">
+                        <m:Text id="spv20" text="Lib2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco34" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch34">
+                        <m:Text id="spv34" text="CodUsr2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco22" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch22">
+                        <m:Text id="spv22" text="Lib3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco35" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch35">
+                        <m:Text id="spv35" text="CodUsr3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco24" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch24">
+                        <m:Text id="spv24" text="Lib4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco36" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch36">
+                        <m:Text id="spv36" text="CodUsr4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco26" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch26">
+                        <m:Text id="spv26" text="Lib5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco37" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch37">
+                        <m:Text id="spv37" text="CodUsr5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco28" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch28">
+                        <m:Text id="spv28" text="Lib6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco38" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch38">
+                        <m:Text id="spv38" text="CodUsr6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco30" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch30">
+                        <m:Text id="spv30" text="Lib7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco39" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch39">
+                        <m:Text id="spv39" text="CodUsr7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco32" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch32">
+                        <m:Text id="spv32" text="Lib8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="spco40" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="spch40">
+                        <m:Text id="spv40" text="CodUsr8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="co445" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="ch445">
+                        <m:Text id="v445" text="Cod/lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+               </m:columns>
+               <m:items>
+                  <m:ColumnListItem type="Active">
+                     <m:cells>
+                        <m:Text text="{listModel&gt;Frggr}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgsx}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgxt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--  	<m:Text text="{listModel>Werks}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>  -->
+                        <m:Button text="{path: 'listModel&gt;Werks', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Werks', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPressCEN" width="250px" />
+                        <!--  <m:Text text="{listModel>Matkl}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Matkl', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Matkl', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPressGA" width="250px" />
+                        <!--  		<m:Button			text=""
+				type="Default"
+				icon="sap-icon://show"
+				class="sapUiSmallMarginBottom"
+				press="handleInfoMessageBoxPressGA"
+				width="40px"/> -->
+                        <!-- 	<m:Text text="{listModel>Knttp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Knttp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Default" icon="sap-icon://legend" class="sapUiSmallMarginBottom" press="dialogLib" width="250px" />
+                        <m:Text text="{path: 'listModel&gt;Gnetw', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.formatMoneda2'  }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Ekorg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--   <m:Text text="{listModel>Ekgrp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPress" width="200px" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc1}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc2}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc3}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid3}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc4}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid4}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc5}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid5}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc6}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid6}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc7}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid7}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc8}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid8}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Button text="" type="Default" icon="sap-icon://kpi-managing-my-area" class="sapUiSmallMarginBottom" press="dialogLib" width="40px" />
+                     </m:cells>
+                  </m:ColumnListItem>
+               </m:items>
+            </m:Table>
+            <m:Table width="100%" id="idDetalleTableHES" fixedLayout="false" noDataText="Sin Datos" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{listModel&gt;/results}">
+               <m:headerToolbar>
+                  <m:OverflowToolbar>
+                     <m:SearchField width="80%" selectOnFocus="false" liveChange="onFilter" placeholder="Refinar búsqueda por Grupo o Estrategia" />
+                     <m:ToolbarSpacer />
+                     <m:Button icon="sap-icon://excel-attachment" press="onExport2" type="Accept" />
+                     <m:Button visible="false" icon="sap-icon://action-settings" press="onPersoButtonPressed">
+                        <m:layoutData>
+                           <m:OverflowToolbarLayoutData priority="NeverOverflow" />
+                        </m:layoutData>
+                     </m:Button>
+                  </m:OverflowToolbar>
+               </m:headerToolbar>
+               <m:columns>
+                  <m:Column id="hspco1" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch1">
+                        <m:Text id="hspv1" text="Grup Lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspc31" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch31">
+                        <m:Text id="hspv31" text="Est L" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco2" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch2">
+                        <m:Text id="hspv2" text="Nombre" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco4" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch4">
+                        <m:Text id="hspv4" text="Centro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco10" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch10">
+                        <m:Text id="hspv10" text="Grupo de Artículos" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco11" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch11">
+                        <m:Text id="hspv11" text="Valor Servicios" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco5" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch5">
+                        <m:Text id="hspv5" text="Org. Comp." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco7" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch7">
+                        <m:Text id="hspv7" text="Grp.Compras" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hspco18" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hspch18">
+                        <m:Text id="hspv18" text="Lib1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco33" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch33">
+                        <m:Text id="hv33" text="CodUsr1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco20" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch20">
+                        <m:Text id="hv20" text="Lib2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco34" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch34">
+                        <m:Text id="hv34" text="CodUsr2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco22" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch22">
+                        <m:Text id="hv22" text="Lib3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco35" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch35">
+                        <m:Text id="hv35" text="CodUsr3" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco24" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch24">
+                        <m:Text id="hv24" text="Lib4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco36" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch36">
+                        <m:Text id="hv36" text="CodUsr4" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco26" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch26">
+                        <m:Text id="hv26" text="Lib5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco37" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch37">
+                        <m:Text id="hv37" text="CodUsr5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco28" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch28">
+                        <m:Text id="hv28" text="Lib6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco38" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch38">
+                        <m:Text id="hv38" text="CodUsr6" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco30" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch30">
+                        <m:Text id="hv30" text="Lib7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco39" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch39">
+                        <m:Text id="hv39" text="CodUsr7" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco32" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch32">
+                        <m:Text id="hv32" text="Lib8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco40" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch40">
+                        <m:Text id="hv40" text="CodUsr8" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="hco44" visible="false" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="hch44">
+                        <m:Text id="hv44" text="Cod/lib" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+               </m:columns>
+               <m:items>
+                  <m:ColumnListItem type="Active">
+                     <m:cells>
+                        <m:Text text="{listModel&gt;Frggr}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgsx}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Frgxt}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--	<m:Text text="{listModel>Werks}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Werks', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Werks', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPressCEN" width="250px" />
+                        <!-- <m:Text text="{listModel>Matkl}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>  -->
+                        <m:Button text="{path: 'listModel&gt;Matkl', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Matkl', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPressGA" width="250px" />
+                        <m:Text text="{path: 'listModel&gt;Ktwrt', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.formatMoneda2'  }" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Ekorg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--   <m:Text text="{listModel>Ekgrp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/> -->
+                        <m:Button text="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPress" width="200px" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc1}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc2}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc3}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid3}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc4}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid4}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc5}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid5}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc6}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid6}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc7}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid7}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:ObjectIdentifier title="{listModel&gt;Frgc8}" text="" titleActive="false" visible="true" />
+                        <m:Text text="{listModel&gt;Objid8}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Button text="" type="Default" icon="sap-icon://kpi-managing-my-area" class="sapUiSmallMarginBottom" press="dialogLib" width="40px" />
+                     </m:cells>
+                  </m:ColumnListItem>
+               </m:items>
+            </m:Table>
+            <m:Table width="100%" visible="false" id="idDetalleTableFact" fixedLayout="false" noDataText="Sin Datos" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{listModel&gt;/results}">
+               <m:headerToolbar>
+                  <m:OverflowToolbar>
+                     <m:SearchField width="80%" selectOnFocus="false" liveChange="onFilter" placeholder="Refinar búsqueda por Grupo o Estrategia" />
+                     <m:ToolbarSpacer />
+                     <m:Button icon="sap-icon://excel-attachment" press="onExport2" type="Accept" />
+                     <m:Button visible="false" icon="sap-icon://action-settings" press="onPersoButtonPressed">
+                        <m:layoutData>
+                           <m:OverflowToolbarLayoutData priority="NeverOverflow" />
+                        </m:layoutData>
+                     </m:Button>
+                  </m:OverflowToolbar>
+               </m:headerToolbar>
+               <m:columns>
+                  <m:Column id="bfco5" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="bfch5">
+                        <m:Text id="bfv5" text="Org. Comp." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="bfco7" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="bfch7">
+                        <m:Text id="bfv7" text="Grp.Compras" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="bfco41" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="bfch41">
+                        <m:Text id="bfv41" text="Usuario-1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="bfco42" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="bfch42">
+                        <m:Text id="bfv42" text="Usuario-2" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+                  <m:Column id="bfco43" visible="true" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                     <m:header id="bfch43">
+                        <m:Text id="bfv43" text="Usuario-TI" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:header>
+                     <m:footer />
+                  </m:Column>
+               </m:columns>
+               <m:items>
+                  <m:ColumnListItem type="Active">
+                     <m:cells>
+                        <m:Text text="{listModel&gt;Ekorg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <!--  						<m:Button
+				text=""
+				type="Default"
+				icon="sap-icon://show"
+				class="sapUiSmallMarginBottom"
+				press="handleInfoMessageBoxPress"
+				width="40px"/>
+    					 -->
+                        <m:Button text="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.testImpr'  }" type="Emphasized" icon="{path: 'listModel&gt;Ekgrp', formatter: 'com.sap.build.standard.ztestcap.controller.Formatter.verIcon'  }" class="sapUiSmallMarginBottom" press="handleInfoMessageBoxPress" width="200px" />
+                        <m:Text text="{listModel&gt;Uname1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Uname2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                        <m:Text text="{listModel&gt;Userti}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" />
+                     </m:cells>
+                  </m:ColumnListItem>
+               </m:items>
+            </m:Table>
+         </m:ScrollContainer> 
+      </m:content>
+      <m:footer>
+         <m:Bar design="Auto" visible="false">
+            <m:contentLeft />
+            <m:contentMiddle />
+            <m:contentRight visible="false">
+               <m:Button text="Aceptar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+               <m:Button text="Rechazar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+               <m:Button text="" type="Default" icon="sap-icon://action" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+            </m:contentRight>
+         </m:Bar>
+      </m:footer>
+      <m:headerContent />
+      <m:subHeader />
+      <m:customHeader />
+   </m:Page>
+</mvc:View>

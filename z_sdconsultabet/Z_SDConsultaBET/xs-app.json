@@ -1,0 +1,21 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "authenticationMethod": "none",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "authenticationType": "none",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/ZODATA_SD_WINESHOP_CONSULTA_BET_SRV/",
+      "destination": "FIORI_BGW_HTTP_BASICAUTH"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

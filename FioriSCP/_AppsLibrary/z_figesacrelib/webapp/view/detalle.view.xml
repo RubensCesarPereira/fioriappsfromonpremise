@@ -1,0 +1,95 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:ux="sap.uxap"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" 
+	controllerName="z_figesacrelib.controller.detalle" >
+	<App id="RootView">
+<Page title="Detalle Condición Comercial" showNavButton="true" navButtonPress="backPress">
+		
+		 <VBox class="sapUiSmallMargin">
+
+  <f:SimpleForm id="SimpleForm" minWidth="1024"
+
+  maxContainerCols="2" editable="false" layout="ResponsiveGridLayout"
+
+  title="En Datos Organizacionales" labelSpanL="3" labelSpanM="3" emptySpanL="4"
+
+  emptySpanM="4" columnsL="1" columnsM="1">
+
+  <f:content>
+	<Label text="País" />
+  	<Text  id="Landx" enabled="false" text="{Landx}"/>
+  	
+  	<Label text="Cliente" />
+  	<Text  id="Name1"/>
+	
+	<Label text="Org. Ventas"/>
+  	<Text  id="TVkorg" text="{TVkorg}"/>
+  	
+  	<Label text="Fecha" />
+  	<Text  id="ZzfechaStatus" text="{path : 'detalle>/zfechaStatus', 
+             			type : 'sap.ui.model.type.Date',
+             			formatOptions: { style : 'medium'}} - {path : 'detalle>/zhoraStatus', 
+             			type : 'sap.ui.model.type.Time',
+             			formatOptions: { style : 'medium'}}"/>
+ 
+    <Label text="Creador"/>
+  	<Text  id="Uname" text="{Uname}"/>
+</f:content>
+
+  </f:SimpleForm>
+   <f:SimpleForm id="SecondForm" minWidth="100"
+
+  maxContainerCols="2" editable="false" layout="ResponsiveGridLayout"
+
+  title="Datos Condición Comercial" labelSpanL="3" labelSpanM="3" emptySpanL="4"
+
+  emptySpanM="4" columnsL="1" columnsM="1">
+
+  <f:content>
+	<Label text="Producto" />
+
+  	<Text  id="Maktx" enabled="false" text="{Maktx}"/>
+  	
+  	<Label text="Cond. Comercial" />
+
+  	<Text  id="TKschl"/>
+
+	<Label text="Nueva Cond."/>
+
+  	<Text  id="Kbetr" text="{Kbetr}"/>
+  	
+  	<Label text="Antigua Cond." />
+
+  	<Text  id="KbetrOld" text="{KbetrOld}"/>
+  
+  	<Label text="Vigente Nueva Cond."/>
+
+  	<Text  id="Datab" text="{path : 'detalle>/datab', 
+             			type : 'sap.ui.model.type.Date',
+             			formatOptions: { style : 'medium'}} - {path : 'detalle>/datbi', 
+             			type : 'sap.ui.model.type.Date',
+             			formatOptions: { style : 'medium'}}"/>
+  	
+</f:content>
+
+  </f:SimpleForm>
+  </VBox>
+  <footer>
+	<OverflowToolbar id="otbFooter">
+		<ToolbarSpacer/>
+		<Button type="Accept" text="Aceptar" icon="sap-icon://paid-leave" press="onAprobarDialog">
+			<layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+		</Button>
+		
+		<Button type="Reject" text="Rechazar" icon="sap-icon://unpaid-leave" press="onRechazoDialog">
+			<layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+		</Button>
+			
+	</OverflowToolbar>
+  </footer>
+</Page></App></core:View>

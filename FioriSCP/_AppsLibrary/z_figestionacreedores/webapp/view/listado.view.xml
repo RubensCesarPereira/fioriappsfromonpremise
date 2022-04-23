@@ -1,0 +1,400 @@
+<core:View 
+	xmlns:core="sap.ui.core"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:ux="sap.uxap"
+	xmlns:l="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	controllerName="z_figestionacreedores.controller.listado" >
+	
+	<Table 
+		id="idSolicTable"
+		inset="false"
+		noDataText="Sin datos"
+		growing="true"
+		growingThreshold="8"
+		growingScrollToLoad="true"
+		visibleRowCount="8"
+		items="{/listSolicitudes}"
+				title="Lista Proceso">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="Listado Solicitudes" level="H2"/>
+					<ToolbarSpacer/>
+					<SearchField id="filtro" search="filtrarListado"  >
+					<layoutData>
+					<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/></layoutData>
+					</SearchField>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column
+				hAlign="Left"
+				valign="Middle"
+				width="6em">
+				<Text text="" />
+			</Column>
+			<Column
+				width="6em"
+				valign="Middle"
+				halign="Right">
+				<Text text="Fecha Solicitud" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="Center"
+				valign="Middle">
+				<Text text="Tipo" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="Center"
+				valign="Middle">
+				<Text text="Acreedor" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="Initial"
+				valign="Middle">
+				<Text text="Grupo Cuenta" />
+			</Column>
+			<Column
+				hAlign="Left"
+				valign="Middle"
+				halign="Center">
+				<Text text="Estado" />
+			</Column>
+			<Column
+				hAlign="Left"
+				valign="Middle"
+				halign="Center">
+				<Text text="Estado Aprobación" />
+			</Column>
+			<Column
+				valign="Middle"
+				halign="Center"
+				>
+				<Text text="Id Solicitud" />
+			</Column>
+			<Column
+				valign="Middle"
+				halign="Center"
+				>
+				<Text text="Motivo Rechazo" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem press="onPress" type="Navigation" vAlign="Middle">
+				<cells>
+					<ObjectStatus
+						icon="{ICON}" />
+					<ObjectIdentifier
+						text="{ERSDA}"/>
+					<Text
+						text="{TIPO_PROCESO}"/>
+					<Text
+						text="{NAME1}"/>
+					<Text
+						text="{KTOKK}"/>
+					<ObjectStatus
+					text="{ESTADO}"
+						state="{STATE}"/>
+					<Text
+					text="{SUBESTADO}"/>
+					<Text
+						text="{ID_PROCESO}" />	
+					<Text
+						text="{MOTIVO_RECHAZO}" />	
+					
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	
+			 
+<ux:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" class="sapUiTinyMargin sapUiTinyPadding">
+	
+ <ux:headerTitle>
+	<ux:ObjectPageHeader id="tit" objectTitle="Visualiza Solicitud" isObjectIconAlwaysVisible="true" headerDesign="Dark">
+	<ux:actions>
+			<Button id="btnVolver" icon="sap-icon://nav-back" text="Volver" type="Emphized" press="toListado"/>
+			
+		</ux:actions>
+	</ux:ObjectPageHeader>
+</ux:headerTitle>
+<ux:headerContent width="auto" class="sapUiTinyMargin sapUiTinyPadding">
+		<l:HorizontalLayout
+			height="50px"
+			alignItems="Center"
+			justifyContent="Left">
+			
+			<Label text="Grupo de Cuenta:" class="sapUiSmallMarginEnd"/>
+			<Label id="lblGrpCta" text="{dataModel>/KTOKK}" design="Bold"/>
+			<Label text="Gerente/Subgerente:" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+			<Label id="lblAprobadores" text="{dataModel>/APROBADOR}" design="Bold"/>
+			
+		</l:HorizontalLayout>
+</ux:headerContent>
+ 
+<ux:sections>
+	<ux:ObjectPageSection title="General">
+		<ux:subSections>
+			<ux:ObjectPageSubSection title="Datos Generales ">
+				<ux:blocks>
+					<l:HorizontalLayout class="sapUiSmallMargin">
+		<f:SimpleForm id="formDG" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<Label text="Tratamiento" class="sapUiMiddleAlign" design="Bold"/>
+				<TextArea id="trat" value="{dataModel>/ANRED}"  editable="false" rows="1"/>
+				<Label text="Nombre" design="Bold"/>
+				<TextArea id="name1" value="{dataModel>/NAME1}" editable="false" rows="1" />
+				<Label text="Concepto" design="Bold"/>
+				<TextArea id="concep" value="{dataModel>/SORTL}" editable="false" rows="1"/>
+				<Label text="Teléfono" design="Bold"/>
+				<TextArea id="telf" value="{dataModel>/TELF1}"  editable="false" rows="1"/>
+				<Label text="E-mail " design="Bold"/>
+				<TextArea id="email1" width="100%" value="{dataModel>/SMTP_ADDR}" editable="false" rows="1"/>
+				<Label text="E-mail cobranza" design="Bold"/>
+				<TextArea id="email2" width="100%" value="{dataModel>/SMTP_ADDR2}" editable="false" rows="1"/>
+				
+			</f:content>
+		</f:SimpleForm>
+		
+				
+		</l:HorizontalLayout>
+			</ux:blocks>
+		</ux:ObjectPageSubSection>
+		<ux:ObjectPageSubSection title="Dirección">
+			<ux:blocks>
+			<f:SimpleForm id="frmDD" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<Label text="Dirección/Calle/N°" wrapping="true" design="Bold"/>
+				<TextArea id="direc" width="100%" value="{dataModel>/STRAS}" editable="false" rows="1"/>
+				<Label text="Ciudad" design="Bold"/>
+				<TextArea id="txtCiudad" width="100%" value="{dataModel>/CITY1}" editable="false" rows="1" />
+				<Label text="País" design="Bold"/>
+				<TextArea id="txtPais" width="100%" value="{dataModel>/LAND1}" editable="false" rows="1" />
+				<Label text="Comuna" design="Bold"/>
+				<TextArea id="txtComu" width="100%" value="{dataModel>/CITY2}" editable="false" rows="1" />
+				<Label text="Región" design="Bold"/>
+				<TextArea id="txtRegio" width="100%" value="{dataModel>/REGIO}" editable="false" rows="1"/>
+				
+							
+			</f:content>
+		</f:SimpleForm>	
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+ 
+			<ux:ObjectPageSection title="Datos Sociedad">
+			<ux:subSections>
+					<ux:ObjectPageSubSection title="Sociedad">
+						<ux:blocks>
+				
+			<f:SimpleForm id="formDC" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="false"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="4"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<Label text="Sociedad(es)"  design="Bold"/>
+				<TextArea id="txtSoci" width="100%" text="{dataModel>/BUKRS_MULTI}" editable="false" rows="1"/>
+				<Label text="N° Id.fiscal" design="Bold"/>
+				<TextArea id="txtRut" width="100%" text="{dataModel>/STCD1}" editable="false" rows="1"/>
+				<Label text="N.I.F." design="Bold"/>
+				<TextArea id="txtNif" width="100%" text="{dataModel>/STENR}" editable="false" rows="1"/>
+				<Label text="Deudor" design="Bold"/>
+				<TextArea id="txtDeu" width="100%" text="{dataModel>/KUNNR}" editable="false" rows="1"/>
+				<Label text="Fab. Externo" design="Bold"/>
+				<TextArea id="txtFEx" width="100%" text="{dataModel>/EMNFR}" editable="false" rows="1"/>
+				<Label text="Cond. Pago" design="Bold"/>
+				<TextArea id="txtCPag" width="100%" text="{dataModel>/ZTERM}" editable="false" rows="1"/>
+			</f:content>
+		</f:SimpleForm>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+					<ux:ObjectPageSubSection title="Bancario">
+					<ux:blocks>
+					<f:SimpleForm id="frmDB" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<Label text="Dato Ban. País" wrapping="true" design="Bold"/>
+				<TextArea  width="100%" value="{dataModel>/BANKS}" editable="false" rows="1"/>
+				<Label text="Clave Banco" design="Bold"/>
+				<TextArea width="100%" value="{dataModel>/BANKL}" editable="false" rows="1"/>
+				<Label text="Cta. Bancaria" design="Bold"/>
+				<TextArea  width="100%" value="{dataModel>/BANKN}" editable="false" rows="1"/>
+				<Label text="Titular Cta." design="Bold"/>
+				<TextArea  width="100%" value="{dataModel>/KOINH}" editable="false" rows="1"/>
+				<Label text="IBAN" design="Bold"/>
+				<TextArea  width="100%" value="{dataModel>/IBAN}" editable="false" rows="1"/>
+			</f:content>
+		</f:SimpleForm>	
+					</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+ 
+			<ux:ObjectPageSection title="Datos Compra">
+				<ux:subSections>
+					<ux:ObjectPageSubSection title=" ">
+						<ux:blocks>
+							<f:SimpleForm id="frmDBa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			<Label text="Grupo de Compras" design="Bold"/>
+			<TextArea width="100%" value="{dataModel>/EKORG_MULTI}" editable="false" rows="1"/>
+			<Label text="Moneda del Pedido" design="Bold" />
+			<TextArea width="100%" value="{dataModel>/WAERS}" editable="false" rows="1"/>
+			<Label text="Condición Pago" design="Bold"/>
+			<TextArea width="100%" value="{dataModel>/ZTERM}" editable="false" rows="1"/>
+			</f:content>
+		</f:SimpleForm>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+ 
+			<ux:ObjectPageSection title="Anexos">
+				<ux:subSections>
+					<ux:ObjectPageSubSection title=" ">
+						<ux:blocks>
+							<f:SimpleForm id="frmDBaa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			</f:content>
+		</f:SimpleForm>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+ 
+			<ux:ObjectPageSection title="Observaciones">
+				<ux:subSections>
+					<ux:ObjectPageSubSection title=" ">
+						<ux:blocks>
+						<f:SimpleForm id="frmDBaat" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+							
+			<TextArea editable="false" id="txtObs" value="{dataModel>/OBS}" showExceededText="true" maxLength="200" width="100%" valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }" valueLiveUpdate="false" liveChange="handleLiveChange" />
+						</f:content></f:SimpleForm></ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+ 
+ 
+		</ux:sections>
+ 
+	</ux:ObjectPageLayout>
+		
+	</core:View>

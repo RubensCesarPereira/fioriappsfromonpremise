@@ -1,0 +1,118 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core"  xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m" controllerName="fcg.grc.accessrequest.approve.view.RequestDetail">
+	<Page id="RequestDetail" title="{i18n>ACCESS_REQUEST_LBL}">
+		<content>
+			<core:ExtensionPoint name="extHeader" />
+            <ObjectHeader id="requestHeader" title="{RequestReason}"
+             			  number="{path:'DaysElapsed', formatter:'.formatDaysNumberDisplay'}"
+                    	  numberUnit="{path:'DaysElapsed', formatter:'.formatDaysDisplay'}"
+                          >
+                <attributes>
+					<ObjectAttribute text="{parts:[{path:'i18n>REQUEST_LBL'}, {path:'RequestNumber'}], formatter:'jQuery.sap.formatMessage'}" />
+					<ObjectAttribute text="{parts:[ {path:'UserName'}, {path:'RequesterName'}], formatter:'.formatUserNameDisplay'}"  />
+				</attributes>
+			     <firstStatus>
+					<ObjectStatus
+						text="{path:'RisksCount', formatter:'.formatRiskDisplay'}"
+						state="Error" />
+				</firstStatus>
+            </ObjectHeader>
+
+          <Text id="lockId" text="{Exception}" visible="false"></Text>
+             
+            
+            
+            <IconTabBar id="TABCONT_ROLE_INFO">
+            <items>
+            	<IconTabFilter  id="AccessTab" icon="sap-icon://menu" key="Acess" text="{i18n>ACCESS_LBL}" count="{AccessCount}">
+            	<content>
+            		<core:ExtensionPoint name="extAccessTab" />
+		             <Table
+						id="accessRequestedList" select="handleSelect"
+						growing="false" growingScrollToLoad="false" items="{Roles}" class="sapFixHeaderList" noDataText="{i18n>NO_ACCESS_REQUESTED_MSG}" >
+						<!--  updateFinished="onListLoaded" -->
+						<columns>
+						    <Column hAlign="Left" styleClass="limit" width="20%"><header><Label text="{i18n>APPROVE_LBL}"></Label></header></Column>
+							<Column hAlign="Left" styleClass="limit" width="60%"><header><Label text="{i18n>ACCESS_LBL}"></Label></header></Column>
+							<Column hAlign="Left" styleClass="limit" width="20%"><header><Label text="{i18n>RISKS_COL_LBL}"></Label></header></Column>
+							<!-- extension point for Validity Field-->
+							<core:ExtensionPoint name="extValidityField" />
+						</columns>
+						<items  >
+							<ColumnListItem id="accessRequestedListItem" press="handleItemPress"  type="Navigation" >
+								<cells>
+								    <CheckBox  selected="{path:'ApprovalStatus', formatter:'.isCheckBoxSelected'}" visible="true" enabled="{path:'CanApprove', formatter:'.isEnabled'}" 
+								    design="Small" value="{AccessName}"  name="{path:'AccessName', formatter:'.getCheckBoxName'}" 
+								    select="approveLineItemSelect" tooltip="{path:'CanApprove', formatter:'.formatAuthorizedMessage'}"></CheckBox>
+									<Text text="{Description}"></Text>
+									<core:Icon src="sap-icon://alert" color="red" visible="{path:'RisksCount', formatter:'.formatRiskIconDisplay'}"/>
+									<core:ExtensionPoint name="extension2" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			    </content>
+				</IconTabFilter>
+				<IconTabFilter  icon="sap-icon://hint" key="Info" text="{i18n>INFO_LBL}">
+			       <content>
+			        <form:SimpleForm id="INFO_FORM" minWidth="300">
+					  <form:content>
+                        <Label id="BusinessProcess_lbl" text="{i18n>BUS_PROC_TEXT}"
+								design="Bold" visible="false"></Label>
+				        <Text id="BusinessProcess_txt" text="{BusinessProcess}" visible="false"></Text> 
+
+                        <Label id="FunctionalArea_lbl" text="{i18n>FUN_AREA_TEXT}"
+								design="Bold" visible="false"></Label>
+				        <Text id="FunctionalArea_txt" text="{FunctionalArea}" visible="false"></Text> 
+
+                        <Label id="Requester_lbl" text="{i18n>REQUESTER_TXT}"
+								design="Bold" visible="false"></Label>
+				        <Text id="Requester_txt" text="{RequesterName}" visible="false"></Text> 
+
+                        <Label id="RequestReason_lbl" text="{i18n>REQUEST_REASON_TEXT}"
+								design="Bold" visible="false"></Label>
+				        <Text id="RequestReason_txt" text="{RequestReason}" visible="false"></Text> 
+				        <core:ExtensionPoint name="extInfoView" />
+				       </form:content>
+					 </form:SimpleForm>
+		             <Table
+						id="customFieldsDataList" select="handleSelect"
+						growing="false" growingScrollToLoad="false" items="{CustomFields}" class="sapFixHeaderList" noDataText="" visible="false">
+						  <columns>
+						    <Column hAlign="Left" styleClass="limit" width="20%"><header><Label text="{i18n>NAME_LBL}"></Label></header></Column>
+							<Column hAlign="Left" styleClass="limit" width="60%"><header><Label text="{i18n>VALUE_LBL}"></Label></header></Column>
+						</columns>
+						<items  >
+							<ColumnListItem id="customFieldsDataListItem"  >
+								<cells>
+									<Text text="{FieldLabel}"></Text>
+									<Text text="{FieldValue}"></Text>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					 
+                    </content>
+				</IconTabFilter>
+			</items>
+        </IconTabBar>
+			             
+		</content>
+		
+		<!--  <footer>
+		   <Bar id="detailFooter">
+				<contentRight>
+					<Button id="Submit" text="{i18n>SUBMIT_BTN}" tap="doSubmit"
+						type="Emphasized"></Button>
+					<Button id="Forward" text="{i18n>FORWARD_TEXT}" 
+						enabled="true" press="handleForward" />
+				</contentRight>
+			</Bar>
+		</footer> -->
+	</Page>
+</core:View>

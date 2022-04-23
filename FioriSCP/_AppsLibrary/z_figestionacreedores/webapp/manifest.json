@@ -1,0 +1,121 @@
+{
+  "_version": "1.12.0",
+  "sap.app":{
+    
+    "resources": "resources.json",
+    "type":"application",
+    "id":"z_figestionacreedores",
+    "title": "Solicitudes de Creación Acreedores",
+    "applicationVersion":{
+       "version":"1.6.0"
+    },
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZFI_SO_GESTION_ACREEDORES",
+                "action": "display",
+                "title": "Solicitudes de Creación Acreedores",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://business-card"				
+            }
+        }
+    }
+  },
+  "sap.cloud": {
+	"public": true,
+	"service": "FioriSCP"
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },  
+  "sap.ui5": {
+	"rootView": {
+			"viewName": "z_figestionacreedores.view.ppal",
+			"type": "JS"
+		},
+    "contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+    "dependencies": {
+      "minUI5Version": "1.66.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {}
+      }
+    },        
+	"models": {
+	
+	},
+	"routing": {
+	  "config": {
+		"routerClass": "sap.m.routing.Router",
+		"viewType": "XML",
+		"viewPath": "z_figestionacreedores.view",
+		"controlId": "RootView",
+		"controlAggregation": "pages",
+		"async": true
+	  },
+	  "routes": [
+		{
+			"name": "listado",
+				"pattern": "listado",
+				"titleTarget": "",
+				"greedy": false,
+				"target": "listado"
+			},
+			{
+			"name": "detalle",
+				"pattern": "detalle",
+				"titleTarget": "",
+				"greedy": false,
+				"target": "detalle"	
+			}
+	  ],
+	  "targets": {
+		"listado": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 1,
+					"viewName": "listado"
+		},
+		"detalle": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 2,
+					"viewName": "detalle"
+		}
+	  }
+	}
+  },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zfigestionacreedores"
+            ]
+        }  
+}

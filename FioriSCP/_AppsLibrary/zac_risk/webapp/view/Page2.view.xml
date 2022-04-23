@@ -1,0 +1,110 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:layout="sap.ui.commons.layout" xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="Page2" controllerName="zac.grc.risk.cust.controller.Page2" encoding="utf-8">
+    <Page showHeader="true" title="Reporte Riesgos GRC" showNavButton="true" enableScrolling="false" navButtonPress="onNavBack">
+        <content>
+        <sap.ui.layout:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" width="100%" id="slayout0">
+          
+            <sap.ui.layout:content>
+                
+                <Table id="tblSGerencia_id" width="auto" noDataText="" mode="None" showSeparators="All" growing="false" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path:'/SGerenciaSet',parameters:{select:'Sociedad,Gerencia,SGerencia,Riskcount,Critico,Alto,Medio,Bajo'}}" updateStarted="">
+                                <infoToolbar>
+                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                        <content>
+                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </content>
+                                    </Toolbar>
+                                </infoToolbar>
+                                <headerToolbar>
+                                    <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
+                                    	
+                                    	
+                                        <content>
+                                            <Title text="Riesgos por SubGerencias Holding Concha y Toro" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="true" id="txtSubGerencia_id"/>
+                                            <ToolbarSpacer width=""/>
+                                            <OverflowToolbarButton text="Sort" type="Default" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="handleViewSettingsDialogButtonPressed"/>
+                                            <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" visible="false" iconDensityAware="false"/>
+                                            <OverflowToolbarButton text="Excel" type="Default" icon="sap-icon://download" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onObjectNumberPress"/>
+                                            <SearchField width="100%" placeholder="Filtrar SubGerencia" selectOnFocus="true" id="sfield0" search="Change"/>
+                                            <SearchField width="100%" visible="true" placeholder="Filtrar Sociedad" selectOnFocus="true" id="sfield1" search="Change2"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="30%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="true">
+                                        <header>
+                                            <Title text="SubGerencia" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="20%" hAlign="Left" vAlign="Top" minScreenWidth="Desktop" demandPopin="true" popinDisplay="WithoutHeader" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Sociedad" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+
+                                    
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Critico" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Alto" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Medio" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Bajo" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Total" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press="_onRowPress1">
+                                        <cells>
+                                            <Text text="{SGerencia}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{Sociedad}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            
+                                            <ObjectNumber unit="" emphasized="true" state="None" number="{Critico}"/>
+                                            <ObjectNumber unit="" emphasized="true" state="None" number="{Alto}"/>
+                                            <ObjectNumber unit="" emphasized="true" state="None" number="{Medio}"/>
+                                            <ObjectNumber unit="" emphasized="true" state="None" number="{Bajo}"/>
+                                            <ObjectNumber unit="" emphasized="true" state="None" number="{Riskcount}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                
+            </sap.ui.layout:content>
+          
+        </sap.ui.layout:VerticalLayout>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="false" visible="false">
+                <content/>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

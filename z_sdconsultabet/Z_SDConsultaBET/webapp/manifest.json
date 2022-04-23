@@ -1,0 +1,47 @@
+{
+  "_version": "1.0.0",
+  "sap.app":{
+     "id":"ns.Z_SDConsultaBET",
+     "type":"application",
+     "applicationVersion":{
+        "version":"1.0.0"
+     }
+  },  
+  "sap.ui5": {
+	"rootView": {
+			"viewName": "Z_SDConsultaBET.view.ppal",
+			"type": "JS"
+		},
+	"models": {
+	
+	},
+	"routing": {
+	  "config": {
+		"routerClass": "sap.m.routing.Router",
+		"viewType": "XML",
+		"viewPath": "Z_SDConsultaBET.view",
+		"controlId": "RootView",
+		"controlAggregation": "pages",
+		"async": true
+	  },
+	  "routes": [
+		{
+				"name": "boleta",
+				"pattern": "boleta",
+				"titleTarget": "",
+				"greedy": false,
+				"target": "boleta"
+			}
+	  ],
+	  "targets": {
+		"boleta": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 1,
+					"viewName": "DespliegaBoleta"
+		}
+	  }
+	}
+  }
+}

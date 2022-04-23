@@ -1,0 +1,269 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"_version": "1.3.0",
+		"id": "zac.grc.risk.cust",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.2.2"
+		},
+		"dataSources": {
+			"ZAC_RISK_SRV": {
+				"uri": "sap/opu/odata/sap/ZAC_RISK_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZAC_RISK_SRV/metadata.xml"
+				}
+			}
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "ach",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZRiskSem",
+                "action": "display",
+                "title": "Reporte de Riegos",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://line-chart"
+            }
+        }
+    }
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "FioriSCP"
+	},
+	"sap.ui": {
+		"_version": "1.3.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"_version": "1.3.0",
+		"rootView": {
+			"viewName": "generated.app.view.Page6",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.38.18",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"uri": "sap/opu/odata/sap/ZAC_RISK_SRV/",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZAC_RISK_SRV",
+				"preload": true
+			},
+			"fecha": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "zac.grc.risk.cust.view",
+				"controlId": "App",
+				"clearTarget": false,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"Page1"
+					]
+				}
+			},
+			"targets": {
+				"Page1": {
+					"controlAggregation": "pages",
+					"viewName": "Page1",
+					"viewId": "Page1",
+					"viewLevel": 3,
+					"transition": "slide"
+				},
+				"Page2": {
+					"controlAggregation": "pages",
+					"viewName": "Page2",
+					"viewId": "Page2",
+					"viewLevel": 4,
+					"transition": "slide"
+				},
+				"RiesgosAll": {
+					"controlAggregation": "pages",
+					"viewName": "RiesgosAll",
+					"viewId": "RiesgosAll",
+					"viewLevel": 5,
+					"transition": "slide"
+				},
+				"Launchpad": {
+					"controlAggregation": "pages",
+					"viewName": "Launchpad",
+					"viewId": "Launchpad",
+					"viewLevel": 2,
+					"transition": "slide"
+				},
+				"RiesgosTi": {
+					"controlAggregation": "pages",
+					"viewName": "RiesgosTi",
+					"viewId": "RiesgosTi",
+					"viewLevel": 6,
+					"transition": "slide"
+				},
+				"RiesgosAg": {
+					"controlAggregation": "pages",
+					"viewName": "RiesgosAg",
+					"viewId": "RiesgosAg",
+					"viewLevel": 5,
+					"transition": "slide"
+				},
+				"Page6": {
+					"controlAggregation": "pages",
+					"viewName": "Page6",
+					"viewId": "Page6",
+					"viewLevel": 1,
+					"transition": "slide"
+				},
+				"Grafico": {
+					"viewName": "Main",
+					"title": "Grafico",
+					"viewLevel": 2
+				}
+			},
+			"routes": [
+				{
+					"pattern": "Page1/:context:",
+					"name": "Page1",
+					"target": [
+						"Page1"
+					]
+				},
+				{
+					"pattern": "Page2/:context:",
+					"name": "Page2",
+					"target": [
+						"Page2"
+					]
+				},
+				{
+					"pattern": "",
+					"name": "default",
+					"target": [
+						"Page1"
+					]
+				},
+				{
+					"pattern": "RiesgosAll/:context:",
+					"name": "RiesgosAll",
+					"target": [
+						"RiesgosAll"
+					]
+				},
+				{
+					"pattern": "Launchpad/:context:",
+					"name": "Launchpad",
+					"target": [
+						"Launchpad"
+					]
+				},
+				{
+					"pattern": "RiesgosTi/:context:",
+					"name": "RiesgosTi",
+					"target": [
+						"RiesgosTi"
+					]
+				},
+				{
+					"pattern": "RiesgosAg/:context:",
+					"name": "RiesgosAg",
+					"target": [
+						"RiesgosAg"
+					]
+				},
+				{
+					"pattern": "Page6/:context:",
+					"name": "Page6",
+					"target": [
+						"Page6"
+					]
+				},
+				{
+					"name": "Page1",
+					"pattern": "Page1/:context:",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Grafico"
+					]
+				},
+				{
+					"name": "Main",
+					"pattern": "Main",
+					"target": [
+						"Grafico"
+					]
+				}
+			]
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zac_risk",
+		"_version": "1.1.0"
+	},
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zac_risk"
+            ]
+        }    
+}

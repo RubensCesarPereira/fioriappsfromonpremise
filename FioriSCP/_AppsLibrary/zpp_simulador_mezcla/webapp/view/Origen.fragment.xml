@@ -1,0 +1,153 @@
+<core:FragmentDefinition id="fragmentOrigenPage" height="100%" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog id="origenPage" title="Composición Denominación Origen" afterClose="dialogAfterclose">
+		<content>
+			<Table id="denomOrigen" items="">
+				<headerToolbar>
+					<Toolbar></Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="8em">
+						<Text text="Material"/>
+					</Column>
+					<Column width="15em">
+						<Text text="Denominación"/>
+					</Column>
+					<!--<Column width="6em">
+						<Text text="Cosecha"/>
+					</Column>-->
+					<Column width="15em">
+						<Text text="Región"/>
+					</Column>
+					<Column width="10em">
+						<Text text="Subregión"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Zona"/>
+					</Column>
+					<Column width="8em">
+						<Text text="Area"/>
+					</Column>
+					<Column width="6em">
+						<Text text="% Cepa"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Cabernet Sauvignon"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Puente Alto"/>
+							<Text text="35,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Cabernet Sauvignon"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Pirque"/>
+							<Text text="19,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Cabernet Sauvignon"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Buin"/>
+							<Text text="28,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Cabernet Sauvignon"/>
+							<!--<Text text="2018"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Buin"/>
+							<Text text="3,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Cabernet Franc"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Puente Alto"/>
+							<Text text="4,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Malbec"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maule"/>
+							<Text text="Valle del Claro"/>
+							<Text text="Pencahue"/>
+							<Text text="1,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Merlot"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Puente Alto"/>
+							<Text text="1,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Syrah"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Buin"/>
+							<Text text="8,00"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Text text="2102-2017"/>
+							<Text text="Petit Verdot"/>
+							<!--<Text text="2017"/>-->
+							<Text text="Región Valle Central"/>
+							<Text text="Valle del Maipo"/>
+							<Text text=""/>
+							<Text text="Puente Alto"/>
+							<Text text="1,00"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<!--<beginButton>
+			<Button type="Accept" text="Guardar" press="onAddCompo"/>
+		</beginButton>-->
+		<endButton>
+			<Button type="Reject" text="Cerrar" press="onCloseDialogO"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,65 @@
+<mvc:View controllerName="Z_SDConsultaBET.controller.DespliegaBoleta"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:l="sap.ui.layout" >
+	<App id="RootView">
+		<pages>
+			<Page id="pag" title="Consulta Boleta Electrónica" 
+			enableScrolling="true" showNavButton="false" 
+				navButtonPress="onNavBack">
+				<FlexBox alignItems="Center" justifyContent="Center">
+					<l:VerticalLayout class="sapUiContentPadding"
+						width="100%">
+						<l:content>
+							<Panel id="BoletaPanel" width="auto" accessibleRole="Region" >
+								<content>
+									<FlexBox alignContent="SpaceAround">
+										
+										<l:VerticalLayout>
+										<Image src="./img/vctLogo.png" width="300px"  />
+										<Text id="t_msj" text="Su documento se está consultando, la descarga comenzará en unos segundos..." />
+										<Label id="l_folio" text="N° Boleta (Folio):" labelFor="nb" class="sapUiSmallMarginTop"/>
+										<Input id="nb" placeholder="Ingrese n° ..."
+										class="sapUiSmallMarginBottom" 
+										maxLength="10"
+										liveChange="onLiveChangeFolio"
+										required="true"/>
+										<Label id="l_monto" text="Monto total" labelFor="mt"/>
+										<Input id="mt"  placeholder="Total de la venta ..."
+											class="sapUiSmallMarginBottom" liveChange="onLiveChangeFolio"
+											required="true"/>
+										<Label id="l_fecha" text="Fecha" labelFor="DP1" />
+										<DatePicker id="DP1" placeholder="Ingrese fecha de compra ..."
+											change="handleChange" class="sapUiSmallMarginBottom" 
+											valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy"
+											required="true"/>
+										<l:HorizontalLayout>
+											<Button id="b_aceptar" text="Buscar" type="Emphasized" press="carga"
+												icon="sap-icon://search" class="sapUiTinyMarginLeft"/>
+											<Button id="b_limpiar" text="Limpiar" press="clear" icon="sap-icon://eraser" />
+										</l:HorizontalLayout>
+										</l:VerticalLayout>
+									</FlexBox>
+								</content>
+							</Panel>
+							<Panel backgroundDesign="Solid" id="ErrorPanel" width="100%" >
+								<content>
+									<l:VerticalLayout>
+										<MessageStrip
+				text="Error al cargar los datos"
+				type="Error"
+				enableFormattedText="true"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom">
+			</MessageStrip>
+									</l:VerticalLayout>
+								</content>
+							</Panel>
+						</l:content>
+					</l:VerticalLayout>
+				</FlexBox>
+				<core:HTML id="ifrm" visible="false"/>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

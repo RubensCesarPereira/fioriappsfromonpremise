@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Total" key="Riskcount" selected="true" />
+			<ViewSettingsItem text="Critico" key="Critico" />
+			<ViewSettingsItem text="Alto" key="Alto" />
+			<ViewSettingsItem text="Medio" key="Medio" />
+			<ViewSettingsItem text="Bajo" key="Bajo" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,205 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_simulador_mezcla.controller.View1" class="sapUiSizeCompact" displayBlock="true"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<App id="app" busy="{oModelView>/busyApp}">
+		<NavContainer id="wizardNavContainer">
+			<pages>
+				<Page id="wizardContentPage" title="{i18n>title}" enableScrolling="true">
+					<!--
+					<headerContent>
+						<Button
+							icon="sap-icon://hello-world"
+							press=".onOpenDialog"
+							/>
+					</headerContent>
+					-->
+					<content>
+						<Wizard id="SimuladorWizard" complete="wizardCompletedHandler">
+							<WizardStep id="DatosMezclaStep" title="{i18n>stepName1}" validated="false" activate="datosMezclaValidation">
+								<VBox class="sapUiSmallMargin">
+									<form:SimpleForm id="datosForm1" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+										labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+										singleContainerFullSize="false">
+										<form:content>
+											<core:Title text="Datos" level="H3"/>
+											<Label text="Código Mezcla" labelFor="CodigoMezcla" required="true"/>
+											<Input id="CodigoMezcla" valueStateText="Ingrese 4 caracteres o más" valueState="{ViewModel>/codigoMezclaState}"
+												value="{ViewModel>/codigoMezcla}" change="getDescription" required="true" maxLength="18" placeholder="Ej: M2206-2018"/>
+											<Label text="Descripción" labelFor="Descripcion" required="true"/>
+											<Input id="Descripcion" valueState="{ViewModel>/descripcionState}" change="datosMezclaValidation" placeholder="Descripción" editable="false"
+												maxLength="40" value="{ViewModel>/descripcion}"/>
+											<core:Title text="" level="H3"/>
+											<!--NMezcla-->
+											<Label text="N° Mezcla" labelFor="NMezcla" required="true"/>
+											<Input id="NMezcla" type="Number" valueState="{ViewModel>/nmezclaState}" valueStateText="Ingrese N° Mezcla"
+												liveChange="datosMezclaValidation" value="{ path: 'ViewModel>/NMezcla'}" required="true" placeholder="Ej: 20"/>
+											<!-- -->
+											<Label text="Cantidad" labelFor="Cantidad" required="true"/>
+											<Input id="Cantidad" valueState="{ViewModel>/cantidadState}" valueStateText="Ingrese cantidad" liveChange="datosMezclaValidation"
+												value="{ path: 'ViewModel>/cantidad', type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false, minIntegerDigits: 1, maxIntegerDigits: 12, minFractionDigits: 0, maxFractionDigits: 3, decimals: 0, decimalSeparator: ',', groupingSeparator: '.' }, constraints: { minimun: '1,0' } }"
+												required="true" placeholder="Ej: 215.000"/>
+											<!-- value="{ViewModel>/cantidad}" change="cantidadValidate" validationSuccess="validateRequired" parseError="invalidateStep" />-->
+											<Label text="Bodega" labelFor="Centro" required="true"/>
+											<ComboBox id="Centro" valueState="{ViewModel>/centroState}" valueStateText="Seleccione Centro" change="datosMezclaValidation"
+												value="{ViewModel>/centro}" required="true" items="{ path: '/CentroSet', sorter: { path: 'Werks' } }" placeholder="Seleccione Centro...">
+												<core:ListItem key="{Werks}" text="{Werks} - {Name1}"/>
+											</ComboBox>
+										</form:content>
+									</form:SimpleForm>
+								</VBox>
+								<VBox>
+									<form:SimpleForm id="datosForm2" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+										labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" editable="true"
+										singleContainerFullSize="false">
+										<form:toolbar>
+											<Toolbar id="TB1">
+												<Title id="Title1" text="Características" level="H3" titleStyle="H3"/>
+												<ToolbarSpacer/>
+												<Button icon="sap-icon://card" text="Valle" press=".openViewValle"/>
+												<Button icon="sap-icon://checklist-item" text="Cepa" press=".openViewCepa"/>
+												<Button icon="sap-icon://cancel" text="Restricciones" press=".openViewRest"/>
+											</Toolbar>
+										</form:toolbar>
+										<form:content>
+											<core:Title text="" level="H3"/>
+											<Label text="Cosecha" labelFor="Cosecha"/>
+											<Input id="Cosecha" editable="false" valueState="{ViewModel>/cosechaState}"/>
+											<Label text="Calidad" labelFor="Calidad"/>
+											<Input id="Calidad" editable="true" valueState="{ViewModel>/calidadState}"/>
+											<!--<Label text="Familia Técnica" labelFor="Familia"/>
+											<Input id="Familia" editable="true" valueState="{ViewModel>/familiaState}"/>-->
+											<Label text="Color" labelFor="Color"/>
+											<Input id="Color" editable="false" valueState="{ViewModel>/colorState}"/>
+											<core:Title text="" level="H3"/>
+											<Label text="D.O" labelFor="do"/>
+											<Input id="DO" editable="true" valueState="{ViewModel>/doState}"/>
+											<Label text="Grado Alcohólico" labelFor="Codigo"/>
+											<Input id="Grado" editable="false" valueState="{ViewModel>/gradoState}"/>
+											<Label text="Azúcar" labelFor="Azucar"/>
+											<Input id="Azucar" editable="false" valueState="{ViewModel>/azucarState}"/>
+										</form:content>
+									</form:SimpleForm>
+								</VBox>
+							</WizardStep>
+							<WizardStep id="ComponentesStep" title="{i18n>stepName2}" validated="false" complete="onAddAnalisis">
+								<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+									<Table id="componentes" class="sapUiResponsiveMargin" width="auto">
+										<headerToolbar>
+											<Toolbar>
+												<Title id="title1" text=""/>
+												<ToolbarSpacer/>
+												<Button id="btnCalcular" icon="sap-icon://simulate" text="Calcular" press="onCalcular"/>
+												<Button id="btnCompo" icon="sap-icon://create" text="Componentes" press="openComponentes"/>
+												<!--<Button id="btnOrigen" icon="sap-icon://map" text="Denominación" press="openOrigen"/>-->
+												<!--<Button id="btnAdicionales" icon="" text="Adicionales" press="onAddAdicionales"/>-->
+												<!--<OverflowToolbarButton id="agregar" icon="sap-icon://add" press="onAddComponentes"/>-->
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="7em">
+												<Text text="Cuba"/>
+											</Column>
+											<Column width="10em">
+												<Text text="Bodega"/>
+											</Column>
+											<Column width="6em">
+												<Text text="Código"/>
+											</Column>
+											<Column width="15em">
+												<Text text="Descripción"/>
+											</Column>
+											<Column width="8em">
+												<Text text="Calidad"/>
+											</Column>
+											<Column width="8em">
+												<Text text="Variedad"/>
+											</Column>
+											<Column width="8em">
+												<Text text="D.O"/>
+											</Column>
+											<Column width="7em">
+												<Text text="Cosecha"/>
+											</Column>
+											<Column width="10em">
+												<Text text="Litros Requeridos"/>
+											</Column>
+											<Column width="8em">
+												<Text text="Precio"/>
+											</Column>
+											<Column width="8em">
+												<Text text="Stock"/>
+											</Column>
+											<Column width="6em">
+												<Text text="%"/>
+											</Column>
+											<Column width="7em">
+												<Text text="Origen"/>
+											</Column>
+											<Column width="1em">
+												<Text text=""/>
+											</Column>
+											<Column width="1em" visible="false">
+												<Text text=""/>
+											</Column>
+										</columns>
+									</Table>
+								</ScrollContainer>
+							</WizardStep>
+							<WizardStep id="AnalisisStep" validated="true" title="Análisis Químico">
+								<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+									<Table id="analisis">
+										<headerToolbar>
+											<Toolbar>
+												<Title id="title2" text=""/>
+												<ToolbarSpacer/>
+												<Button id="btnAnalisis" icon="sap-icon://simulate" text="Calcular" press="onSumaAnalisis"/>
+												<!--<OverflowToolbarButton icon="sap-icon://add" press="onAddAnalisis"/>-->
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="6em">
+												<Text text="Bodega"/>
+											</Column>
+											<Column width="4em">
+												<Text text="Cuba"/>
+											</Column>
+											<Column width="6em">
+												<Text text="Componente"/>
+											</Column>
+											<Column width="4em">
+												<Text text="A°"/>
+											</Column>
+											<Column width="4em">
+												<Text text="AT"/>
+											</Column>
+											<Column width="4em">
+												<Text text="AV"/>
+											</Column>
+											<Column width="4em">
+												<Text text="SO2 L"/>
+											</Column>
+											<Column width="4em">
+												<Text text="SO2 T"/>
+											</Column>
+											<Column width="4em">
+												<Text text="MR"/>
+											</Column>
+											<Column width="4em">
+												<Text text="pH"/>
+											</Column>
+											<Column width="4em">
+												<Text text="Color"/>
+											</Column>
+											<Column width="4em" visible="false">
+												<Text text="Cosecha"/>
+											</Column>
+										</columns>
+									</Table>
+								</ScrollContainer>
+							</WizardStep>
+						</Wizard>
+					</content>
+				</Page>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

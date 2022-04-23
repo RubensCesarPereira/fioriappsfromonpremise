@@ -1,0 +1,24 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPP_CREAR_ORDEN_REPROCESO_SRV" xml:lang="es" sap:schema-version="1">
+			<EntityType Name="CreaProceso" sap:content-version="1">
+				<Key><PropertyRef Name="IPlannedOrder"/></Key><Property Name="IPlannedOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Orden previs."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ReferenceOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Orden"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="Buscar" sap:content-version="1">
+				<Key><PropertyRef Name="Plnum"/></Key><Property Name="IPlnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Orden previs."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Plnum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Orden previs." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Pwwrk" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ce.producciÃ³n" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Psttr" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Fe.inic.extrema"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Atwrt" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Valor caract." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Cuba" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Campo de texto, longitud 10"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Gsmng" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Cantidad orden"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Stprs" Type="Edm.Decimal" Nullable="false" Precision="12" Scale="3" sap:unicode="false" sap:label="Precio estÃ¡ndar"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CodMezcla" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Campo de texto, longitud 10"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityContainer Name="ZPP_CREAR_ORDEN_REPROCESO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="CreaProcesoSet" EntityType="ZPP_CREAR_ORDEN_REPROCESO_SRV.CreaProceso" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="BuscarSet" EntityType="ZPP_CREAR_ORDEN_REPROCESO_SRV.Buscar" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/></EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPP_CREAR_ORDEN_REPROCESO_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPP_CREAR_ORDEN_REPROCESO_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

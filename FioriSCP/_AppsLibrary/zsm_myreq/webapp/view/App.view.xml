@@ -1,0 +1,14 @@
+<!--
+
+    Copyright (C) 2009-2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<mvc:View
+	controllerName="zsm.itsm.myreq.cust.view.App"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	busy="{appView>/busy}"
+	busyIndicatorDelay="{appView>/delay}"
+	xmlns="sap.m">
+	<SplitApp id="idAppControl" />
+</mvc:View>

@@ -1,0 +1,46 @@
+<mvc:View controllerName="z_mmfichatecnic.controller.listado"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:smartList="sap.ui.comp.smartlist" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App id="RootView">
+		<Page id="pag" title="Pendientes de Ficha Técnica"
+			busyIndicatorDelay="0" enableScrolling="true" showNavButton="true"
+			navButtonPress="onNavBack">
+			<FlexBox alignContent="Center" alignItems="Center"
+				justifyContent="Center">
+				<Image src="{GM>/imgPath}img/bannerHis.png" densityAware="false"
+					widrh="100%" />
+			</FlexBox>
+			<VBox class="divmarginpage">
+				<html:hr></html:hr>
+				<HBox alignContent="Center" alignItems="Center" justifyContent="Center">
+					<Label text="Código ficha:" class="sapUiLargeMarginBegin sapUiSmallMarginEnd" />
+					<Input id="cod" value="" placeholder="Indique código..."
+						liveChange="onConsultarPress"></Input>
+					<Button type="Emphasized" text="Consultar" icon="sap-icon://inspection"
+						width="170px" press="onConsultarPress" class="sapUiSmallMarginBegin" />
+				</HBox>
+				<html:hr></html:hr>
+				<ScrollContainer id="sclistado" height="345px"
+					width="100%" vertical="true">
+					<List id="ItemsSP" headerText="Fichas (Clic para detalle)"
+						items="{PENDLIST>/}">
+						<items>
+							<StandardListItem press="onPress" type="Navigation"
+								adaptTitleSize="true" wrapping="true" icon="{PENDLIST>ICON}"
+								infoState="Success" class="stateClass"
+								title="CÓD.: {PENDLIST>MATNR} - {PENDLIST>MAKTX} - {PENDLIST>TIPO_SOLICITUD_VB} "
+								info="{PENDLIST>STSTEXT}" description="FECHA: {PENDLIST>ERSDA} COSECHA: {PENDLIST>COSECHA} "
+								highlight="Success">
+								<customData>
+									<core:CustomData xmlns:core="sap.ui.core"
+										key="{PENDLIST>CUSSTATE}" value="" writeToDom="true" />
+								</customData>
+							</StandardListItem>
+						</items>
+					</List>
+				</ScrollContainer>
+			</VBox>
+		</Page>
+	</App>
+</mvc:View>

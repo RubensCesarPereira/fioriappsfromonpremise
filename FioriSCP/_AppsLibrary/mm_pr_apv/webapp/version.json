@@ -1,0 +1,8 @@
+{ "application" : "ui.s2p.mm.requisition.approve",
+  "version" : "1.5.31",
+  "buildNumber" : "10",
+  "buildId" : "2018-01-25_09-23-15",
+  "branch" : "origin/rel-1.5",
+  "revision" : "55f9d4b33465ecca3acdecb6abba7d9bb68e109c",
+  "GitURL" : ""
+}

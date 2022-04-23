@@ -1,0 +1,13 @@
+{
+	"results": [{
+		"Periodo": "201808",
+		"Riskcount": 589792,
+		"Critico": 26864,
+		"Alto": 77907
+	}, {
+		"Periodo": "201807",
+		"Riskcount": 588992,
+		"Critico": 26864,
+		"Alto": 77945
+	}]
+}

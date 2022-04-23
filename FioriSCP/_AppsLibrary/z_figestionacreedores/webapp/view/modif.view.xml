@@ -1,0 +1,420 @@
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.uxap"
+		   xmlns:layout="sap.ui.layout"
+		   xmlns:m="sap.m"
+		   xmlns:sample="sap.uxap.sample.AnchorBar.block"
+		   controllerName="z_figestionacreedores.controller.modif" 
+		   xmlns:blockcolor="sap.uxap.sample.SharedBlocks"
+		   	xmlns:f="sap.ui.layout.form"
+		   height="100%"
+		>
+ 
+	<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" class="sapUiTinyMargin sapUiTinyPadding">
+		
+ <headerTitle>
+			<ObjectPageHeader objectTitle="Modifica Acreedor" headerDesign="Dark">
+			<actions>
+					<m:Button icon="sap-icon://accept" text="Validar" type="Accept" id="btnValidar" press="onValida"/>
+					<m:Button icon="sap-icon://save" text="Guardar" type="Emphasized" id="btnGuardar" press="onSave"/>
+				</actions>
+			</ObjectPageHeader>
+		</headerTitle>
+		<headerContent width="auto" class="sapUiTinyMargin sapUiTinyPadding">
+		<layout:HorizontalLayout 
+			height="50px"
+			alignItems="Center"
+			justifyContent="Left">	
+			<m:Label text="ID Acreedor:" labelFor="idAcr" class="sapUiSmallMarginEnd" />	
+			<m:FlexBox
+				height="20px"
+				alignItems="Center"
+				justifyContent="Center">
+				<m:items>
+				
+			<m:SearchField
+			height="20px"
+				required="true"
+				id="idAcr"
+				placeholder="Indique código Acreedor..."
+				search="onSearchAcr"
+				class="sapUiSmallMargin"/>
+				</m:items>
+			</m:FlexBox>
+			<m:Label id="gsg" text="Gerente/Subgerente:" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+			<m:Select
+			id="selectAprobadores"
+			required="true"
+			forceSelection="true"
+			items="{/Aprobadores}"
+			change="">
+			<core:ListItem key="{APROBADOR}" text="{NAME}"/></m:Select>
+		</layout:HorizontalLayout>
+		</headerContent>
+ 
+		<sections>
+			<ObjectPageSection title="General" id="objPageScG">
+				<subSections>
+					<ObjectPageSubSection title="Datos Generales ">
+						<blocks>
+							<layout:HorizontalLayout class="sapUiSmallMargin">
+		<f:SimpleForm id="formDG" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Grupo de Cuentas " design="Bold"/>
+				<layout:HorizontalLayout>
+				<m:Input  id="inpKtokk" 
+				value="{dataModel>/KTOKK}" 
+				editable="false"
+				visible="true" 
+				fieldWidth="70px"
+				description="-"
+				class="sapUiTinyMarginEnd"/>
+				<m:Input  id="inpKtokkDesc" 
+				value="{dataModel>/KTOKK_DESC}"  
+				editable="false"/>
+				</layout:HorizontalLayout>
+				<m:Label text="ID Acreedor" design="Bold" visible="false"/>
+				<m:Input id="lifnr" value="{dataModel>/LIFNR}" visible="false"/>
+				<m:Label text="Tratamiento" class="sapUiMiddleAlign" design="Bold"/>
+				<m:Select 
+					id="selectTrat"
+					width="40%"
+					autoAdjustWidth="true"
+					forceSelection="false"
+					selectedKey="{dataModel>/ANRED}"
+					change="disableSave">
+					<core:ListItem key="Sr." text="SR." />
+					<core:ListItem key="Sra." text="SRA." />
+					<core:ListItem key="Señores" text="Señores" />
+					<core:ListItem key="Empresa" text="Empresa" />
+					<core:ListItem key="Estimados" text="Estimados" />
+					<core:ListItem key="Fondo de Inversión" text="Fondo de Inversión" />
+					<core:ListItem key="Persona Jurídica" text="Persona Jurídica" />
+					<core:ListItem key="Persona Natural" text="Persona Natural" /></m:Select>
+				<m:Label text="Nombre" design="Bold"/>
+				<m:Input id="name1" value="{dataModel>/NAME1}" liveChange="disableSave"/>
+				<m:Label text="Concepto" design="Bold"/>
+				<m:Input id="concep" value="{dataModel>/SORTL}" liveChange="disableSave"/>
+				<m:Label text="Teléfono" design="Bold"/>
+				<m:Input id="telf" value="{dataModel>/TELF1}" liveChange="onChangeTelef" width="100%"/>
+				<m:Label text="E-mail " design="Bold"/>
+				<m:Input id="email1" value="{dataModel>/SMTP_ADDR}" liveChange="disableSave" width="100%"/>
+				<m:Label text="E-mail cobranza" design="Bold"/>
+				<m:Input id="email2" value="{dataModel>/SMTP_ADDR2}" liveChange="disableSave" width="100%"/>
+			</f:content>
+		</f:SimpleForm>
+		
+				
+		</layout:HorizontalLayout>
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection title="Dirección">
+						<blocks>
+							<f:SimpleForm id="frmDD" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title=""
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Calle/N°" wrapping="true" design="Bold"/>
+				<m:Input id="direc" value="{dataModel>/STRAS}" liveChange="disableSave" width="100%"/>
+				<m:Label text="País" design="Bold"/>
+				<m:Select
+					id="selectPais"
+					forceSelection="false"
+					selectedKey="{dataModel>/LAND1}"
+					items="{/Paises}"
+					change="onChangePais">
+					<core:Item key="{LAND1}" text="{LAND1_DESC}" /></m:Select>
+					<m:Label text="Región" design="Bold"/>
+				<m:Select
+					id="selectRegion"
+					forceSelection="false"
+					selectedKey="{dataModel>/REGIO}"
+					items="{/Regiones}"
+					change="onChangeRegion">
+					<core:Item key="{REGIO}" text="{REGIO_DESC}" />
+					</m:Select>
+				<m:Label text="Comuna" design="Bold"/>
+				<m:Select 
+					id="selectComunas" 
+					forceSelection="false"
+					selectedKey="{dataModel>/CITY2}"
+					items="{/Comunas}">
+				<core:Item key="{CITY2}" text="{CITY2_DESC}" />
+				</m:Select>
+				<m:Label text="Ciudad" design="Bold"/>
+				<m:Input id="txtCiudad" value="{dataModel>/CITY1}" liveChange="disableSave"/>
+				
+				
+							
+			</f:content>
+		</f:SimpleForm>	
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Datos Sociedad" id="objPageScS">
+			<subSections>
+					<ObjectPageSubSection title="Sociedad">
+						<blocks>
+				
+			<f:SimpleForm id="formDC" width="600px" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="false"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="4"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Sociedad(es)"  design="Bold"/>
+				<m:Input id="txtSociedades" editable="false"/>
+				<m:Label text="Cuenta Asociada" design="Bold"/>	
+				<m:Input value="{dataModel>/HKONT}" liveChange="disableSave"/>		
+				<m:Label text="N° Id.fiscal" design="Bold"/>
+				<m:Input id="stcd1" value="{dataModel>/STCD1}" editable="false"/>
+				
+				<m:Label id="lblfna" text="(*)Fecha Nacimiento" design="Bold"/>
+				<m:Input id="fna" value="{dataModel>/GBDAT}" liveChange="disableSave" type="Date"/>
+				<m:Label id="lbllna" text="(*)Lugar Nacimiento" design="Bold"/>
+				<m:Input id="lna" value="{dataModel>/GBORT}"  liveChange="disableSave"/>
+				<m:Label id="lblsex" text="(*)Sexo" design="Bold"/>
+				<m:RadioButtonGroup id="sex" columns="2" width="500px" class="sapUiMediumMarginBottom">
+				<m:buttons>
+					<m:RadioButton id="RB1-1" text="Masculino"/>
+					<m:RadioButton id="RB1-2" text="Femenino"/>
+				</m:buttons>
+				</m:RadioButtonGroup>
+				<m:Label id="lblpro" text="(*)Profesión" design="Bold"/>
+				<m:Input id="pro"  value="{dataModel>/PROFS}" liveChange="disableSave"/>
+				<m:Label text="Deudor" design="Bold"/>
+				<m:Input id="kunnr" value="{dataModel>/KUNNR}" liveChange="disableSave"/>
+				<m:Label text="Fab. Externo" design="Bold"/>
+				<m:Input id="emnfr" value="{dataModel>/EMNFR}" liveChange="disableSave"></m:Input>
+				<m:Label text="Cond. Pago" design="Bold"/>
+				<m:Select
+					id="selectCondPagoS"
+					width="300px"
+					forceSelection="false"
+					selectedKey="{dataModel>/ZTERM}"
+					items="{/CondPago}"
+					change="disableSave">
+					<core:Item key="{ZTERM}" text="{ZTERM_DESC}" /></m:Select>
+			</f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection title="Bancario">
+					<blocks>
+					<f:SimpleForm id="frmDB" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+				<m:Label text="Dato Ban. País" wrapping="true" design="Bold"/>
+				<m:Select
+					id="selectPaiBank"
+					forceSelection="false"
+					selectedKey="{dataModel>/BANKS}"
+					items="{/Paises}"
+					change="onChangePaisBank">
+					<core:Item key="{LAND1}" text="{LAND1_DESC}" /></m:Select>
+				<m:Label text="Clave Banco" design="Bold"/>	
+				<m:Select
+					id="selectClaBank"
+					forceSelection="false"
+					selectedKey="{dataModel>/BANKL}"
+					items="{/Bancos}"
+					change="disableSave">
+					<core:Item key="{BANKL}" text="{BANKA}" /></m:Select>
+				<m:Label text="Cta. Bancaria" design="Bold"/><m:Input id="cta" value="{dataModel>/BANKN}" liveChange="disableSave"/>
+				<m:Label text="Titular Cta." design="Bold"/><m:Input id="titcta" value="{dataModel>/KOINH}" liveChange="disableSave"/>
+				<m:Label text="IBAN" design="Bold"/><m:Input id="iban" value="{dataModel>/IBAN}" liveChange="disableSave"></m:Input>
+			</f:content>
+		</f:SimpleForm>	
+					</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Datos Compra" id="objPageScC">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+							<f:SimpleForm id="frmDBa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			<m:Label text="Org. Compras" design="Bold"/>
+			<m:Text id="txtEkorg"
+			width="400px" text="{dataModel>/EKORG_MULTI}"></m:Text>
+			
+			<m:Label text="Moneda" design="Bold" />
+			<m:Select
+					id="selectMoneda"
+					forceSelection="false"
+					selectedKey="{dataModel>/WAERS}"
+					items="{/Monedas}"
+					change="disableSave">
+					<core:Item key="{WAERS}" text="{WAERS}" /></m:Select>
+		<m:Label text="Condición Pago" design="Bold"/>
+			<m:Select
+			id="selectCondPagoC"
+			width="300px"
+			forceSelection="false"
+			selectedKey="{dataModel>/ZTERM}"
+			items="{/CondPago}"
+			change="disableSave">
+			<core:Item key="{ZTERM}" text="{ZTERM_DESC}" /></m:Select></f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Anexos" id="objPageScA">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+							<f:SimpleForm id="frmDBaa" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+			
+			<m:UploadCollection
+			id="UploadCollection"
+			maximumFilenameLength="55"
+			maximumFileSize="10"
+			multiple="true"
+			sameFilenameAllowed="true"
+			instantUpload="false"
+			noDataDescription="Arrastre archivos o presione en el botón &quot;+&quot; "
+			change="onChange"
+			fileDeleted="onFileDeleted"
+			filenameLengthExceed="onFilenameLengthExceed"
+			fileSizeExceed="onFileSizeExceed"
+			typeMissmatch="onTypeMissmatch"
+			uploadComplete="onUploadComplete"
+			beforeUploadStarts="onBeforeUploadStarts"
+			noDataText="Sin archivos." 
+			uploadUrl=""/></f:content>
+		</f:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+			<ObjectPageSection title="Observaciones" id="objPageScO">
+				<subSections>
+					<ObjectPageSubSection title=" ">
+						<blocks>
+						<f:SimpleForm id="frmDBaat" width="600px" height="100%" backgroundDesign="Transparent"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="true"
+			emptySpanXL="2"
+			emptySpanL="2"
+			emptySpanM="2"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true" >
+			<f:content >
+							
+			<m:TextArea id="txtObs" value="{dataModel>/OBS}" showExceededText="true" maxLength="200" width="100%" valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }" valueLiveUpdate="false" liveChange="handleLiveChange" />
+						</f:content></f:SimpleForm></blocks>
+						
+						
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+ 
+ 
+		</sections>
+ 
+	</ObjectPageLayout>
+</core:View>

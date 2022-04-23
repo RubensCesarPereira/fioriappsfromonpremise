@@ -1,0 +1,12 @@
+.debugger{
+	border: 1px solid red;
+}
+.newValue{
+	color: #82b74b;
+}
+.lastValue{
+	color: #f18973;
+}
+.headerTable{
+	background-color: #f0f0f0;
+}

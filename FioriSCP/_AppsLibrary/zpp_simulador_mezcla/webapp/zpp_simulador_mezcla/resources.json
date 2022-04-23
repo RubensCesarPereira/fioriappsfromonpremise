@@ -1,0 +1,95 @@
+{
+    "resources": [
+        {
+            "name": "../view/Resultados.fragment.xml"
+        },
+        {
+            "name": "../manifest.json"
+        },
+        {
+            "name": "../model/models.js"
+        },
+        {
+            "name": "../model/formatter.js"
+        },
+        {
+            "name": "../controller/View1.controller.js"
+        },
+        {
+            "name": "../controller/BaseController.js"
+        },
+        {
+            "name": "../Component.js"
+        },
+        {
+            "name": "../manifest-bundle.zip"
+        },
+        {
+            "name": "../Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "../model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../controller/View1-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "../controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../../sap-ui-version.json"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "../view/View1.view.xml"
+        },
+        {
+            "name": "../view/Valle.fragment.xml"
+        },
+        {
+            "name": "../view/ReviewPage.fragment.xml"
+        },
+        {
+            "name": "../i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "../view/Restric.fragment.xml"
+        },
+        {
+            "name": "../view/Origen.fragment.xml"
+        },
+        {
+            "name": "../view/Componentes.fragment.xml"
+        },
+        {
+            "name": "../view/Cepa.fragment.xml"
+        },
+        {
+            "name": "../css/style.css"
+        },
+        {
+            "name": "../index.html"
+        },
+        {
+            "name": "../extended_runnable_file.html"
+        }
+    ]
+}

@@ -1,0 +1,151 @@
+<core:View xmlns:core="sap.ui.core" xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout" xmlns:m="sap.m" xmlns:tnt="sap.tnt"
+	xmlns:sample="sap.uxap.sample.AnchorBar.block" controllerName="z_figestionacreedores.controller.borrado"
+	xmlns:blockcolor="sap.uxap.sample.SharedBlocks" xmlns:f="sap.ui.layout.form"
+	height="100%">
+	<tnt:ToolPage id="toolPage">
+		<tnt:sideContent>
+			<tnt:SideNavigation width="130px" expanded="true"
+				itemSelect="onItemSelect" id="sideNavigation">
+				<tnt:item>
+					<tnt:NavigationList>
+						<tnt:NavigationListItem id="comprasNav"
+							icon="sap-icon://capital-projects" text="Compras" select="select1"
+							key="compK" />
+						<tnt:NavigationListItem id="contabNav"
+							icon="sap-icon://customer-financial-fact-sheet" text="Contabilidad"
+							select="select2" key="contK">
+						</tnt:NavigationListItem>
+					</tnt:NavigationList>
+				</tnt:item>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents height="100%">
+			<m:NavContainer id="pageContainer">
+				<m:ScrollContainer id="compK" horizontal="false"
+					vertical="true" height="100%">
+					<m:FlexBox height="60px" alignItems="Start"
+						justifyContent="End">
+						<m:items>
+							<m:Button id="btnValida" icon="sap-icon://accept" text="Validar"
+								type="Accept" press="onValida" class="sapUiSmallMarginEnd" />
+							<m:Button id="btnGuarda" icon="sap-icon://save" text="Guardar"
+								type="Emphasized" press="onSaveCompra" class="sapUiSmallMarginEnd" />
+						</m:items>
+					</m:FlexBox>
+					<m:Toolbar class="sapUiSmallMargin">
+						<m:Label text="Buscar Acreedor:" class="sapUiSmallMargin"
+							width="130px" labelFor="numac" design="Bold"></m:Label>
+						<m:SearchField id="numacComp" placeholder="Ingrese n° acreedor..."
+							required="true" search="onSearchAcrComp" />
+						<m:Button type="Succes" text="Buscar" icon="sap-icon://search"
+							press="onSearchAcrComp" />
+					</m:Toolbar>
+					<f:SimpleForm id="formCompra" width="600px"
+						backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+						title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+						adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2" emptySpanM="2"
+						emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<m:Label text="Gerente/Subgerente:"
+								class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+							<m:Select id="selectAprobadores" required="true"
+								forceSelection="true" items="{/Aprobadores}" change="">
+								<core:ListItem key="{APROBADOR}" text="{NAME}" />
+							</m:Select>
+							<m:Label text="ID Acreedor" design="Bold" />
+							<m:Input id="lifnr" value="{dataModel>/LIFNR}" editable="false" />
+							<m:Label text="Nombre" design="Bold" />
+							<m:Input id="name1" value="{dataModel>/NAME1}" editable="false" />
+							<m:Label text="Sociedad(es)" design="Bold" />
+							<m:Input id="inpSoc" value="{dataModel>/BUKRS_MULTI}"
+								editable="false" fieldWidth="70px" class="sapUiTinyMarginEnd" />
+							<m:Label text="Sociedad(es)" design="Bold" />
+							<m:Select id="selectSociedades" forceSelection="true"
+								selectedKey="" items="{/Sociedades}">
+								<core:Item key="{BUKRS}" text="{BUKRS_DESC}" />
+							</m:Select>
+							<m:Label text="Peticiones de Borrado" design="Bold" />
+							<m:VBox>
+								<m:CheckBox id="chk1" text="Áreas todas" selected="{dataModel>/LOEVM}" />
+								<m:CheckBox id="chk2" text="Sociedad Seleccionada"
+									selected="{dataModel>/LOEVM_COMPRAS}" />
+							</m:VBox>
+							<m:Label text="Bloqueos de Borrado" design="Bold" />
+							<m:VBox>
+								<m:CheckBox id="chk3" text="Datos Generales"
+									selected="{dataModel>/SPERM}" />
+								<m:Button type="Emphized" text="Marcar para borrado"
+									icon="sap-icon://save" press="onSaveCompra" visible="false" />
+							</m:VBox>
+						</f:content>
+					</f:SimpleForm>
+				</m:ScrollContainer>
+				<m:ScrollContainer id="contK" horizontal="false"
+					vertical="true" height="100%">
+					<m:FlexBox height="60px" alignItems="Start"
+						justifyContent="End">
+						<m:items>
+							<m:Button id="btnValidaCt" icon="sap-icon://accept"
+								text="Validar" type="Accept" press="onValidaCt" class="sapUiSmallMarginEnd" />
+							<m:Button id="btnGuardaCt" icon="sap-icon://save" text="Guardar"
+								type="Emphasized" press="onSaveContab" class="sapUiSmallMarginEnd" />
+						</m:items>
+					</m:FlexBox>
+					<m:Toolbar class="sapUiSmallMargin">
+						<m:Label text="Buscar Acreedor:" class="sapUiSmallMargin"
+							width="130px" labelFor="numac" design="Bold"></m:Label>
+						<m:SearchField id="numacCont" placeholder="Ingrese n° acreedor..."
+							required="true" search="onSearchAcrCont" />
+						<m:Button type="Succes" text="Buscar" icon="sap-icon://search"
+							press="onSearchAcrCont" />
+					</m:Toolbar>
+					<f:SimpleForm id="formContab" width="600px"
+						backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+						title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+						adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2" emptySpanM="2"
+						emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<m:Label text="Gerente/Subgerente:"
+								class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+							<m:Select id="selectAprobadores_" required="true"
+								forceSelection="true" items="{/Aprobadores}" change="">
+								<core:ListItem key="{APROBADOR}" text="{NAME}" />
+							</m:Select>
+							<m:Label text="ID Acreedor" design="Bold" />
+							<m:Input id="lifnr_" value="{dataModel>/LIFNR}" editable="false" />
+							<m:Label text="Nombre" design="Bold" />
+							<m:Input id="name1_" value="{dataModel>/NAME1}" editable="false" />
+
+							<m:Label text="Sociedad(es)" design="Bold" />
+							<m:Input id="inpSoc_" value="{dataModel>/BUKRS_MULTI}"
+								editable="false" fieldWidth="70px" class="sapUiTinyMarginEnd" />
+							<m:Label text="Sociedad(es)" design="Bold" />
+							<m:Select id="selectSociedades_" forceSelection="true"
+								selectedKey="" items="{/Sociedades}">
+								<core:Item key="{BUKRS}" text="{BUKRS_DESC}" />
+							</m:Select>
+							<m:Label text="Peticiones de Borrado" design="Bold" />
+							<m:VBox>
+								<m:CheckBox id="chk1_" text="Áreas todas" selected="{dataModel>/LOEVM}" />
+								<m:CheckBox id="chk2_" text="Sociedad Seleccionada"
+									selected="{dataModel>/LOEVM_CONTABLE}" />
+							</m:VBox>
+							<m:Label text="Bloqueos de Borrado" design="Bold" />
+							<m:VBox>
+								<m:CheckBox id="chk3_" text="Datos Generales"
+									selected="{dataModel>/NODEL}" />
+								<m:CheckBox id="chk4_"
+									text="Soc. Seleccionada incluye datos grales." selected="{dataModel>/NODEL_CONTABLE}" />
+								<m:Button type="Emphized" text="Marcar para borrado"
+									icon="sap-icon://save" press="onSaveContab" visible="false" />
+							</m:VBox>
+						</f:content>
+					</f:SimpleForm>
+				</m:ScrollContainer>
+			</m:NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</core:View>

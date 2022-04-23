@@ -1,0 +1,13 @@
+<!--
+
+    Copyright (C) 2009-2017 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <BusyDialog
+    id = "busyDialog"
+    title="{i18n>CREATING_IN_PROGRESS}"
+    />
+</core:FragmentDefinition>

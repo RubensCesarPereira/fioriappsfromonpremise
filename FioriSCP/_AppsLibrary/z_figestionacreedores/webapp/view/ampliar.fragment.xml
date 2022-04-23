@@ -1,0 +1,223 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt" xmlns:ux="sap.uxap"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	xmlns:blockcolor="sap.uxap.sample.SharedBlocks" xmlns:f="sap.ui.layout.form">
+	<Page id="amplAcreedor" showHeader="false">
+		<tnt:ToolPage id="toolPageA">
+			<tnt:sideContent>
+				<tnt:SideNavigation expanded="true" itemSelect="onItemSelectAmpl"
+					id="sideNavigationA">
+					<tnt:item>
+						<tnt:NavigationList>
+							<tnt:NavigationListItem id="comprasNavA"
+								icon="sap-icon://capital-projects" text="Compras" key="comprasKeyA" />
+							<tnt:NavigationListItem id="contabNavA"
+								icon="sap-icon://customer-financial-fact-sheet" text="Contabilidad"
+								key="contabKeyA">
+							</tnt:NavigationListItem>
+						</tnt:NavigationList>
+					</tnt:item>
+				</tnt:SideNavigation>
+			</tnt:sideContent>
+			<tnt:mainContents height="100%">
+				<NavContainer id="pageContainerA">
+					<ScrollContainer id="dummy">
+					</ScrollContainer>
+					<ux:ObjectPageLayout id="comprasKeyA"
+						enableLazyLoading="true" alwaysShowContentHeader="true"
+						class="sapUiTinyMargin sapUiTinyPadding">
+						<ux:headerTitle>
+							<ux:ObjectPageHeader
+								isActionAreaAlwaysVisible="true" objectTitle="Ampliación compras"
+								isObjectIconAlwaysVisible="true" isObjectSubtitleAlwaysVisible="true"
+								isObjectTitleAlwaysVisible="true">
+								<ux:actions>
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnValidaACP" icon="sap-icon://accept"
+										text="Validar" type="Accept" press="amp_validaCP" />
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnGuardaACP" icon="sap-icon://save"
+										text="Guardar" type="Emphasized" press="amp_onSaveCP"
+										class="sapUiMediumMarginRight" />
+								</ux:actions>
+							</ux:ObjectPageHeader>
+						</ux:headerTitle>
+						<ux:headerContent width="auto"
+							class="sapUiTinyMargin sapUiTinyPadding">
+							<l:HorizontalLayout>
+								<Label text="ID Acreedor:" labelFor="idAcrACP" class="sapUiSmallMarginEnd" />
+								<FlexBox height="20px" alignItems="Center"
+									justifyContent="Center">
+									<items>
+										<SearchField id="idAcrACP" placeholder="Indique código Acreedor..."
+											search="onSearchAcrComp" class="sapUiSmallMargin" />
+									</items>
+								</FlexBox>
+
+							</l:HorizontalLayout>
+						</ux:headerContent>
+						<ux:sections>
+							<ux:ObjectPageSection showTitle="false">
+								<ux:subSections>
+									<ux:ObjectPageSubSection title="">
+										<ux:blocks id="1">
+											<f:SimpleForm id="formCompraA" width="600px"
+												backgroundDesign="Transparent" editable="true"
+												layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+												labelSpanM="4" labelSpanS="4" adjustLabelSpan="false"
+												emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+												columnsXL="2" columnsL="2" columnsM="2"
+												singleContainerFullSize="true">
+												<f:content>
+													<Label text="Gerente/Subgerente:"
+														class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+													<Select id="selectAprobadoresAmpCom" forceSelection="true"
+														items="{/results}">
+														<core:ListItem key="{APROBADOR}" text="{NAME}" />
+													</Select>
+													<Label text="Nombre" design="Bold" />
+													<Text id="NAME1ACP" text="{dataModel>/NAME1}" />
+													<Label text="" design="Bold" />
+													<Text id="NAME2ACP" text="{dataModel>/NAME2}" />
+													<Label text="Org. Compras" design="Bold" />
+													<MultiComboBox id="selectGrpCompAmpCom" width="400px" editable="false"
+														items="{/results}" selectedKeys="{dataModel>/EKORG_MULTI}">
+														<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+													</MultiComboBox>
+													<Label text="Moneda del Pedido" design="Bold" />
+													<Select id="selectMonedaSAmpCom" forceSelection="false" enabled="false"
+														selectedKey="{dataModel>/WAERS}" items="{/results}">
+														<core:Item key="{WAERS}" text="{WAERS}-{WAERS_DESC}" />
+													</Select>
+													<Label text="Condición Pago" design="Bold" />
+													<Text id="condPagoACP" width="300px"
+														text="{dataModel>/ZTERM_COMPRAS}" />
+													<Label text="Org. Compras Modelo" design="Bold" />
+													<Select id="selectGrpCompAmpCom2" width="400px"
+														items="{/results}" forceSelection="true">
+														<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+													</Select>
+													<Label text="Ampliar a" design="Bold" />
+													<MultiComboBox id="selectGrpCompAmpCom3" width="400px"
+														items="{/results}">
+														<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+													</MultiComboBox>
+													<Label text="Observaciones" design="Bold"/>
+													<TextArea id="ampObsCom" value="{/value}"
+														showExceededText="true" maxLength="200" width="100%"
+														valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }"
+														valueLiveUpdate="false" liveChange="ampObsChange"/>
+												</f:content>
+											</f:SimpleForm>
+										</ux:blocks>
+									</ux:ObjectPageSubSection>
+								</ux:subSections>
+							</ux:ObjectPageSection>
+						</ux:sections>
+					</ux:ObjectPageLayout>
+					<ux:ObjectPageLayout id="contabKeyA"
+						enableLazyLoading="true" alwaysShowContentHeader="false"
+						class="sapUiTinyMargin sapUiTinyPadding">
+						<ux:headerTitle>
+							<ux:ObjectPageHeader objectTitle="Ampliación contable"
+								isObjectIconAlwaysVisible="true">
+								<ux:actions>
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnValidaACT" icon="sap-icon://accept"
+										text="Validar" type="Accept" press="amp_validaCT" />
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnGuardaACT" icon="sap-icon://save"
+										text="Guardar" type="Emphasized" press="amp_onSaveCT"
+										class="sapUiMediumMarginRight" />
+								</ux:actions>
+							</ux:ObjectPageHeader>
+						</ux:headerTitle>
+						<ux:headerContent width="auto"
+							class="sapUiTinyMargin sapUiTinyPadding">
+							<l:HorizontalLayout>
+								<Label text="ID Acreedor:" labelFor="idAcrACT" class="sapUiSmallMarginEnd" />
+								<FlexBox height="20px" alignItems="Center"
+									justifyContent="Center">
+									<items>
+										<SearchField id="idAcrACT" placeholder="Indique código Acreedor..."
+											search="onSearchAcrCont" class="sapUiSmallMargin" />
+									</items>
+								</FlexBox>
+							</l:HorizontalLayout>
+						</ux:headerContent>
+						<ux:sections>
+							<ux:ObjectPageSection showTitle="false">
+								<ux:subSections>
+									<ux:ObjectPageSubSection title="Datos Generales ">
+										<ux:blocks id="2">
+										<FlexBox>
+											<f:SimpleForm id="formContabilidadA" width="600px"
+												backgroundDesign="Transparent" editable="true"
+												layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+												labelSpanM="4" labelSpanS="4" adjustLabelSpan="false"
+												emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+												columnsXL="2" columnsL="4" columnsM="2"
+												singleContainerFullSize="true">
+												<f:content>
+													<Label text="Gerente/Subgerente:"
+														class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+													<Select id="selectAprobadoresAmpCon" forceSelection="true"
+														items="{/results}">
+														<core:ListItem key="{APROBADOR}" text="{NAME}" />
+													</Select>
+													<Label text="Grupo Cuentas" design="Bold"/>
+													<Select id="GrpCtaAmpCon" width="40%" autoAdjustWidth="true" enabled="false"
+														forceSelection="false" items="{/results}" selectedKey="{dataModel>/KTOKK}">
+														<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+													</Select>
+													<Label text="Nombre" design="Bold" />
+													<Text id="NAME1ACT" text="{dataModel>/NAME1}" />
+													<Label text="" design="Bold" />
+													<Text id="NAME2ACT" text="{dataModel>/NAME2}" />
+													<Label text="Sociedad(es)" design="Bold" />
+													<MultiComboBox id="selectSociedadesAmpCon3" width="400px" editable="false"
+														items="{/results}" selectedKeys="{dataModel>/BUKRS_MULTI}">
+														<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+													</MultiComboBox>
+													<Label text="N° Id.fiscal" design="Bold" />
+													<Text id="stcd1ACT" text="{dataModel>/STCD1}" />
+													<Label text="Deudor" design="Bold" />
+													<Text id="kunnrACT" text="{dataModel>/KUNNR}" />
+													<Label text="Fab. Externo" design="Bold" />
+													<Text id="emnfrACT" text="{dataModel>/EMNFR}" />
+													<Label text="Cond. Pago" design="Bold" />
+													<Text text="{ZTERM}" />
+													<Label id="lblViasPago" text="Vías de Pago" design="Bold" />
+													<MultiComboBox id="selectViasPagoAmpCon" width="400px" editable="false"
+														items="{/results}" selectedKeys="{dataModel>/ZWELS}">
+														<core:Item key="{ZWELS}" text="{ZWELS}-{ZWELS_DESC}" />
+													</MultiComboBox>
+													<Label text="Sociedad Modelo" design="Bold" />
+													<Select id="selectSociedadesAmpCon"
+														items="{/results}" forceSelection="true">
+														<core:Item key="{BUKRS}" text="{BUKRS} - {BUKRS_DESC}" />
+													</Select>
+													<Label text="Ampliar" design="Bold" />
+													<MultiComboBox id="selectSociedadesAmpCon2"
+														items="{/results}">
+														<core:Item key="{BUKRS}" text="{BUKRS} - {BUKRS_DESC}" />
+													</MultiComboBox>
+													<Label text="Observaciones" design="Bold"/>
+													<TextArea id="ampObsCon" value="{/value}"
+														showExceededText="true" maxLength="200" width="100%"
+														valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }"
+														valueLiveUpdate="false" liveChange="ampObsChange" />
+												</f:content>
+											</f:SimpleForm>
+											</FlexBox>
+										</ux:blocks>
+									</ux:ObjectPageSubSection>
+								</ux:subSections>
+							</ux:ObjectPageSection>
+						</ux:sections>
+					</ux:ObjectPageLayout>
+				</NavContainer>
+			</tnt:mainContents>
+		</tnt:ToolPage>
+	</Page>
+</core:FragmentDefinition>

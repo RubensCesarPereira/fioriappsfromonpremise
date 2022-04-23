@@ -1,0 +1,43 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV" xml:lang="es"
+			sap:schema-version="1">
+			<EntityType Name="Pedido" sap:content-version="1">
+				<Key><PropertyRef Name="Purchaseorder"/></Key><Property Name="Purchaseorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Doc.compras"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CreatDate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Creado el" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Clase documento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PurchOrg" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Org.compras" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PurGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Grupo-compras"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="SupplPlnt" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ce.suministrad."
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="PedidoToPosiciones" Relationship="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.PedidoPosiciones"
+					FromRole="FromRole_PedidoPosiciones" ToRole="ToRole_PedidoPosiciones"/></EntityType>
+			<EntityType Name="Posiciones" sap:content-version="1">
+				<Key><PropertyRef Name="Purchaseorder"/><PropertyRef Name="PoItem"/></Key><Property Name="Purchaseorder" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Doc.compras"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PoItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Posición" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Material" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ShortText" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Txt.brv." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="StgeLoc" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Almacén" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Quantity" Type="Edm.String" Nullable="false" MaxLength="17" sap:unicode="false" sap:label="Cantidad pedido"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PoUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="UM de pedido" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Eindt" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Creado el" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="CreatDate" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Fe. documento"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="SupplPlnt" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Texto1" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Año" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="Texto2" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Nota" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<Association Name="PedidoPosiciones" sap:content-version="1"><End Type="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.Pedido" Multiplicity="1" Role="FromRole_PedidoPosiciones"/><End Type="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.Posiciones" Multiplicity="*" Role="ToRole_PedidoPosiciones"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_PedidoPosiciones"><PropertyRef Name="Purchaseorder"/></Principal>
+					<Dependent Role="ToRole_PedidoPosiciones"><PropertyRef Name="Purchaseorder"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="PedidoSet" EntityType="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.Pedido" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="PosicionesSet" EntityType="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.Posiciones" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="PedidoPosicionesSet" Association="ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV.PedidoPosiciones" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="PedidoSet" Role="FromRole_PedidoPosiciones"/><End EntitySet="PosicionesSet" Role="ToRole_PedidoPosiciones"/></AssociationSet>
+			</EntityContainer><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZMM_CREA_PEDIDO_COMPRA_FIORI_SRV/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="onAcceptFilterPress">
+		<filterItems>
+			<ViewSettingsFilterItem
+				text="País"
+				key="Orders"
+				multiSelect="true"
+				items="{path: 'FilterModel>/paises' }">
+				<items>
+					<ViewSettingsItem text="{FilterModel>text}" key="Landx___EQ___{FilterModel>text}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem
+				text="Cliente"
+				key="Orders"
+				multiSelect="true"
+				items="{path: 'FilterModel>/clientes' }">
+				<items>
+					<ViewSettingsItem text="{FilterModel>text}" key="Name1___EQ___{FilterModel>text}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem
+				text="Producto"
+				key="Orders"
+				multiSelect="true"
+				items="{path: 'FilterModel>/productos' }">
+				<items>
+					<ViewSettingsItem text="{FilterModel>text}" key="Maktx___EQ___{FilterModel>text}"/>
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

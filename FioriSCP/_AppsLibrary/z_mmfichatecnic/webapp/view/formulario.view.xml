@@ -1,0 +1,669 @@
+<mvc:View controllerName="z_mmfichatecnic.controller.formulario"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:ux="sap.uxap" xmlns:ef="sap.f" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:smartList="sap.ui.comp.smartlist"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+		<Page id="pag" title="INGRESO DE FICHA TÉCNICA" backgroundDesign="Solid"
+			busyIndicatorDelay="0" enableScrolling="true" showNavButton="true"
+			navButtonPress="onNavBack">
+			<l:VerticalLayout id="containerLayout" width="100%">
+				<l:BlockLayout id="BlockLayout" background="{/selectedBackground}">
+					<l:BlockLayoutRow accentCells="Accent1" class="sapUiSmallMargin">
+						<l:BlockLayoutCell id="Accent1" width="3"
+							class="sapUiNoContentPadding" title="{/MATNR} - {/DESCRIPCION_VINO}">
+
+							<l:HorizontalLayout >
+								<ef:Avatar src="{GM>/imgPath}img/vinedo.jpg"
+									displaySize="XL" showBorder="true" class="sapUiSmallMargin" />
+								<l:VerticalLayout class="sapUiMediumMargin">
+									<ObjectStatus title="COSECHA" text="{/COSECHA}" />
+									<ObjectStatus title="APELACIÓN (ETIQUETA)" text="{/APELACION}" />
+									<ObjectStatus title="VARIEDAD" text="{/PORCENTAJE_VARIEDAD}" />
+								</l:VerticalLayout>
+
+								<l:VerticalLayout class="sapUiSmallMarginBegin sapUiMediumMargin">
+
+									<ObjectStatus title="ENÓLOGO" text="{/ENOLOGO}"
+										class="sapUiSmallMarginBegin" />
+									
+									<ObjectStatus title="CORREO ELECTRÓNICO" text="{/EMAIL_ENOLOGO}"
+										class="sapUiSmallMarginBegin" />
+
+								</l:VerticalLayout>
+							</l:HorizontalLayout>
+
+							<FlexBox alignItems="Center" justifyContent="Center">
+								<items>
+									<Label text="Descripción:" wrapping="true" class="sapUiTinyMargin" />
+									<Input id="top-layout" value="{/DESCRIPCION_VINO}" class="sapUiTinyMargin"
+										width="500px" editable="{CONF>/E}"/>
+								</items>
+							</FlexBox>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+			<l:VerticalLayout class="sapUiNoContentPadding"
+				width="100%">
+				<l:content>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S1}" headerText="VIÑEDO" width="auto"
+						class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="100%" height="100%"
+								backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+								title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								labelSpanS="4" adjustLabelSpan="true" emptySpanXL="4"
+								emptySpanL="3" emptySpanM="2" emptySpanS="0" columnsXL="4"
+								columnsL="3" columnsM="3" singleContainerFullSize="true">
+
+								<f:content>
+									<Label text="Viñedo y Propiedad" wrapping="true" />
+									<Select id="vinedo-pro" forceSelection="false"
+										change="" items="{NAVS>/NAVVinedo/results}" selectedKey="{/VINEDO_PROPIEDAD}">
+										<core:ListItem key="{NAVS>VINEDO_PROPIEDAD}"
+											text="{NAVS>DESC_VINEDO_PROPIEDAD}" enabled="{CONF>/E}" />
+									</Select>
+									<Label text="Superficie ( há )" wrapping="true" />
+									<Input value="{=parseInt(${/SUPERFICIE})}" id="superficie" type="Number"
+										editable="{CONF>/E}" />
+									<Text text="Hás." wrapping="true" />
+									<Label text="Año Plantación" />
+									<l:HorizontalLayout>
+										<StepInput id="anoplandesde" value="{=parseInt(${/ANNO_PLANTACION_DESDE})}" min="1985"
+											max="2060" width="110px" step="1" largerStep="10" stepMode=""
+											editable="{CONF>/E}"
+											change="onChange" />
+										<Label text=" - " wrapping="true" class="sapUiSmallMargin" />
+										<StepInput id="anoplanhasta" value="{=parseInt(${/ANNO_PLANTACION_HASTA})}" min="1985"
+											max="2060" width="110px" step="1" largerStep="10" stepMode=""
+											editable="{CONF>/E}"
+											change="onChange" />
+									</l:HorizontalLayout>
+									<Label text="Conducción (ESP)" class="sapUiSmallMarginEnd" />
+									<TextArea id="conduccion_es" value="{=${/CONDUCCION_ES}.split('#').join('\n')}" editable="{CONF>/E}"
+										rows="3" />
+									<Label text="Conducción (ENG)" class="sapUiSmallMarginEnd" />
+									<TextArea id="conduccion_en" value="{=${/CONDUCCION_EN}.split('#').join('\n')}"
+										rows="3" editable="{CONF>/E}"/>
+									<Label text="Tipo de cosecha" />
+									<Title text="" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/PORCENTAJE_COSECHA_MECANICA})}"
+										id="slider-meca" liveChange="onSliderLiveChangeMeca"
+										showAdvancedTooltip="false" enabled="{CONF>/E}"/>
+									<Text id="slider-meca-lbl"
+										text="{= parseInt(${/PORCENTAJE_COSECHA_MECANICA})}% Mecánica" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/PORCENTAJE_COSECHA_MANUAL})}"
+										id="slider-manu" liveChange="onSliderLiveChangeManu"
+										showAdvancedTooltip="false" enabled="{CONF>/E}"/>
+									<Text id="slider-manu-lbl"
+										text="{= parseInt(${/PORCENTAJE_COSECHA_MANUAL})}% Manual" />
+									<Label text="Origen y características del suelo (ESP)" />
+									<TextArea id="origsue_es" value="{=${/ORIGEN_CARAC_SUELO_ES}.split('#').join('\n')}"
+										rows="3" editable="{CONF>/E}"/>
+									<Label text="Origen y características del suelo (ENG)" />
+									<TextArea id="origsue_en" value="{=${/ORIGEN_CARAC_SUELO_EN}.split('#').join('\n')}" rows="3" editable="{CONF>/E}"/>
+									<Label text="Clasificación climática (ESP)" />
+									<TextArea id="clasclim_es" value="{=${/CLASIFICACION_CLIMATICA_ES}.split('#').join('\n')}"
+										rows="3" editable="{CONF>/E}"/>
+									<Label text="Clasificación climática (ENG)" />
+									<TextArea id="clasclim_en" value="{=${/CLASIFICACION_CLIMATICA_EN}.split('#').join('\n')}" rows="3" editable="{CONF>/E}"/>
+									<Label text="Comentario climático de la temporada (Español)" />
+									<TextArea id="comclimtemes_es" value="{=${/COMENTARIO_CLIMA_TEMPORADA_ES}.split('#').join('\n')}"
+										rows="3" editable="{CONF>/E}"/>
+									<Label text="Comentario climático de la temporada (Inglés)" />
+									<TextArea id="comclimtemes_en" value="{=${/COMENTARIO_CLIMA_TEMPORADA_EN}.split('#').join('\n')}"
+										rows="3" editable="{CONF>/E}"/>
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S2}" headerText="PROCESO FERMENTATIVO"
+						width="auto" class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label
+										text="Tipo de vasija ( acero inoxidable, cemento epoxicado,  barrica u otro, indicar )"
+										wrapping="true" />
+									<MultiComboBox id="selectVasija" selectionChange="handleSelectionChange" editable="{CONF>/E}"
+										selectionFinish="handleSelectionFinish" items="{NAVS>/NAVFerm/results}"
+										selectedKeys="{= (${/TIPO_VASIJA_FERMENTACION}).split('-')}">
+										<core:ListItem key="{NAVS>TIPO_VASIJA_FERMENTACION}"
+											text="{NAVS>DESC_TIPO_VASIJA_FERMENTACION}" />
+									</MultiComboBox>
+
+									<Label text="Duración fermentación ( días )" wrapping="true" />
+									<StepInput id="durferm" value="{=parseInt(${/DURACION_FERMENTACION})}"
+										min="1" max="31"
+										width="110px" step="1" largerStep="10" stepMode="" editable="{CONF>/E}"
+										change="onChange" />
+									<Label text="Temperatura fermentación ( °C )"
+										wrapping="true" />
+									<l:HorizontalLayout>
+										<StepInput id="tempfermdesde" value="{= parseInt(${/TEMPERATURA_FERMENTACION_DESDE})}"
+											 min="0" max="35"
+											width="110px" step="1" largerStep="10" stepMode=""
+											editable="{CONF>/E}"
+											change="onChange" />
+										<Label text=" - " wrapping="true" class="sapUiTinyMargin" />
+										<StepInput id="tempfermhasta" value="{= parseInt(${/TEMPERATURA_FERMENTACION_HASTA})}"
+											min="5" max="35"
+											width="110px" step="1" largerStep="10" stepMode="" editable="{CONF>/E}"
+											change="onChange" />
+									</l:HorizontalLayout>
+									<Label text="Uso Levadura" wrapping="true" />
+
+									<Select id="select_usolevadura" width="100%" forceSelection="false" enabled="{CONF>/E}"
+										selectedKey="{/USO_LEVADURA}" items="{NAVS>/NAVLevadura/results}">
+										<core:ListItem key="{NAVS>LEVADURA}" text="{NAVS>DESC_LEVADURA}" />
+									</Select>
+
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S3}" headerText="GUARDA EN ESTANQUES"
+						width="auto" class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label
+										text="Tipo de estanque, acero inoxidable, cemento epoxicado, ( indicar)"
+										wrapping="true" />
+
+									<MultiComboBox id="selectEstanq"
+										selectedKeys="{=(${/TIPO_ESTANQUE}).split('-')}" editable="{CONF>/E}"
+										items="{NAVS>/NAVEstanque/results}">
+										<core:ListItem key="{NAVS>TIPO_ESTANQUE}" text="{NAVS>DESC_TIPO_ESTANQUE}" />
+									</MultiComboBox>
+
+									<Label text="Tiempo de guarda en estanques, ( meses)"
+										wrapping="true" />
+
+									<StepInput id="tiempoGuardaEstq" value="{=parseInt(${/TIEMPO_GUARDA_ESTANQUE})}"
+										min="1" max="60"
+										width="110px" step="1" largerStep="10" stepMode="" editable="{CONF>/E}" change="onChange" />
+
+									<Label text="Uso de madera, (Si/No)" wrapping="true" />
+									<HBox>
+										<Switch id="sn1" state="{=${/USO_MADERA} === 'SI' ? true : false }"
+											customTextOn="Sí" customTextOff="No" select="sinoSwETN" enabled="{=${/USO_MADERA} !== 'NA' &amp;&amp; ${CONF>/E}? true : false}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+										<CheckBox id="ch1" text="No aplica" wrapping="true"
+											width="250px" select="sinoAp1" editable="{CONF>/E}"
+											selected="{=${/USO_MADERA} === 'NA' ? true : false}">
+											<layoutData>
+												<l:GridData linebreak="true" indentL="4" indentM="4" />
+											</layoutData>
+										</CheckBox>
+									</HBox>
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S4}" headerText="GUARDA EN BARRICAS O FUDRES"
+						width="auto" class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Tipo de vasija, barrica o fudre ( indicar)"
+										wrapping="true" />
+
+									<MultiComboBox id="selectBarrica" editable="{CONF>/E}"
+										selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish"
+										selectedKeys="{= (${/TIPO_VASIJA_BARRICA}).split('-')}" items="{NAVS>/NAVBarrica/results}">
+										<core:ListItem key="{NAVS>TIPO_VASIJA_BARRICA}"
+											text="{NAVS>DESC_TIPO_VASIJA_BARRICA} " />
+
+									</MultiComboBox>
+
+									<Label text="Tiempo de guarda en madera (meses)"
+										wrapping="true" />
+									<StepInput id="tiempoGuardBarr" value="{=parseInt(${/TIEMPO_GUARDA_BARRICA})}"
+										min="1" max="60"
+										width="110px" step="1" largerStep="10" stepMode="1"
+										editable="{CONF>/E}"
+										change="onChange" />
+									<Label text="Porcentaje del vino en cada uno de los tipos" />
+									<Title text="" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/PORCENTAJE_VINO_BARRICA})}" enabled="{CONF>/E}"
+										id="slider-barr" liveChange="onSliderLiveChangeBarr"
+										showAdvancedTooltip="false" />
+									<Text id="slider-barr-lbl"
+										text="{= parseInt(${/PORCENTAJE_VINO_BARRICA})}% Barrica" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/PORCENTAJE_VINO_FUDRE})}" enabled="{CONF>/E}"
+										id="slider-fudr" liveChange="onSliderLiveChangeFudr"
+										showAdvancedTooltip="false" />
+									<Text id="slider-fudr-lbl" text="{= parseInt(${/PORCENTAJE_VINO_FUDRE})}% Fudre" />
+									<Label text="Origen de la madera (indicar %)" />
+									<Title text="" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/ORIGEN_MADERA_AMERICANO})}" enabled="{CONF>/E}"
+										id="slider-amer" liveChange="onSliderLiveChangeAmer"
+										showAdvancedTooltip="false" />
+									<Text id="slider-amer-lbl"
+										text="{= parseInt(${/ORIGEN_MADERA_AMERICANO})}% Americano" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/ORIGEN_MADERA_FRANCES})}" enabled="{CONF>/E}"
+										id="slider-fran" liveChange="onSliderLiveChangeFran"
+										showAdvancedTooltip="false" />
+									<Text id="slider-fran-lbl"
+										text="{= parseInt(${/ORIGEN_MADERA_FRANCES})}% Francés" />
+									<Label text="Porcentaje del vino en madera nueva (indicar)"
+										wrapping="true" />
+									<Title text="" />
+									<Label text="" />
+									<Slider value="{= parseInt(${/PORCENTAJE_VINO_MADERA})}" enabled="{CONF>/E}"
+										id="slider-mad" liveChange="onSliderLiveChangeMad"
+										showAdvancedTooltip="false" />
+									<Text id="slider-mad-lbl"
+										text="{= parseInt(${/PORCENTAJE_VINO_MADERA})}% Madera Nueva" />
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S5}" headerText="ESTABILIZACIÓN" width="auto"
+						class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Estabilización  proteica (Si/No)" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn2"
+											state="{=${/ESTABILIZACION_PROTEICA} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" enabled="{CONF>/E}"
+											class="sapUiTinyMargin" />
+
+									</HBox>
+									<Label text="Estabilización tartárica por frío artificial (Si/No)"
+										wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn3"
+											state="{=${/ESTABILIZACION_TARTARICA_FRIO} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" enabled="{CONF>/E}"
+											class="sapUiTinyMargin" />
+
+									</HBox>
+									<Label text="Estabilización tartárica por aditivos"
+										wrapping="true" />
+									<MultiComboBox editable="{CONF>/E}" id="selectAditivos"
+										selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish"
+										selectedKeys="{= (${/ESTABILIZACION_TARTARICA_ADIT}).split('-')}"
+										items="{NAVS>/NAVAditivos/results}">
+										<core:ListItem key="{NAVS>ADITIVOS}" text="{NAVS>DESC_ADITIVOS}" />
+
+									</MultiComboBox>
+									<Label
+										text="Estabilización tartárica natural, solo inviernos (Si/No)"
+										wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<items>
+											<Switch id="sn5" enabled="{CONF>/E}"
+												state="{=${/ESTABILIZACION_TARTARICA_NATU} === 'X' ? true : false}"
+												customTextOn="Sí" customTextOff="No" select="sinoSw5"
+												class="sapUiTinyMargin" />
+
+										</items>
+									</HBox>
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S6}" headerText="ENVASADO" width="auto"
+						class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Fecha de envasado" wrapping="true" />
+									<DatePicker id="fechaEnv" displayFormat="yyyy/MM"
+										valueFormat="yyyyMMdd"  editable="{CONF>/E}"
+										value="{ path: '/FECHA_ENVASADO_DESDE',type: 'DateType',formatOptions: { pattern: 'yyyyMM', source: {pattern: 'yyyyMM'}},constraints: { maximum: '2090/12' }}"
+										change="handleChange" class="sapUiSmallMarginBottom" />
+									<DatePicker id="fechaEnvHas" displayFormat="yyyy/MM" valueFormat="yyyyMMdd" editable="{CONF>/E}"
+										value="{ path: '/FECHA_ENVASADO_HASTA',type: 'DateType',formatOptions: { pattern: 'yyyyMM', source: {pattern: 'yyyyMM'}},constraints: { maximum: '2090/12' }}"
+										change="handleChange" class="sapUiSmallMarginBottom" />
+									<Label text="Guarda en botella" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn10" enabled="{CONF>/E}"
+											state="{=${/GUARDA_BOTELLA} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" select="sinoSw10">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+
+									</HBox>
+									<Label text="Tiempo de guarda en botella (meses)"
+										wrapping="true" />
+									<VBox>
+										<Select id="tiempoGuarBot" forceSelection="false" width="100%" change="disableSave" enabled="{CONF>/E}" selectedKey="{/TIEMPO_GUARDA_BOTELLA}">
+											<core:ListItem key="01" text="1 Mes" />
+											<core:ListItem key="02" text="2 Meses" />
+											<core:ListItem key="03" text="3 Meses" />
+											<core:ListItem key="04" text="4 Meses" />
+											<core:ListItem key="05" text="5 Meses" />
+											<core:ListItem key="06" text="6 Meses" />
+											<core:ListItem key="07" text="7 Meses" />
+											<core:ListItem key="08" text="8 Meses" />
+											<core:ListItem key="09" text="9 Meses" />
+											<core:ListItem key="10" text="10 Meses" />
+											<core:ListItem key="11" text="11 Meses" />
+											<core:ListItem key="12" text="12 Meses" />
+										</Select>
+
+									</VBox>
+									<Label text="Fecha aproximada de liberación al mercado"
+										wrapping="true" />
+									<DatePicker value="{ path: '/FECHA_APROX_LIB_MERCADO_DESDE',type: 'DateType',formatOptions: { pattern: 'yyyyMM', source: {pattern: 'yyyyMM'}},constraints: { maximum: '2090/12' }}" editable="{CONF>/E}"
+										valueFormat="yyyyMM" id="fechaLib" displayFormat="yyyy/MM" change="handleChange"
+										class="sapUiSmallMarginBottom" />
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S7}" headerText="PARÁMETROS ANALÍTICOS"
+						width="auto" class="sapUiTinyMargin">
+						<infoToolbar>
+							<Toolbar visible="{=${CONF>/L} &#124;&#124; ${CONF>/A} ? false : true}">
+								<Text text="Solo modificable por laboratorio" />
+							</Toolbar>
+						</infoToolbar>
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<l:VerticalLayout>
+										<l:HorizontalLayout>
+											<Label text="BBE N°: " wrapping="true" class="sapUiTinyMargin" />
+											<Input id="bben" editable="{CONF>/L}" value="{/LAB_BBE}" type="Number"></Input>
+										</l:HorizontalLayout>
+										<Table id="idSolicTable" inset="false" noDataText="Sin datos"
+											growing="true" growingThreshold="10" growingScrollToLoad="true">
+
+											<columns>
+												<Column hAlign="Left" vAlign="Middle">
+													<Label text="Análisis" design="Bold" />
+												</Column>
+												<Column vAlign="Middle" hAlign="Center">
+													<Label design="Bold" text="Unidades" />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true"
+													vAlign="Middle" hAlign="Center">
+													<Label design="Bold" text="BBE " />
+												</Column>
+												<Column minScreenWidth="Tablet" demandPopin="true"
+													vAlign="Middle" hAlign="Center">
+													<Label design="Bold" text="Rango resultados" />
+												</Column>
+
+											</columns>
+											<items>
+												<ColumnListItem press="onPress" vAlign="Middle">
+													<cells>
+														<Text text="Alcohol" />
+														<Text text="Vol.% a 20°C" />
+														<Input id="alcohol" value="{/LAB_ALCOHOL}" editable="{CONF>/L}" type="Number"/>
+														<Text text="Etiqueta ± 0,5" />
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem vAlign="Middle">
+													<cells>
+														<Text text="Azúcar reductores (en glucosa)" />
+														<Text text="g/L" />
+														<Input id="azu-red" value="{/LAB_AZUCAR}" editable="{CONF>/L}" type="Number"/>
+														<Text text="rango de acuerdo a nivel" />
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem vAlign="Middle">
+													<cells>
+														<Text text="Acidez total (en ácido tartárico) " />
+														<Text text="g/L" />
+														<Input id="acid-total" value="{/LAB_ACIDEZ_TOTAL}" editable="{CONF>/L}" type="Number"/>
+														<Text text="± 0,8" />
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem vAlign="Middle">
+													<cells>
+														<Text text="Ph" />
+														<Text text="" />
+														<Input id="ph-ph" value="{/LAB_PH}" editable="{CONF>/L}" type="Number"/>
+														<Text text="± 0,2" />
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem vAlign="Middle">
+													<cells>
+														<Text text="Acidez volátil (en ácido acético)" />
+														<Text text="mg/L" />
+														<Input id="acid-vila" value="{/LAB_ACIDEZ_VOLATIL}" editable="{CONF>/L}" type="Number"/>
+														<Text text="± 0,05" />
+													</cells>
+												</ColumnListItem>
+												<ColumnListItem vAlign="Middle">
+													<cells>
+														<Text text="Presión (sólo espumoso)" />
+														<Text text="Atm a 20°C" />
+														<Input id="presion" value="{/LAB_PRESION}" editable="{CONF>/L}" type="Number"/>
+														<Text text="3,0 – 7,5" />
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</l:VerticalLayout>
+
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S8}" headerText="OTROS" width="auto"
+						class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Apto consumo Vegetarianos (Si/No)" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn6" enabled="{CONF>/A}"
+											state="{=${/APTO_VEGETARIANOS} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</HBox>
+									<Label text="Apto consumo Veganos (Si/No)" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn7" state="{=${/APTO_VEGANOS} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" enabled="{CONF>/A}"
+											>
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</HBox>
+									<Label text="Sulfitos (Si/No)" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn8" state="{=${/SULFITOS} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" enabled="{CONF>/A}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</HBox>
+									<Label text="Otros Alérgenos?" wrapping="true" />
+									<HBox alignItems="Center" justifyContent="Start">
+										<Switch id="sn9" state="{=${/ALERGENOS} === 'X' ? true : false}"
+											customTextOn="Sí" customTextOff="No" change="accionSn9" enabled="{CONF>/E}">
+											<layoutData>
+												<FlexItemData growFactor="1" />
+											</layoutData>
+										</Switch>
+									</HBox>
+									<Label text="Cuáles?" wrapping="true" />
+									<Input id="inputAlergenos" value="{/OTROS_ALERGENOS}" editable="{CONF>/E}"/>
+
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S9}" headerText="NOTAS DE CATA" width="auto"
+						class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Color (Español)" />
+									<TextArea id="nota-color-es" value="{=${/NOTA_CATA_COLOR_ES}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Color (Inglés)" />
+									<TextArea id="nota-color-en" value="{=${/NOTA_CATA_COLOR_EN}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Aroma (Español)" />
+									<TextArea id="nota-aroma-es" value="{=${/NOTA_CATA_AROMA_ES}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Aroma (Inglés)" />
+									<TextArea id="nota-aroma-en" value="{=${/NOTA_CATA_AROMA_EN}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Sabor (Español)" />
+									<TextArea id="nota-sabor-es" value="{=${/NOTA_CATA_SABOR_ES}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Sabor (Inglés)" />
+									<TextArea id="nota-sabor-en" value="{=${/NOTA_CATA_SABOR_EN}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="T° ideal de consumo" />
+									<Slider value="{=parseInt(${/NOTA_CATA_TEMP_IDEAL_CONSUMO})}" enabled="{CONF>/E}"
+										id="slider-temp-cons" liveChange="onSliderLiveChangeTempIdeal"
+										showAdvancedTooltip="false" min="0" max="25"/>
+									<Text id="slider-temp-cons-lbl"
+										text="{=parseInt(${/NOTA_CATA_TEMP_IDEAL_CONSUMO})}°C" />
+									<Label text="Recomendación de Maridaje (Español)" />
+									<TextArea id="nota-mari-es" value="{=${/RECOMENDACION_MARIDAJE_ES}.split('#').join('\n')}" editable="{CONF>/E}"/>
+									<Label text="Recomendación de Maridaje (Inglés)" />
+									<TextArea id="nota-mari-en" value="{=${/RECOMENDACION_MARIDAJE_EN}.split('#').join('\n')}" editable="{CONF>/E}"/>
+								</f:content>
+							</f:SimpleForm>
+						</content>
+					</Panel>
+					<Panel expandable="true" backgroundDesign="Solid"
+						expanded="{CONF>/FORM_STATE/S10}" headerText="CONSUMO SUGERIDO DE ACUERDO  A NUESTRA EXPERIENCIA"
+						width="auto" class="sapUiTinyMargin">
+						<content>
+							<f:SimpleForm width="850px" height="100%" editable="true"
+								layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+								labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+								emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<f:content>
+									<Label text="Meses desde la Fecha de Envasado" />
+									<Select id="consumoEnv" width="100%" change="disableSave" enabled="{CONF>/E}"
+									forceSelection="false"
+									selectedKey="{/CONSUMO_MESES_FECHA_ENVASADO}">
+										<core:ListItem key="6m" text="6 meses" />
+										<core:ListItem key="12m" text="12 meses" />
+										<core:ListItem key="18m" text="18 meses" />
+										<core:ListItem key="2y" text="2 años" />
+										<core:ListItem key="3y" text="3 años" />
+										<core:ListItem key="4y" text="4 años" />
+										<core:ListItem key="5y" text="5 años" />
+										<core:ListItem key="6y" text="6 años" />
+										<core:ListItem key="7y" text="7 años" />
+										<core:ListItem key="8y" text="8 años" />
+										<core:ListItem key="9y" text="9 años" />
+										<core:ListItem key="10y" text="10 años" />
+										<core:ListItem key="11y" text="11 años" />
+										<core:ListItem key="12y" text="12 años" />
+										<core:ListItem key="13y" text="13 años" />
+										<core:ListItem key="14y" text="14 años" />
+										<core:ListItem key="15y" text="15 años" />
+									</Select>
+								</f:content>
+							</f:SimpleForm>
+							<Label text="En las condiciones de guarda adecuadas"
+								required="true" />
+						</content>
+					</Panel>
+
+				</l:content>
+			</l:VerticalLayout>
+			<core:HTML id="ifrm" visible="false" />
+			<footer>
+				<OverflowToolbar id="pend-actions" visible="true">
+					<ToolbarSpacer />
+					<Button id="btn-sv-mod" type="Accept" text="Guardar" press="onSave"
+						visible="false">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Button id="btn-ff-mod" type="Emphized" text="Finalizar"
+						press="onFinishPress" visible="false">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Button id="btn-ap-adm" type="Accept" text="Aprobar" press="onApprovePress"
+						visible="true">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Button id="btn-rj-adm" type="Reject" text="Anular" press="onRejectPress"
+						visible="true">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Button id="btn-sr-adm" type="Emphized" text="Solicitar Revisión"
+						press="onRequestPress" visible="true">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+					<Button id="btn-cc-mod" type="Ghost" text="Cancelar" press="onNavBack"
+						visible="false">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow" />
+						</layoutData>
+					</Button>
+				</OverflowToolbar>
+			</footer>
+		</Page>
+</mvc:View>

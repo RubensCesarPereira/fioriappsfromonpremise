@@ -1,0 +1,41 @@
+<core:FragmentDefinition height="100%" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog contentWidth="40em">
+		<content>
+			<Table id="valleTableList" items="{valle>/}" inset="false" width="auto" mode="None" noDataText="{i18n>valleLineItemTableNoDataText}">
+				<infoToolbar>
+					<OverflowToolbar>
+						<Label text="{i18n>valleTitleTableCharact}"/>
+					</OverflowToolbar>
+				</infoToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>valleLineItemTableCharact}"/>
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="End">
+						<Text text="{i18n>valleLineItemTableValue}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{valle>ValueChar}"/>
+							<Text text="{valle>Value}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<!-- 
+			<beginButton>
+				<Button id="btnAceptar" type="Accept" text="Crear" press="onAddNewRow">
+					<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+				</Button>
+			</beginButton>
+			-->
+		<endButton>
+			<Button type="Reject" text="Cerrar" press="onCloseViewValle">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,211 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout"
+	xmlns="sap.m" controllerName="ui.s2p.mm.ses.approve.view.S4">	
+				
+	<Page id="ServiceLines">
+		<content>
+ 		  <ObjectHeader id = "sesSelectedDetail"
+						  title = "{Description}"
+						  number="{parts:['ActualValue','ActualValueCrcy'], 
+                                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatCurrencyAmountStandard'}"
+                          numberUnit="{ActualValueCrcy}">
+			<attributes>
+					<ObjectAttribute text = "{parts:[{path:'i18n>LABEL_SERVICE_LINE_QUANTITY'},{path:'ActualQuantity'},
+					                                 {path:'ActualQuantityUnit'},{path:'QuantityUnitDescription'}],
+				                              formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatQuantityWithLabel'}"></ObjectAttribute>
+					<ObjectAttribute text = "{parts:[{path:'i18n>LABEL_SERVICE_LINE_STATUS'},{path:'Status'}], 
+					                          formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatStatusWithLabel'}"></ObjectAttribute>							
+			</attributes>
+		   </ObjectHeader>
+		   
+				<form:SimpleForm class = "sapMListInsetBG">
+					<form:title><core:Title text ="{i18n>TEXT_INFORMATION_S4}"></core:Title></form:title>
+					<form:content>
+						<Label id= "InfoS4LabelServiceLineNumber" text="{i18n>LABEL_SERVICE_LINE_NUMBER}"></Label>
+						<Text  id= "InfoS4TextServiceLineNumber"  text="{sesItemDetail>ExternalLineNumber}"> </Text>
+						<Label visible="{path:'sesItemDetail>Requestor', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}" 
+					           id= "InfoS4LabelRequestor" text="{i18n>LABEL_TEXT_REQUESTOR}"></Label>
+						<Link visible="{path:'sesItemDetail>Requestor', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"
+						       id= "InfoS4TextRequestor" text="{sesItemDetail>Requestor}" press = "onRequestorLinkPress"> </Link>
+						<Label visible="{path:'sesItemDetail>ActivityNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}" 
+						       id= "InfoS4LabelActivityNumber" text="{i18n>LABEL_TEXT_ACTIVITY_NUMBER}"></Label>
+						<Text visible="{path:'sesItemDetail>ActivityNumber', formatter:'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}"  
+						      id= "InfoS4TextActivityNumber" text="{parts:[{path:'sesItemDetail>ActivityNumber'},{path:'sesItemDetail>ActivityNumberDescription'}],
+					                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"> </Text>
+						<Label id= "InfoS4LabelTaxCode" text="{i18n>LABEL_TAX_CODE}"></Label>
+						<Text  id= "InfoS4TextTaxCode" text ="{parts:[{path:'i18n>TEXT_NO_TAX_CODE'},{path:'sesItemDetail>TaxCode'},{path:'sesItemDetail>TaxCodeDescription'}],
+					                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescriptionWithNoData'}"> </Text>
+						<Label id= "InfoS4LabelPlannedValue" text="{i18n>LABEL_PLANNED_VALUE}"></Label>		
+						<Text  id= "InfoS4TextPlannedValue" text ="{parts:[{path:'sesItemDetail>PlannedValue'},{path:'sesItemDetail>PlannedValueCurrency'}], 
+	                                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.getAmountWithCurrency'}"></Text>
+						<Label id= "InfoS4LabelPlannedQuantity" text="{i18n>LABEL_PLANNED_QUANTITY}"></Label>
+						<Text  id= "InfoS4TextPlannedQuantity" text ="{parts:[{path:'sesItemDetail>PlannedQuantity'},{path:'sesItemDetail>PlannedQuantityUnit'},{path:'sesItemDetail>QuantityUnitDescription'}],
+					                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.getQuantityWithDescritption'}"></Text>
+						<Label id= "InfoS4LabelCompanyCode" text="{i18n>LABEL_COMPANY_CODE}"></Label>
+						<Text  id= "InfoS4TextCompanyCode" text ="{parts:[{path:'sesItemDetail>CompanyCode'},{path:'sesItemDetail>CompanyCodeDescription'}],
+					                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text>
+                        <!-- Extends the Information  -->
+						<core:ExtensionPoint name="extMoreInfo" />
+					</form:content>
+				</form:SimpleForm>
+   		    
+				
+				<Table id = "AccountAssignment" 
+				       inset ="true" items="{path:'sesItemDetail>SESAccountings'}" noDataText="{i18n>TABLE_NO_DATA_ACCOUNTS}" 
+				       class="detailControlPadding" 
+				       updateFinished="handleUpdateFinishedAccountAssignment"
+	                   headerText="{i18n>TABLE_ACCOUNT_ASSIGNMENT_TITLE}">
+	
+					<columns>
+					    <!-- old backend columns -->
+						<Column hAlign="Left" id= "AccountAssignmentColumnDescription"
+						        visible="{parts : [{path : 'sesItemDetail>SESAccountings'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getOldAccountAssignmentVisibility'}">
+							<header>
+								<Text text="{i18n>TABLE_ACCOUNT_ASSIGNMENT_COLUMN_DESCRIPTION}"></Text>
+							</header>
+						</Column>
+						<Column hAlign="Left" id= "AccountAssignmentColumnCategory" demandPopin="true" minScreenWidth="Tablet"
+						        visible="{parts : [{path : 'sesItemDetail>SESAccountings'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getOldAccountAssignmentVisibility'}">
+							<header>
+							   <Text text="{i18n>TABLE_ACCOUNT_ASSIGNMENT_COLUMN_CATEGORY}"></Text>
+							</header>
+						</Column>
+						
+						<!-- new backend columns -->
+						<Column hAlign="Left" id= "AccountAssignmentColumnObjects" demandPopin="true"
+						        visible="{parts : [{path : 'sesItemDetail>SESAccountings'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getNewAccountAssignmentVisibility'}">
+							<header>
+								<Text text="{i18n>ACCOUNT_ASSIGNMENT_OBJECTS}"></Text>
+							</header>
+						</Column>
+						
+						<!-- old and new backend columns -->
+						<Column hAlign="Left" id= "AccountAssignmentColumnGLAccount" demandPopin="true" minScreenWidth="Tablet">
+							<header>
+							   <Text text="{i18n>TABLE_ACCOUNT_ASSIGNMENT_COLUMN_GL_ACCOUNT}"></Text>
+							</header>
+						</Column>
+	
+						<Column hAlign="Right" id= "AccountAssignmentColumnShare" demandPopin="true" minScreenWidth="Tablet">
+							<header>
+								<Text text="{i18n>TABLE_ACCOUNT_ASSIGNMENT_COLUMN_SHARE}" ></Text>
+							</header>
+						</Column>
+                        <!-- Add new colums to the AccountAssignmentList  -->
+						<core:ExtensionPoint name="extMoreAccountAssignmentListColumns" />
+					</columns>
+	
+					<items>
+						<ColumnListItem>
+							<cells>
+							    <!-- old backend version -->
+		                        <Text   id= "AccountAssignmentCellDescription" 
+                                        text="{parts:[{path:'sesItemDetail>AccountNumber'},{path:'sesItemDetail>AccountDescription'}],
+                                                formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text>
+								<Text id= "AccountAssignmentCellCategory"
+								      text ="{parts:[{path:'sesItemDetail>AccountAssignmentCategory'},{path:'sesItemDetail>AccAssignmCatDescription'}],
+							                           formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text>
+								<!-- new backend version -->
+								<layout:VerticalLayout>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>CostCenter'}, {path : 'sesItemDetail>CostCentreDescription'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"
+                                        visible="{parts : [{path : 'sesItemDetail>CostCentre'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                    <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_COST_CENTRE}"
+                                        visible="{parts : [{path : 'sesItemDetail>CostCentre'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>WBSElement'}, {path : 'sesItemDetail>WBSElementDescription'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"
+                                        visible="{parts : [{path : 'sesItemDetail>WBSElement'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                    <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_WBS_ELEMENT}"
+                                        visible="{parts : [{path : 'sesItemDetail>WBSElement'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>Network'}, {path : 'sesItemDetail>NetworkDescription'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"
+                                        visible="{parts : [{path : 'sesItemDetail>Network'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                    <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_NETWORK}"
+                                        visible="{parts : [{path : 'sesItemDetail>Network'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>Order'}, {path : 'sesItemDetail>OrderDescription'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"
+                                        visible="{parts : [{path : 'sesItemDetail>Order'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                    <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_ORDER}"
+                                        visible="{parts : [{path : 'sesItemDetail>Order'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>SalesOrder'}, {path : 'sesItemDetail>SalesOrderItem'}, {path : 'SalesOrderScheduleLine'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.salesOrderIDFormatter'}"
+                                        visible="{parts : [{path : 'sesItemDetail>SalesOrder'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                    <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_SALES_ORDER}"
+                                        visible="{parts : [{path : 'sesItemDetail>SalesOrder'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+                                    <ObjectIdentifier
+                                        title="{parts:[{path : 'sesItemDetail>Asset'}, {path : 'sesItemDetail>AssetDescription'}, {path : 'AssetSubNumber'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.assetIDFormatter'}"
+                                        visible="{parts : [{path : 'sesItemDetail>Asset'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </ObjectIdentifier>
+                                        <Text 
+                                        text="{i18n>ACCOUNT_ASSIGNMENT_ASSET}"
+                                        visible="{parts : [{path : 'sesItemDetail>Asset'}], formatter : 'ui.s2p.mm.ses.approve.util.Formatter.getVisibility'}">
+                                    </Text>
+								</layout:VerticalLayout>
+								
+								<!-- old and new version part -->
+								<Text id= "AccountAssignmentCellGLAccount"
+								      text ="{parts:[{path:'sesItemDetail>GLAccount'},{path:'sesItemDetail>GLAccountDescription'}],
+							                           formatter:'ui.s2p.mm.ses.approve.util.Formatter.getCodeAndDescription'}"></Text>
+	                            <ObjectNumber id= "AccountAssignmentCellShare" number="{parts:[{path:'sesItemDetail>DistributionPercentage'}],
+									                         formatter:'ui.s2p.mm.ses.approve.util.Formatter.formatNumberPercentage'}" numberUnit="%"></ObjectNumber>
+                                <!-- Add new cells to the AccountAssignmentList  -->
+                                <core:ExtensionPoint name="extMoreAccountAssignmentListCells" />	                            
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Table id = "PackageAssignments" 
+				       inset ="true" items="{path:'sesItemDetail>SESPackages'}" noDataText="{i18n>TABLE_NO_DATA_PACKAGES}" 
+				       class="detailControlPadding" 
+				       updateFinished="handleUpdateFinishedPackageAssignment"
+	                   headerText="{i18n>TABLE_PACKAGE_ASSIGNMENT_TITLE}">
+					<columns>
+						<Column hAlign="Left" id= "PackageAssignmentColumnPackage">
+							<header>
+								<Text text="{i18n>TABLE_PACKAGE_ASSIGNMENT_COLUMN_PACKAGE}"></Text>
+							</header>
+						</Column>
+						<Column hAlign="Right" id= "PackageAssignmentColumnHierarchyLevel" demandPopin="true" minScreenWidth="Tablet">
+							<header>
+							   <Text text="{i18n>TABLE_PACKAGE_ASSIGNMENT_COLUMN_HIERARCHY_LEVEL}"></Text>
+							</header>
+						</Column>
+                        <!-- Add new colums to the PackageAssignmentsList  -->
+						<core:ExtensionPoint name="extMorePackageAssignmentsListColumns" />
+					</columns>
+	
+					<items>
+						<ColumnListItem>
+							<cells>
+							    <Text id= "PackageAssignmentCellPackage" text="{sesItemDetail>Description}"></Text> 
+							    <Text id= "PackageAssignmentCellHierarchyLevel" text="{sesItemDetail>HierarchyLevel}"></Text>	
+                                <!-- Add new cells to the PackageAssignmentsList  -->
+							    <core:ExtensionPoint name="extMorePackageAssignmentListCells" />					    
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<!-- Add new task lists to the sub detail screen  -->
+                <core:ExtensionPoint name="extTaskList" />
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,94 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_aprobar_reclasificacion.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<!--<ObjectHeader id="objectHeader" title="{Aufnr}" number="{ path: 'CantCab', formatter: '.formatter.currencyValue' }"></ObjectHeader>-->
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm layout="ResponsiveGridLayout" title="Orden: {Aufnr}" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2"
+					labelSpanM="2" labelSpanS="5">
+					<f:content>
+						<Label text="Bodega" design="Bold"/>
+						<Text id="bodega" text="{Werks} - {DescripCentro}"/>
+						<Label text="Motivo" design="Bold"/>
+						<Text id="motivo" text="{DescripMotiv}"/>
+						<Label text="Vino Origen" design="Bold"/>
+						<Text id="mezcla" text="{MatnrOrigen} - {Maktx}"/>
+						<Label text="Cantidad" design="Bold"/>
+						<Text id="cantidad" text="{CantCab} Lts."/>
+						<Label text="Responsable" design="Bold"/>
+						<Text id="respon" text="{VeraaUser}"/>
+						<Label text="Aprobador" design="Bold"/>
+						<Text id="aprobador" text="{Aprobador}"/>
+						<Text id="Orden" text="{Aufnr}" visible="false"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" width="auto" items="{OrdenToPosiciones}" updateFinished="onListUpdateFinished"
+					noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="8em">
+							<Text text="Código Origen"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Denominación Origen"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Costo"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Código Destino"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Denominación Destino"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Costo"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Cantidad"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Costo Total"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{MatnrOrigen}"/>
+								<Text text="{MaktxOrigen}"/>
+								<Text text="{CosechaOrg}"/>
+								<Text text="{CostOrigen}"/>
+								<Text text="{MatnrDestino}"/>
+								<Text text="{MaktxDestino}"/>
+								<Text text="{Cosecha}"/>
+								<Text text="{CostDestino}"/>
+								<Text text="{CantPos} L"/>
+								<!--<ObjectStatus text="{CostTotal}" state="{ path: 'CostTotal', formatter: '.formatter.costoState' }"/>-->
+								<ObjectStatus text="{ path: 'CostTotal', formatter: '.formatter.addDot' }" state="{ path: 'CostTotal', formatter: '.formatter.costoState' }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Aprobar" press="onAutorizar"/>
+		</semantic:positiveAction>
+		<semantic:negativeAction>
+			<semantic:NegativeAction text="Rechazar" press="onRechazar"/>
+		</semantic:negativeAction>
+	</semantic:DetailPage>
+</mvc:View>

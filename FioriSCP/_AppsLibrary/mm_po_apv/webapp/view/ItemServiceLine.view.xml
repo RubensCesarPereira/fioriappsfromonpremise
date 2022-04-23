@@ -1,0 +1,133 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:layout="sap.ui.layout"
+	controllerName="ui.s2p.mm.purchorder.approve.view.ItemServiceLine">
+	
+ 	<!-- S9 screen of Service Lines -->	
+	<Page
+	    id="servicedetail"
+		class="sapUiFioriObjectPage"
+		enableScrolling="true">
+		
+		<!-- Header of Service Lines (ItemServiceLineHeader) -->
+		<ObjectHeader
+			id="Header"
+			introActive="false"
+			title="{Description}"
+			number="{parts : [{path: 'Value'}], formatter: 'ui.s2p.mm.purchorder.approve.util.Conversions.formatAmount'}"
+			numberUnit="{Currency}">
+     		<attributes>
+				<ObjectAttribute
+					id="HeaderAttributeQuantity"
+					text="{parts : [{path : 'Quantity'}, {path : 'UnitDescription'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.quantityFormatter'}"
+					active="false">
+				</ObjectAttribute>
+				<ObjectAttribute
+					id="HeaderAttributeQuantityForPPU"
+					text="{parts : [{path : 'QuantityForPPU'}, {path : 'UnitForPPUDescription'}, {path : 'PricePerUnit'}, {path : 'CurrencyForPPU'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.quantityPerUnitFormatter'}"
+					active="false">
+				</ObjectAttribute>
+			</attributes>
+
+			<!-- @ExtensionPoint extServiceLineHeaderInfo: service line information -->
+			<core:ExtensionPoint name="extServiceLineHeaderInfo" />
+		</ObjectHeader>
+		<!-- end of Header of Service Lines (ItemServiceLineHeader) -->
+
+	    <!-- Information area of Service Lines (ItemServiceLineInfo) -->
+		<form:Form
+			id="serviceDtlView_ServLineFormPrice"
+			visible="{parts : [{path : 'ServiceID'}, {path : 'LongDescription'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.serviceInformationVisibilityTrigger'}">
+			<form:layout>
+				<form:ResponsiveLayout 
+					id="serviceDtlView_ServLineFormLayout"> 
+				</form:ResponsiveLayout>
+			</form:layout>
+			<form:formContainers>
+				<form:FormContainer 
+					id = "serviceDtlView_InfoContainer"
+	            	title="{i18n>view.PurchaseOrder.information}">
+					<form:layoutData>
+						<layout:ResponsiveFlowLayoutData
+							linebreak="true"
+							margin="false">
+						</layout:ResponsiveFlowLayoutData>
+					</form:layoutData>
+					<form:formElements>
+						<form:FormElement
+							id="serviceDtlView_InfoContainerServiceID"
+							visible="{parts : [{path : 'ServiceID'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.commonFieldVisibilityTrigger'}">
+					        <form:layoutData>
+								<layout:ResponsiveFlowLayoutData
+									linebreak="true"
+								    margin="false">
+							    </layout:ResponsiveFlowLayoutData>
+					        </form:layoutData>
+					        <form:label>
+								<Label
+									id="serviceDtlView_Service"
+									text="{i18n>view.PurchaseOrder.serviceLineIdLabel}">
+								</Label>						
+							</form:label>
+					        <form:fields>
+								<Text text="{ServiceID}">
+									<layoutData>
+										<layout:ResponsiveFlowLayoutData
+											weight="2"
+											alignItems="End">
+										</layout:ResponsiveFlowLayoutData>
+									</layoutData>
+								</Text>
+							</form:fields>
+					</form:FormElement>			
+					<form:FormElement
+						id="serviceDtlView_InfoContainerLongDescription"
+						visible="{parts : [{path : 'LongDescription'}], formatter : 'ui.s2p.mm.purchorder.approve.util.Conversions.commonFieldVisibilityTrigger'}">
+							<form:layoutData>
+								<layout:ResponsiveFlowLayoutData
+									linebreak="true" 
+									margin="false">
+								</layout:ResponsiveFlowLayoutData>
+							</form:layoutData>
+							<form:label>
+								<Label
+									id= "serviceDtlView_Desc"
+									text="{i18n>view.PurchaseOrder.descriptionLabel}">
+								</Label>
+							</form:label>
+							<form:fields>
+								<Text
+									id="serviceDtlView_DescTx"
+								    text="{LongDescription}">
+									<layoutData>
+										<layout:ResponsiveFlowLayoutData
+											weight="2"
+											alignItems="End">
+										</layout:ResponsiveFlowLayoutData>
+									</layoutData>
+								</Text>
+							</form:fields>
+						</form:FormElement>
+					</form:formElements>
+				</form:FormContainer>
+			</form:formContainers>
+		</form:Form>
+	    <!-- end of Information area of Service Lines (ItemServiceLineInfo) -->
+
+		<!-- Accounting Table of Service Lines (ItemServiceLineAccounting) -->  	 
+		<mvc:XMLView
+			viewName="ui.s2p.mm.purchorder.approve.view.AccountAssignmentTable"
+			id="AccountAssignmentCommonView">
+		</mvc:XMLView>
+		<!-- end of Accounting Table of Service Lines (ItemServiceLineAccounting) -->
+		
+	</Page>
+</core:View>

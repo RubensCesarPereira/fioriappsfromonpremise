@@ -1,0 +1,34 @@
+<core:FragmentDefinition height="100%" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog contentWidth="40em">
+		<content>
+			<Table id="cepaTableList" items="{cepa>/}" inset="false" width="auto" mode="None" noDataText="{i18n>cepaLineItemTableNoDataText}">
+				<infoToolbar>
+					<OverflowToolbar>
+						<Label text="{i18n>cepaTitleTableCharact}"/>
+					</OverflowToolbar>
+				</infoToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>cepaLineItemTableCharact}"/>
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="End">
+						<Text text="{i18n>cepaLineItemTableValue}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{cepa>ValueChar}"/>
+							<Text text="{cepa>Value}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button type="Reject" text="Cerrar" press="onCloseViewCepa">
+				<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+			</Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

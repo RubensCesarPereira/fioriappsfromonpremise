@@ -1,0 +1,205 @@
+{
+	"_version": "1.4.0",
+	"sap.app": {
+		"id": "zsm.itsm.myreq.cust",
+		"type": "application",
+		"resources": "resources.json",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{SHELL_TITLE}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.6.0"
+		},
+		"ach": "SV-SMG-SUP",
+		"dataSources": {
+			"mainService": {
+				"uri": "sap/opu/odata/sap/ZAI_CRM_GW_MYREQUIREMENTS_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"createRequest": {
+				"uri": "sap/opu/odata/sap/ZAI_CRM_GW_CREATE_REQUIREMENT_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},            
+			"pictureService": {
+				"uri": "/sap/bc/ui2/smi/rest_tunnel/Jam/api/v1/OData/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata_smi.xml"
+				}
+			},
+			"messageService": {
+				"uri": "/sap/opu/odata/UI2/INTEROP/Messages",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata_interop.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-plugin.2masterdetail",
+			"version": "1.38.13"
+		},
+    "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZMyRequeriments",
+                "action": "display",
+                "title": "Mis Requerimientos",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://survey",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZAI_CRM_GW_MYREQUIREMENTS_SRV/MessageResultSet/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "FioriSCP"
+	},
+	"sap.fiori": {
+		"registrationIds": ["F1353"],
+		"archeType": "transactional"
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "zsm.itsm.myreq.cust.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.44.9",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.38.0"
+				},
+				"sap.m": {
+					"minVersion": "1.38.0"
+				},
+				"sap.ushell": {
+					"minVersion": "1.38.0"
+				},
+				"sap.collaboration": {
+					"minVersion": "1.38",
+					"lazy": true
+				},
+				"sap.ui.layout": {
+					"minVersion": "1.38.0"
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "zsm.itsm.myreq.cust.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			},
+			"createRequest": {
+				"dataSource": "createRequest",
+				"preload": true
+			}            
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "zsm.itsm.myreq.cust.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": ["master", "notFound"]
+				},
+				"async": true
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": ["object", "master"]
+			}, {
+				"pattern": "MessageResultSet/{objectId}",
+				"name": "object",
+				"target": ["master", "object"]
+			}, {
+				"pattern": "toCreate",
+				"name": "toCreate",
+				"target": ["master", "create"]
+			}],
+			"targets": {
+				"master": {
+					"viewName": "S2",
+					"viewLevel": 1,
+					"viewId": "master",
+					"controlAggregation": "masterPages"
+				},
+				"object": {
+					"viewName": "S3",
+					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound"
+				},
+				"detailNoObjectsAvailable": {
+					"viewName": "DetailNoObjectsAvailable",
+					"viewId": "detailNoObjectsAvailable"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				},
+				"create": {
+					"viewName": "Create",
+					"viewId": "create"
+				}
+			}
+		}
+	},
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zsm_myreq"
+            ]
+        }     
+}

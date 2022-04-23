@@ -1,0 +1,1 @@
+{"type":"sap.web","builders":{"configs":{}},"runners":{"configs":{}},"attributes":{"sap.watt.common.setting":["{\"deploy\":{\"destination\":\"BGW_RV\",\"name\":\"ZAC_RISK\"}}"]},"description":"","mixinTypes":[]}

@@ -1,0 +1,304 @@
+{
+  "xsappname": "FioriSCP",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "uaa.user",
+      "description": "UAA"
+    },
+    {
+		"name": "$XSAPPNAME.zmmfichatecnic",
+		"description": "zmmfichatecnic"     
+    },
+    {
+        "name": "$XSAPPNAME.zfigestionacreedores",
+        "description": "zfigestionacreedores" 
+    },
+    {
+        "name": "$XSAPPNAME.zac_risk",
+        "description": "zac_risk" 
+    },
+    {
+        "name": "$XSAPPNAME.zsm_myreq",
+        "description": "zsm_myreq" 
+    },    
+    {
+        "name": "$XSAPPNAME.grc_acreq_apr",
+        "description": "grc_acreq_apr" 
+    },
+    {
+        "name": "$XSAPPNAME.liberarPrecioExp",
+        "description": "liberarPrecioExp" 
+    },
+    {
+        "name": "$XSAPPNAME.zfigesacrelib",
+        "description": "zfigesacrelib" 
+    },
+    {
+        "name": "$XSAPPNAME.mm_ses_apv",
+        "description": "mm_ses_apv" 
+    },
+    {
+        "name": "$XSAPPNAME.mm_pr_apv",
+        "description": "mm_pr_apv" 
+    },
+    {
+        "name": "$XSAPPNAME.mm_po_apv",
+        "description": "mm_po_apv" 
+    },
+    {
+        "name": "$XSAPPNAME.ztestcap",
+        "description": "ztestcap" 
+    },
+    {
+        "name": "$XSAPPNAME.zmm_entrada_vino",
+        "description": "zmm_entrada_vino" 
+    },
+    {
+        "name": "$XSAPPNAME.zmm_traslado_vino",
+        "description": "zmm_traslado_vino" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_aprobar_reclasificacion",
+        "description": "zpp_aprobar_reclasificacion" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_crea_reclasificacion",
+        "description": "zpp_crea_reclasificacion" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_elaboracion_mezcla",
+        "description": "zpp_elaboracion_mezcla" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_registro_mezcla",
+        "description": "zpp_registro_mezcla" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_simulador_mezcla",
+        "description": "zpp_simulador_mezcla" 
+    },
+    {
+        "name": "$XSAPPNAME.zsd_autorizar_merma",
+        "description": "zsd_autorizar_merma" 
+    },
+    {
+        "name": "$XSAPPNAME.zsd_crear_merma",
+        "description": "zsd_crear_merma" 
+    },
+    {
+        "name": "$XSAPPNAME.zsd_crear_solicitud_vino",
+        "description": "zsd_crear_solicitud_vino" 
+    },
+    {
+        "name": "$XSAPPNAME.zsd_contabilizar_despacho",
+        "description": "zsd_contabilizar_despacho" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_notifica_descomposicion",
+        "description": "zpp_notifica_descomposicion" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_descomponer_mezcla",
+        "description": "zpp_descomponer_mezcla" 
+    },
+    {
+        "name": "$XSAPPNAME.zpp_libera_descomposicion",
+        "description": "zpp_libera_descomposicion" 
+    }                                   
+  ],
+  "role-templates": [
+    {
+      "name": "Token_Exchange",
+      "description": "UAA",
+      "scope-references": [
+        "uaa.user"
+      ]
+    },
+    {
+      "name": "zmmfichatecnic",
+      "description": "FICHA TECNICA ENOLOGICA",
+      "scope-references": [
+        "$XSAPPNAME.zmmfichatecnic"
+      ]
+    },
+    {
+      "name": "zfigestionacreedores",
+      "description": "GESTION ACREEDORES",
+      "scope-references": [
+        "$XSAPPNAME.zfigestionacreedores"
+      ]
+    },
+    {
+      "name": "zac_risk",
+      "description": "zac_risk",
+      "scope-references": [
+        "$XSAPPNAME.zac_risk"
+      ]
+    },
+    {
+      "name": "zsm_myreq",
+      "description": "zsm_myreq",
+      "scope-references": [
+        "$XSAPPNAME.zsm_myreq"
+      ]
+    },
+    {
+      "name": "grc_acreq_apr",
+      "description": "grc_acreq_apr",
+      "scope-references": [
+        "$XSAPPNAME.grc_acreq_apr"
+      ]
+    },
+    {
+      "name": "liberarPrecioExp",
+      "description": "liberarPrecioExp",
+      "scope-references": [
+        "$XSAPPNAME.liberarPrecioExp"
+      ]
+    },
+    {
+      "name": "zfigesacrelib",
+      "description": "zfigesacrelib",
+      "scope-references": [
+        "$XSAPPNAME.zfigesacrelib"
+      ]
+    },
+    {
+      "name": "mm_ses_apv",
+      "description": "mm_ses_apv",
+      "scope-references": [
+        "$XSAPPNAME.mm_ses_apv"
+      ]
+    },
+    {
+      "name": "mm_pr_apv",
+      "description": "mm_pr_apv",
+      "scope-references": [
+        "$XSAPPNAME.mm_pr_apv"
+      ]
+    },
+    {
+      "name": "mm_po_apv",
+      "description": "mm_po_apv",
+      "scope-references": [
+        "$XSAPPNAME.mm_po_apv"
+      ]
+    },
+    {
+      "name": "ztestcap",
+      "description": "ztestcap",
+      "scope-references": [
+        "$XSAPPNAME.ztestcap"
+      ]
+    },
+    {
+      "name": "zmm_entrada_vino",
+      "description": "zmm_entrada_vino",
+      "scope-references": [
+        "$XSAPPNAME.zmm_entrada_vino"
+      ]
+    },
+    {
+      "name": "zmm_traslado_vino",
+      "description": "zmm_traslado_vino",
+      "scope-references": [
+        "$XSAPPNAME.zmm_traslado_vino"
+      ]
+    },
+    {
+      "name": "zpp_aprobar_reclasificacion",
+      "description": "zpp_aprobar_reclasificacion",
+      "scope-references": [
+        "$XSAPPNAME.zpp_aprobar_reclasificacion"
+      ]
+    },
+    {
+      "name": "zpp_crea_reclasificacion",
+      "description": "zpp_crea_reclasificacion",
+      "scope-references": [
+        "$XSAPPNAME.zpp_crea_reclasificacion"
+      ]
+    },
+    {
+      "name": "zpp_elaboracion_mezcla",
+      "description": "zpp_elaboracion_mezcla",
+      "scope-references": [
+        "$XSAPPNAME.zpp_elaboracion_mezcla"
+      ]
+    },
+    {
+      "name": "zpp_registro_mezcla",
+      "description": "zpp_registro_mezcla",
+      "scope-references": [
+        "$XSAPPNAME.zpp_registro_mezcla"
+      ]
+    },
+    {
+      "name": "zpp_simulador_mezcla",
+      "description": "zpp_simulador_mezcla",
+      "scope-references": [
+        "$XSAPPNAME.zpp_simulador_mezcla"
+      ]
+    },
+    {
+      "name": "zsd_autorizar_merma",
+      "description": "zsd_autorizar_merma",
+      "scope-references": [
+        "$XSAPPNAME.zsd_autorizar_merma"
+      ]
+    },
+    {
+      "name": "zsd_crear_merma",
+      "description": "zsd_crear_merma",
+      "scope-references": [
+        "$XSAPPNAME.zsd_crear_merma"
+      ]
+    },
+    {
+      "name": "zsd_crear_solicitud_vino",
+      "description": "zsd_crear_solicitud_vino",
+      "scope-references": [
+        "$XSAPPNAME.zsd_crear_solicitud_vino"
+      ]
+    },
+    {
+      "name": "zsd_contabilizar_despacho",
+      "description": "zsd_contabilizar_despacho",
+      "scope-references": [
+        "$XSAPPNAME.zsd_contabilizar_despacho"
+      ]
+    },
+    {
+      "name": "zpp_notifica_descomposicion",
+      "description": "zpp_notifica_descomposicion",
+      "scope-references": [
+        "$XSAPPNAME.zpp_notifica_descomposicion"
+      ]
+    },
+    {
+      "name": "zpp_descomponer_mezcla",
+      "description": "zpp_descomponer_mezcla",
+      "scope-references": [
+        "$XSAPPNAME.zpp_descomponer_mezcla"
+      ]
+    },
+    {
+      "name": "zpp_libera_descomposicion",
+      "description": "zpp_libera_descomposicion",
+      "scope-references": [
+        "$XSAPPNAME.zpp_libera_descomposicion"
+      ]
+    }                                    
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+    "https://*.cyt.conchaytoro.cl/login/callback",
+    "https://*.cyt.conchaytoro.cl/portal/logoff.html ",
+    "https://*.cfapps.us10.hana.ondemand.com/login/callback",
+    "https://*.cfapps.us10.hana.ondemand.com/portal/logoff.html "
+    ]
+  }
+}
+

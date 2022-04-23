@@ -1,0 +1,211 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "cl.conchaytoro.zpp_simulador_mezcla",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZOBJ_SEM_SIMULADOR",
+                    "action": "display",
+                    "title": "{{appTitle}}",
+                    "info": " ",
+                    "subTitle": " ",
+                    "icon": "sap-icon://lab"
+                    
+                }
+            }
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/FioriSCP.clconchaytorozpp_simulador_mezcla/sap/opu/odata/sap/ZMM_AYUDAS_BUSQUEDAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            },
+            "mainService2": {
+                "uri": "/FioriSCP.clconchaytorozpp_simulador_mezcla/sap/opu/odata/sap/ZPP_CREA_COMPONENTES_SRV_03/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService3": {
+                "uri": "/FioriSCP.clconchaytorozpp_simulador_mezcla/sap/opu/odata/sap/ZPP_ORDEN_PREVISIONAL_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService4": {
+                "uri": "/FioriSCP.clconchaytorozpp_simulador_mezcla/sap/opu/odata/sap/ZMM_CARACTERISTICAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "mainService5": {
+                "uri": "/FioriSCP.clconchaytorozpp_simulador_mezcla/sap/opu/odata/sap/ZSD_SIMULADOR_MEZCLAS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "version": "1.40.12"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "FioriSCP"
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "cl.conchaytoro.zpp_simulador_mezcla.view.View1",
+            "type": "XML",
+            "async": true,
+            "id": "View1"
+        },
+        "dependencies": {
+            "minUI5Version": "1.65.6",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "cl.conchaytoro.zpp_simulador_mezcla.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "metadataUrlParams": {
+                        "saml2": "disabled"
+                    },
+                    "serviceUrlParams": {
+                        "saml2": "disabled"
+                    },
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
+                }
+            },
+            "dos": {
+                "dataSource": "mainService2",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "tres": {
+                "dataSource": "mainService3",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "cuatro": {
+                "dataSource": "mainService4",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            },
+            "cinco": {
+                "dataSource": "mainService5",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "cl.conchaytoro.zpp_simulador_mezcla.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteView1",
+                    "pattern": "RouteView1",
+                    "target": [
+                        "TargetView1"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View1",
+                    "viewName": "View1"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zpp_simulador/webapp",
+        "_version": "1.1.0"
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zpp_simulador_mezcla"
+            ]
+        }
+}

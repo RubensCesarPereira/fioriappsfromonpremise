@@ -1,0 +1,327 @@
+{
+	"_version": "3.0.0",
+	"identification": {
+		"id": "6b52d4a9-7964-4090-abb5-7d02a06a0a76",
+		"entityType": "bundle"
+	},
+	"payload": {
+		"catalogs": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultCatalogId",
+				"title": "{{title}}",
+				"entityType": "catalog",
+				"i18n": "i18n/defaultCatalogId.properties"
+			},
+			"payload": {
+				"viz": []
+			}
+		}],
+		"groups": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultGroupId",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/defaultGroupId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "z_mmfichatecnic-0-1597338050653",
+					"appId": "z_mmfichatecnic",
+					"vizId": "ZMM_SO_FICHA_TECNICA_ENOLOGICA-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "sd---condiciones-comerciales",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/sd---condiciones-comerciales.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "liberarPrecioExp-0-1597276563747",
+					"appId": "liberarPrecioExp",
+					"vizId": "ZSD_SO_LIB_PREC_EXP-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "new-group",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/new-group.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "zsm.itsm.myreq.cust-0-1597152707793",
+					"appId": "zsm.itsm.myreq.cust",
+					"vizId": "ZMyRequeriments-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "grc-acess",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/grc-acess.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "zac.grc.risk.cust-1-1597156575408",
+					"appId": "zac.grc.risk.cust",
+					"vizId": "ZRiskSem-display"
+				}, {
+					"id": "fcg.grc.accessrequest.approve-1-1597264175031",
+					"appId": "fcg.grc.accessrequest.approve",
+					"vizId": "AccessRequest-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "gestion-acreedores-grupo",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/gestion-acreedores-grupo.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "z_figestionacreedores-0-1597350543864",
+					"appId": "z_figestionacreedores",
+					"vizId": "ZFI_SO_GESTION_ACREEDORES-display"
+				}, {
+					"id": "z_figesacrelib-1-1597353975534",
+					"appId": "z_figesacrelib",
+					"vizId": "ZFI_SO_GESTION_ACREED_LIB-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "proceso-de-compra",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/proceso-de-compra.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "ui.s2p.mm.requisition.approve-1-1597425710083",
+					"appId": "ui.s2p.mm.requisition.approve",
+					"vizId": "PurchaseRequisition-approve"
+				}, {
+					"id": "ui.s2p.mm.purchorder.approve-1-1597682146636",
+					"appId": "ui.s2p.mm.purchorder.approve",
+					"vizId": "PurchaseOrder-approve"
+				}, {
+					"id": "ui.s2p.mm.ses.approve-2-1597433938510",
+					"appId": "ui.s2p.mm.ses.approve",
+					"vizId": "ServiceEntrySheet-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "reportes-logisticos",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/reportes-logisticos.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "com.sap.build.standard.ztestcap-0-1597683492037",
+					"appId": "com.sap.build.standard.ztestcap",
+					"vizId": "ZMM_REP_EST_LIB-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "reclasificacion",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/reclasificacion.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "cl.conchaytoro.zpp_crea_reclasificacion-0-1597847216008",
+					"appId": "cl.conchaytoro.zpp_crea_reclasificacion",
+					"vizId": "ZOBJ_SEM_CREA_RECLASIF-display"
+				}, {
+					"id": "cl.conchaytoro.zpp_aprobar_reclasificacion-1-1597848816796",
+					"appId": "cl.conchaytoro.zpp_aprobar_reclasificacion",
+					"vizId": "ZOBJ_SEM_APRO_RECLASIF-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "merma-de-vino",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/merma-de-vino.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "conchaytoro.cl.zsd_crear_merma-0-1597851391307",
+					"appId": "conchaytoro.cl.zsd_crear_merma",
+					"vizId": "ZOBJ_SEM_CREA_MERMA-display"
+				}, {
+					"id": "conchaytoro.cl.zsd_autorizar_merma-1-1597852773965",
+					"appId": "conchaytoro.cl.zsd_autorizar_merma",
+					"vizId": "ZOBJ_SEM_AUT_MERMA-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "entrada-vino-por-cosecha",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/entrada-vino-por-cosecha.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "cl.conchaytoro.zmm_entrada_vino-0-1597865060611",
+					"appId": "cl.conchaytoro.zmm_entrada_vino",
+					"vizId": "ZOBJ_SEM_VIN_COSE-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "recepcion-por-traslado",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/recepcion-por-traslado.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "cl.conchaytoro.zmm_traslado_vino-0-1597872811534",
+					"appId": "cl.conchaytoro.zmm_traslado_vino",
+					"vizId": "ZOBJ_SEM_TRAS_VINO-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "mezclas",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/mezclas.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "cl.conchaytoro.zpp_simulador_mezcla-0-1597872970603",
+					"appId": "cl.conchaytoro.zpp_simulador_mezcla",
+					"vizId": "ZOBJ_SEM_SIMULADOR-display"
+				}, {
+					"id": "cl.conchaytoro.zpp_elaboracion_mezcla-1-1597872970603",
+					"appId": "cl.conchaytoro.zpp_elaboracion_mezcla",
+					"vizId": "ZOBJ_SEM_ELAB_MEZCLA-display"
+				}, {
+					"id": "cl.conchaytoro.zpp_registro_mezcla-2-1597872970603",
+					"appId": "cl.conchaytoro.zpp_registro_mezcla",
+					"vizId": "ZOBJ_SEM_REG_MEZCLA-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "descomposicion-de-mezcla",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/descomposicion-de-mezcla.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "cl.conchaytoro.zpp_descomponer_mezcla-0-1598290709899",
+					"appId": "cl.conchaytoro.zpp_descomponer_mezcla",
+					"vizId": "ZOBJ_SEM_DESCOMP_MEZCLA-display"
+				}, {
+					"id": "cl.conchaytoro.zpp_libera_descomposicion-1-1598291863028",
+					"appId": "cl.conchaytoro.zpp_libera_descomposicion",
+					"vizId": "ZOBJ_SEM_LIBERA_DESCOMP-display"
+				}, {
+					"id": "cl.conchaytoro.zpp_notifica_descomposicion-2-1598292784930",
+					"appId": "cl.conchaytoro.zpp_notifica_descomposicion",
+					"vizId": "ZOBJ_SEM_NOTIF_DESCOMP-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "crear-solicitud",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/crear-solicitud.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "conchaytoro.cl.zsd_crear_solicitud_vino-0-1598452205465",
+					"appId": "conchaytoro.cl.zsd_crear_solicitud_vino",
+					"vizId": "ZOBJ_SEM_CREA_PEDIDO-display"
+				}]
+			}
+		}, {
+			"_version": "3.0.0",
+			"identification": {
+				"id": "crear-y-contabilizar",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/crear-y-contabilizar.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "conchaytoro.cl.zsd_contabilizar_despacho-0-1598452205465",
+					"appId": "conchaytoro.cl.zsd_contabilizar_despacho",
+					"vizId": "ZOBJ_SEM_CONT_DESPACHO-display"
+				}]
+			}
+		}],
+		"sites": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "3da7c371-fc75-4240-b1cc-0493908827cf",
+				"entityType": "site",
+				"title": "SAP Fiori launchpad site on Cloud Foundry",
+				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from WING"
+			},
+			"payload": {
+				"config": {
+					"ushellConfig": {
+						"renderers": {
+							"fiori2": {
+								"componentData": {
+									"config": {
+										"applications": {
+											"Shell-home": {}
+										},
+										"enableSearch": false,
+										"enablePersonalization": true,
+										"enableSetTheme": true,
+										"enableSetLanguage": true
+									}
+								}
+							}
+						}
+					}
+				},
+				"groupsOrder": ["defaultGroupId", "sd---condiciones-comerciales", "new-group", "grc-acess", "gestion-acreedores-grupo",
+					"proceso-de-compra", "reportes-logisticos", "reclasificacion", "merma-de-vino", "entrada-vino-por-cosecha",
+					"recepcion-por-traslado", "mezclas", "descomposicion-de-mezcla", "crear-solicitud", "crear-y-contabilizar"
+				],
+				"sap.cloud.portal": {
+					"config": {
+						"theme.id": "Custom_VCT_V1",
+						"theme.active": ["Custom_VCT_V1", "sap_fiori_3", "sap_fiori_3_dark", "sap_belize_hcb", "sap_belize_hcw"]
+					}
+				}
+			}
+		}]
+	}
+}

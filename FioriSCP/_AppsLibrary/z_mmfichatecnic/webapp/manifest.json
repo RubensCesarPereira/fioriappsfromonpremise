@@ -1,0 +1,150 @@
+{
+	"_version": "1.4.0",
+   "sap.app":{
+      "id":"z_mmfichatecnic",
+      "type":"application",
+      "title": "Fichas Técnicas Enológicas",
+      "resources": "resources.json",
+      "applicationVersion":{
+         "version":"1.6.0"
+      },
+      "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZMM_SO_FICHA_TECNICA_ENOLOGICA",
+                "action": "display",
+                "title": "Fichas Técnicas Enológicas",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://multi-select",
+				"indicatorDataSource": {
+                    "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZODATA_MM_FICHA_TEC_ENOLOGICA_SRV/ListadoPendienteSet/$count",
+                    "refresh":60,
+                    "dataSource":"FIORI_BGW_HTTP"
+				}
+            }
+        }
+    }
+   },
+   "sap.cloud": {
+     "public": true,
+	 "service": "FioriSCP"
+   },
+   "sap.ui": {
+        "_version": "1.1.0",
+        "technology": "UI5",
+        "deviceTypes": { 
+            "desktop": true, 
+            "tablet": true, 
+            "phone": true 
+        },
+	    "supportedThemes": [
+	        "sap_hcb",
+	        "sap_bluecrystal"
+	    ]        
+    },
+	"sap.ui5": {
+        "dependencies": {
+			"minUI5Version": "1.60.0",
+			"libs": {
+				"sap.ui.core": {
+					
+				},
+				"sap.m": {
+					
+				},
+				"sap.f": {
+					
+				}
+			}
+		},       
+		"rootView": {
+			"viewName": "z_mmfichatecnic.view.ppal",
+			"type": "JS"
+		},
+         "contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "z_mmfichatecnic.view",
+				"controlId": "RootView",
+				"controlAggregation": "pages",
+				"async": true
+			},
+			"routes": [
+				{
+					"name": "menu",
+					"pattern": "menu",
+					"target": "menu"
+				},
+				{
+					"name": "ficha",
+					"pattern": "ficha/{id}",
+					"target": "ficha"
+				},
+				{
+					"name": "listado",
+					"pattern": "listado",
+					"target": "listado"
+				},
+				{
+					"name": "listadoant",
+					"pattern": "listadoant",
+					"target": "listadoant"
+				},
+				{
+					"name": "listadoadm",
+					"pattern": "listadoadm",
+					"target": "listadoadm"
+				}
+			],
+			"targets": {
+				"menu": {
+					"viewName": "menu",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 1
+				},
+				"listado": {
+					"viewName": "listado",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 2
+				},
+				"listadoant": {
+					"viewName": "listadoant",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 2
+				},
+				"listadoadm": {
+					"viewName": "listadoadm",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 2
+				},
+				"ficha": {
+					"viewName": "formulario",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewLevel": 3
+				}
+			}
+		}
+	},
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.zmmfichatecnic"
+            ]
+        }
+}

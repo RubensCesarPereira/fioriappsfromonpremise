@@ -1,0 +1,58 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="liberarPrecioExp.controller.detalleCondicion">
+		<Page title="Detalle Condición Comercial" showNavButton="true" id="detail-page"
+			navButtonPress="onNavBackMaster" class="background">
+			<customHeader>
+				<Bar>
+					<contentMiddle>
+						<Title text="Detalle Condición Comercial"/>
+					</contentMiddle>
+					<contentRight>
+						<Button icon="sap-icon://decline" press="onCloseDetails"/>
+					</contentRight>
+				</Bar>
+			</customHeader>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm minWidth="1024"
+					maxContainerCols="2" editable="false" layout="ResponsiveGridLayout"
+					title="En Datos Organizacionales" labelSpanL="3" labelSpanM="3"
+					emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+					<f:content>
+						<Label text="País" />
+						<Text text="{DetailModel>/Landx}" />
+						<Label text="Cliente" />
+						<Text text="{DetailModel>/Name1}" />
+						<Label text="Org. Ventas" />
+						<Text text="{DetailModel>/TVkorg}" />
+						<Label text="Fecha" />
+						<Text text="{DetailModel>/ZzfechaStatus} - {DetailModel>/ZzhoraStatus}" />
+
+						<Label text="Creador" />
+						<Text text="{DetailModel>/Uname}" />
+					</f:content>
+				</f:SimpleForm>
+				<f:SimpleForm minWidth="100"
+					maxContainerCols="2" editable="false" layout="ResponsiveGridLayout"
+					title="Datos Condición Comercial" labelSpanL="3" labelSpanM="3"
+					emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+					<f:content>
+						<Label text="Condición Comercial" />
+						<Text text="{DetailModel>/TKschl}"/>
+						<Label text="Producto" />
+						<Text text="{DetailModel>/Maktx}" />
+						<Label text="Nueva Condición" />
+						<Text text="{DetailModel>/Kbetr} - {DetailModel>/Konwa} - {DetailModel>/Kpein} - {DetailModel>/Kmein}" />
+						<Label text="Vigencia Nueva Condición" />
+						<Text
+							text="{DetailModel>/Datab} - {DetailModel>/Datbi}" />
+						<Label text="Ultima Condición Aprobada" />
+						<Text text="{DetailModel>/KbetrOld} - {DetailModel>/KonwaOld} - {DetailModel>/KpeinOld} - {DetailModel>/KmeinOld}" />
+             			<Label text="Vigencia Ultima Condición" />
+						<Text
+							text="{DetailModel>/DatabOld} - {DetailModel>/DatbiOld}" />
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</Page>
+</core:View>

@@ -1,0 +1,27 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "authenticationType": "none",
+      "csrfProtection": false,
+      "source": "^/sap/opu/odata/sap/ZAC_RISK_SRV/",
+      "destination": "FIORI_BGW_HTTP"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }, 
+    {
+      "source": "^/themerun/(.*)$",
+      "target": "$2",
+      "service": "com.sap.ui.theming",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_descomponer_mezcla.controller.View1" class="sapUiSizeCompact" displayBlock="true"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout">
+	<Page id="page" title="{i18n>title}">
+		<content>
+			<VBox class="sapUiTinyMargin">
+				<form:SimpleForm id="SimpleFormDisplay480_12120Dual" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="4" labelSpanL="4"
+					labelSpanM="12" labelSpanS="12" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+					editable="true" singleContainerFullSize="false">
+					<form:content>
+						<core:Title text=""/>
+						<Label text="Bodega" required="true"/>
+						<ComboBox id="centro" change="_clearMatnr" showSecondaryValues="true" filterSecondaryValues="true" width="350px"
+							items="{ path: '/CentroSet', sorter: { path: 'Werks' } }">
+							<core:ListItem key="{Werks}" text="{Werks} - {Name1}" additionalText="{Werks}"/>
+						</ComboBox>
+						<Label text="Mezcla Descomponer" required="true"/>
+						<Input id="codMezcla" liveChange="_inputMaterial" width="350px"/>
+						<Label text="Descripción"/>
+						<Input id="descripcion" width="350px" change="activeButton" enabled="false"/>
+						<Label text="Código Componente" required="true"/>
+						<Input id="codCompo" liveChange="_inputCompo" width="350px"/>
+					</form:content>
+				</form:SimpleForm>
+			</VBox>
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="tablaMezcla" width="auto" items="{mezclas>/}" updateFinished="onListUpdateFinished" noDataText="Sin Datos"
+					busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin" growing="true" selectionChange="handleSelectionChange">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="7em">
+							<Text text="Stock Disponible"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Lote"/>
+						</Column>
+						<Column width="5em">
+							<Text text="Material"/>
+						</Column>
+						<Column width="15em">
+							<Text text="Descripción"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Almacén"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="5em" vAlign="Middle">
+							<Text text="Orden"/>
+						</Column>
+						<Column width="4em">
+							<Text text="Ver Lista"/>
+							<footer/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle" type="Navigation" press="onPress">
+							<cells>
+								<Text text="{path: 'mezclas>Stock', formatter: '.formatter.addDot'}"/>
+								<Text text="{mezclas>Lote}"/>
+								<Text text="{mezclas>Codigo}"/>
+								<Text text="{mezclas>Descripcion}"/>
+								<Text text="{mezclas>LGORT}"/>
+								<Text text="{mezclas>Cosecha}"/>
+								<ObjectIdentifier title="{mezclas>Orden}"/>
+								<Button icon="sap-icon://inspection" type="Emphasized" enabled="false" width="70px"/>
+								<!--<Text text="{mm>Cantidad}"/>
+								<Text text="{mm>Lote}"/>
+								<Text text="{mm>Material}"/>
+								<Text text="{mm>Description}"/>
+								<Text text="{mm>Almacen}"/>
+								<Text text="{mm>Cosecha}"/>
+								<ObjectIdentifier title="{mm>Orden}"/>
+								<Button icon="sap-icon://inspection" type="Emphasized" enabled="false" width="70px"/>-->
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<VBox height="80px"/>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter1">
+				<ToolbarSpacer/>
+				<Button id="buscar" type="Emphasized" text="Buscar" press="buscaMezclas" icon="sap-icon://search"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,15 @@
+/* Enter your custom styles here */
+.green {
+    color: green;
+}
+.yellow {
+    color: yellow;
+}
+.red {
+    color: red;
+}
+.sapUiSizeCompact .sapMColumnHeader {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    width: max-content;
+}

@@ -1,0 +1,50 @@
+
+{
+"cacheControl": [  
+      {  
+         "maxAge": 86400
+      }
+],
+ 
+	"routes": [
+		{
+			"path": "/sap/opu/odata",
+			"target": {
+				"type": "destination",
+				"name": "SAP_Gateway",
+				"entryPath": "/sap/opu/odata/"
+			},
+			"description": "Target OData system"
+		},
+		{
+			"path": "/sap/ui5/1/resources/sap/cus/crm/lib/reuse",
+			"target": {
+				"type": "application",
+				"name": "cuscrmlibreuse",
+				"entryPath": "/sap/cus/crm/lib/reuse",
+				"preferLocal": true
+			},
+			"description": "CRM LIB Reuse"
+        },
+		{
+			"path": "/sap/ui5/1/resources/sap/retail/store/lib/reuse",
+			"target": {
+				"type": "application",
+				"name": "retailstorelibreuse",
+				"entryPath": "/sap/retail/store/lib/reuse",
+				"preferLocal": true
+			},
+			"description": "Retail Store Lib Reuse"
+    	},
+		{
+			"path": "/sap/ui5/1/resources/sap/hcm/lib/common",
+			"target": {
+				"type": "application",
+				"name": "hcmlibcommon",
+				"entryPath": "/sap/hcm/lib/common",
+				"preferLocal": true
+			},
+			"description": "HCM Lib Reuse"
+		}
+    ]
+}

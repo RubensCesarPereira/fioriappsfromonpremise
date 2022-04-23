@@ -1,0 +1,35 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:core="sap.ui.core" 
+xmlns="sap.m" 
+xmlns:l="sap.ui.layout" 
+controllerName="z_figesacrelib.controller.rechazoPopup" 
+displayBlock="true">
+	<FlexBox alignItems="Center" justifyContent="Center">
+		<l:VerticalLayout class="sapUiContentPadding" >
+			<l:content>
+				
+				<Label text="Indique motivo: "/>
+				<Select
+				stretch="true"
+					forceSelection="false"
+	  				id="lista"
+					selectedKey="-1"
+					change="handleSelectChange"
+					items="{
+						path: '/Motivos'}">
+			<core:Item key="{MOTIVO_RECHAZO}" text="{DESC_RECHAZO}" />
+		</Select>
+			<TextArea id="motOtro" 
+				state="Disabled" 
+				value="" 
+				placeholder="Indique otro motivo(obligatorio)" 
+				maxLength="40" 
+				width="100%" 
+				showExceededText="false"
+				liveChange="handleLiveChange"
+				visible="false"/>
+			</l:content>
+		</l:VerticalLayout>
+	</FlexBox>
+</mvc:View>

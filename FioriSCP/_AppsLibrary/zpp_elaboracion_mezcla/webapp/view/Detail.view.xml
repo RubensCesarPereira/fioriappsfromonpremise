@@ -1,0 +1,75 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_elaboracion_mezcla.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" condensed="true" title="{Psttr}" number="{Plnum}" numberUnit="Simulación">
+				<attributes>
+					<ObjectAttribute text="Fecha"/>
+				</attributes>
+			</ObjectHeader>
+			<VBox class="sapUiLargeMargin">
+				<f:SimpleForm title="Datos Mezcla:" layout="ResponsiveGridLayout" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2"
+					labelSpanM="2" labelSpanS="5">
+					<f:content>
+						<Label text="Código Mezcla" design="Bold"/>
+						<Text id="mezcla" text="{CodMezcla}"/>
+						<Label text="Bodega" design="Bold"/>
+						<Text id="bodega" text="{Pwwrk}"/>
+						<!--<Label text="Origen" design="Bold"/>
+						<Text text="{Atwrt}"/>
+						<Label text="Cuba" design="Bold"/>
+						<Text text="{Cuba}"/>-->
+						<Label text="Cantidad" design="Bold"/>
+						<Text id="cantidad" text="{Gsmng}"/>
+						<Label text="Costo" design="Bold"/>
+						<Text id="costo" text="{Stprs}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<!--<VBox class="sapUiMediumMargin">
+				<f:SimpleForm layout="ResponsiveGridLayout" editable="true" title="CaracterÃ­sticas Lote:" adjustLabelSpan="false" labelSpanXL="2"
+					labelSpanL="2" labelSpanM="2" labelSpanS="5">
+					<f:content>
+						<Label text="Lote" required="true" textAlign="Right"/>
+						<ComboBox width="300px"/>
+						<Label text="DescripciÃ³n" required="true" textAlign="Right"/>
+						<Input width="300px"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items></items>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Label text="Lote:" design="Standard" width="90px" required="true" textAlign="Right" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<ComboBox width="300px"/>
+				</items>
+			</HBox>
+			<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="950.98828125px" height="38.999996185302734px" justifyContent="Start"
+				renderType="Div" visible="true" displayInline="false" class="sapUiTinyMargin">
+				<items>
+					<Label text="DescripciÃ³n:" design="Standard" width="90px" required="true" textAlign="Right" textDirection="Inherit" visible="true"
+						class="sapUiSmallMargin"/>
+					<Input width="300px"/>
+				</items>
+			</HBox>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"></IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"></IconTabFilter>
+				</items>
+			</IconTabBar>-->
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Aprobar" press="onAprobar"/>
+		</semantic:positiveAction>
+		<!--		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>-->
+	</semantic:DetailPage>
+</mvc:View>

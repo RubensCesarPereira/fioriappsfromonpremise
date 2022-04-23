@@ -1,0 +1,866 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt" xmlns:ux="sap.uxap"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	xmlns:blockcolor="sap.uxap.sample.SharedBlocks" xmlns:f="sap.ui.layout.form">
+	<Page id="misSol2" showHeader="false">
+		<ScrollContainer vertical="true" horizontal="true"
+			height="auto">
+			<Table id="idSolicTable" fixedLayout="false" noDataText="Sin datos" growing="true"
+				growingThreshold="8" growingScrollToLoad="true" items="{/listSolicitudes}">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Listado Solicitudes" level="H2" />
+						<ToolbarSpacer />
+						<SearchField id="filtro" search="filtrarListado">
+							<layoutData>
+								<OverflowToolbarLayoutData minWidth="200px"
+									maxWidth="300px" shrinkable="true" />
+							</layoutData>
+						</SearchField>
+						<DateRangeSelection id="DRS2"
+							dateValue="{path:'/dateValueDRS2'}" secondDateValue="{path:'/secondDateValueDRS2'}"
+							minDate="{path:'/dateMinDRS2'}" maxDate="{path:'/dateMaxDRS2'}"
+							change="handleChange" />
+						<Button icon="sap-icon://search" text="" type="Accept"
+							press="misol_getListado" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column hAlign="Left" vAlign="Middle" width="1em">
+						<Text text="" />
+					</Column>
+					<Column vAlign="Middle">
+						<Text text="Fecha Solicitud" />
+					</Column>
+					<Column width="7em" demandPopin="true" hAlign="Center"
+						vAlign="Middle">
+						<Text text="Tipo" />
+					</Column>
+					<Column width="11em" demandPopin="true" hAlign="Initial"
+						vAlign="Middle">
+						<Text text="Acreedor" />
+					</Column>
+					<Column width="8em" demandPopin="true" hAlign="Initial"
+						vAlign="Middle">
+						<Text text="Grp. Cuenta" />
+					</Column>
+					<Column width="7em" vAlign="Middle" hAlign="Center">
+						<Text text="Estado" />
+					</Column>
+					<Column vAlign="Middle" hAlign="Center">
+						<Text text="Cód. SAP" />
+					</Column>
+					<Column width="11em" vAlign="Middle" hAlign="Center">
+						<Text text="Estado Aprobación" />
+					</Column>
+					<Column width="4em" vAlign="Middle" hAlign="Center">
+						<Text text="ID" />
+					</Column>
+					<Column vAlign="Middle" hAlign="Center">
+						<Text text="Motivo Rechazo" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem press="onPress" type="Navigation"
+						vAlign="Middle">
+						<cells>
+							<ObjectStatus icon="{ICON}" />
+							<Text text="{ERSDA}" />
+							<Text text="{TIPO_PROCESO}" />
+							<Text text="{NAME1}" />
+							<Text text="{KTOKK}" />
+							<ObjectStatus text="{ESTADO}" state="{STATE}" />
+							<ObjectStatus text="{LIFNR}" />
+							<Text text="{SUBESTADO}" />
+							<Text text="{ID_PROCESO}" />
+							<Text text="{MOTIVO_RECHAZO}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</ScrollContainer>
+		<!-- MODIFICACION DOS -->
+		<ux:ObjectPageLayout id="modif-dos" visible="false"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader objectTitle="Solicitud Modificación {MDM>/items/0/ACREEDOR}"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button icon="sap-icon://nav-back" text="Volver" type="Emphasized"
+							press="toListado" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:headerContent width="auto"
+				class="sapUiTinyMargin sapUiTinyPadding">
+				<l:HorizontalLayout>
+					<Label text="Grupo Cuenta:" class="sapUiSmallMarginEnd" />
+					<Text text="{MDM>/items/0/KTOKK}" />
+					<Label text="Gerente/Subgerente:" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" />
+					<Text text="{MDM>/items/0/APROBADOR}" />
+				</l:HorizontalLayout>
+			</ux:headerContent>
+			<ux:sections>
+				<ux:ObjectPageSection title="Modificaciones">
+					<ux:ObjectPageSubSection title="">
+						<ux:blocks>
+							<VBox width ="100%">
+								<HBox class="sapUiSmallMarginBottom headerTable">
+									<Label design="Bold" textAlign="Center" width="150px" text="Campo" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+									<Label design="Bold" textAlign="Center" width="300px" text="Valor Actual" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+									<Label design="Bold" textAlign="Center" width="300px" text="Valor Anterior" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+								</HBox>
+								<VBox items="{MDM>/items}" width="100%">
+									<items>
+										<HBox class="sapUiSmallMarginBottom" width="100%">
+											<Label textAlign="End" width="150px" text="{MDM>FIELD}: "
+												design="Bold" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" />
+											<Label width="300px" text="{MDM>NEW_VALUE}"
+												class="sapUiSmallMarginBegin sapUiSmallMarginEnd newValue" />
+											<Label width="300px" text="{MDM>OLD_VALUE}"
+												class="sapUiSmallMarginBegin sapUiSmallMarginEnd lastValue" />
+										</HBox>
+									</items>
+								</VBox>
+							</VBox>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+		<!-- MODIFICACION DOS FIN -->
+		<ux:ObjectPageLayout id="ObjectPageLayout"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader id="tit" objectTitle="Visualiza Solicitud"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button id="btnVolver" icon="sap-icon://nav-back" text="Volver"
+							type="Emphasized" press="toListado" />
+						<Button icon="sap-icon://copy" text="Copiar" type="Emphasized"
+							id="btnCopy" press="onCopyPress" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:headerContent width="auto"
+				class="sapUiTinyMargin sapUiTinyPadding">
+				<l:HorizontalLayout>
+					<Label text="Grupo Cuenta:" class="sapUiSmallMarginEnd" />
+					<Select id="GrpCtaS" width="40%" autoAdjustWidth="true"
+						enabled="false" forceSelection="false" items="{/results}"
+						selectedKey="{dataModel>/KTOKK}">
+						<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+					</Select>
+					<Label text="Gerente/Subgerente:" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" />
+					<Select id="selectAprobadoresS" forceSelection="true"
+						enabled="false" selectedKey="{dataModel>/APROBADOR}" items="{/results}">
+						<core:ListItem key="{APROBADOR}" text="{NAME}" />
+					</Select>
+				</l:HorizontalLayout>
+			</ux:headerContent>
+			<ux:sections>
+				<ux:ObjectPageSection title="General">
+					<ux:subSections>
+						<ux:ObjectPageSubSection id="dgms"
+							title="Datos Generales ">
+							<ux:blocks>
+								<l:HorizontalLayout class="sapUiSmallMargin">
+									<f:SimpleForm width="600px" backgroundDesign="Transparent"
+										editable="true" layout="ResponsiveGridLayout" title=""
+										labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+										adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+										emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+										columnsM="2" singleContainerFullSize="true">
+										<f:content>
+											<Label text="Tratamiento" class="sapUiMiddleAlign"
+												design="Bold" />
+											<Select id="selectTratS" width="40%" autoAdjustWidth="true"
+												enabled="false" forceSelection="false" items="{/Trat}"
+												selectedKey="{dataModel>/ANRED}">
+												<core:ListItem key="{ANRED}" text="{ANRED_DESC}" />
+											</Select>
+											<Label text="Nombre" design="Bold" />
+											<TextArea value="{dataModel>/NAME1}" editable="false"
+												rows="1" />
+											<Label text="" design="Bold" />
+											<TextArea value="{dataModel>/NAME2}" editable="false"
+												rows="1" />
+											<Label text="Concepto" design="Bold" />
+											<TextArea value="{dataModel>/SORTL}" editable="false"
+												rows="1" />
+											<Label text="Teléfono" design="Bold" />
+											<TextArea value="{dataModel>/TELF1}" editable="false"
+												rows="1" />
+											<Label text="E-mail " design="Bold" />
+											<TextArea width="100%" value="{dataModel>/SMTP_ADDR}"
+												editable="false" rows="1" />
+											<Label text="E-mail cobranza" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/SMTP_ADDR2}"
+												editable="false" rows="1" />
+										</f:content>
+									</f:SimpleForm>
+								</l:HorizontalLayout>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+						<ux:ObjectPageSubSection title="Dirección">
+							<ux:blocks>
+								<f:SimpleForm width="600px" backgroundDesign="Transparent"
+									editable="true" layout="ResponsiveGridLayout" title=""
+									labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+									adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+									emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+									columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="Dirección/Calle/N°" wrapping="true" design="Bold" />
+										<TextArea width="100%" value="{dataModel>/STRAS}"
+											editable="false" rows="1" />
+										<Label text="País" design="Bold" />
+										<Select id="selectPaisS" forceSelection="false"
+											enabled="false" selectedKey="{dataModel>/LAND1}" items="{/results}">
+											<core:Item key="{LAND1}" text="{LAND1_DESC}" />
+										</Select>
+										<Label text="Región" design="Bold" />
+										<Select id="selectRegionS" forceSelection="false"
+											enabled="false" selectedKey="{dataModel>/REGIO}" items="{/results}">
+											<core:Item key="{REGIO}" text="{REGIO_DESC}" />
+										</Select>
+										<Label text="Comuna" design="Bold" />
+										<Select id="selectComunasS" forceSelection="false"
+											enabled="false" selectedKey="{dataModel>/CITY2}" items="{/results}">
+											<core:Item key="{CITY2}" text="{CITY2_DESC}" />
+										</Select>
+										<Label text="Ciudad" design="Bold" />
+										<TextArea width="100%" value="{dataModel>/CITY1}"
+											editable="false" rows="1" />
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+				<ux:ObjectPageSection title="Datos Sociedad">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title="Sociedad">
+							<ux:blocks>
+								<f:SimpleForm width="600px" backgroundDesign="Transparent"
+									editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+									labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="false"
+									emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+									columnsXL="2" columnsL="4" columnsM="2"
+									singleContainerFullSize="true">
+									<f:content>
+										<Label text="Sociedad(es)" design="Bold" />
+										<MultiComboBox id="selectSociedadesS" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/BUKRS_MULTI}">
+											<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+										</MultiComboBox>
+										<Label text="N° Id.fiscal" design="Bold" />
+										<TextArea width="100%" value="{dataModel>/STCD1}"
+											editable="false" rows="1" />
+										<Label id="lblctaasocms" text="Cuenta Asociada" design="Bold" />
+										<Select id="selectCtaAsocS" forceSelection="true"
+											enabled="false" selectedKey="{dataModel>/HKONT}" items="{/results}"
+											change="modif_disableSave">
+											<core:Item key="{HKONT}" text="{HKONT_DESC}" />
+										</Select>
+										<Label id="lblfnaS" text="Fecha Nacimiento" design="Bold" />
+										<Input id="fnaS" value="{dataModel>/GBDAT}" type="Date"
+											editable="false" />
+										<Label id="lbllnaS" text="Lugar Nacimiento" design="Bold" />
+										<Input id="lnaS" value="{dataModel>/GBORT}" editable="false" />
+										<Label id="lblsexS" text="Sexo" design="Bold" />
+										<RadioButtonGroup id="sexS" columns="2"
+											editable="false" width="500px" class="sapUiMediumMarginBottom">
+											<buttons visible="false">
+												<RadioButton id="RB1-1S" text="Masculino"
+													selected="false" select="modif_disableSave" />
+												<RadioButton id="RB1-2S" text="Femenino"
+													selected="false" select="modif_disableSave" />
+											</buttons>
+										</RadioButtonGroup>
+										<Label id="lblproS" text="Profesión" design="Bold" />
+										<Input id="proS" value="{dataModel>/PROFS}" editable="false" />
+										<Label text="Deudor" design="Bold" />
+										<Input id="kunnrS" value="{dataModel>/KUNNR}" editable="false" />
+										<!-- <Select id="kunnrS" forceSelection="false" enabled="false"> 
+											<core:Item key="{KUNNR}" text="{KUNNR}"/> </Select> -->
+										<Label text="Fab. Externo" design="Bold" />
+										<TextArea width="100%" value="{dataModel>/EMNFR}"
+											editable="false" rows="1" />
+										<Label text="Cond. Pago" design="Bold" />
+										<Select id="selectCondPagoSS" width="300px"
+											forceSelection="false" selectedKey="{dataModel>/ZTERM}"
+											items="{/results}" enabled="false">
+											<core:Item key="{ZTERM}" text="{ZTERM}-{ZTERM_DESC}" />
+										</Select>
+										<Label id="lblselectIndRetMS" text="Indicador de Retención"
+											design="Bold" />
+										<Select id="selectIndRetS" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" selectedKey="{dataModel>/QSSKZ}">
+											<core:ListItem key="H0" text="Exento" />
+											<core:ListItem key="H1" text="Profesionales 10%" />
+											<core:ListItem key="H2" text="Directores 10%" />
+										</Select>
+										<Label text="Grupo Tesorería" design="Bold" />
+										<Select id="selectGrpTesS" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" selectedKey="{dataModel>/FDGRV}">
+											<core:ListItem key="AD"
+												text="Pagos de Dividendos (Acciones)" />
+											<core:ListItem key="AV" text="Proveedores Varios" />
+										</Select>
+										<Label text="Vías de Pago" design="Bold" />
+										<MultiComboBox id="selectViasPagoS" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/ZWELS}">
+											<core:Item key="{ZWELS}" text="{ZWELS}-{ZWELS_DESC}" />
+										</MultiComboBox>
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+						<ux:ObjectPageSubSection id="creaBancario"
+							title="Bancario">
+							<ux:blocks>
+								<VBox>
+									<f:SimpleForm width="600px" backgroundDesign="Transparent"
+										editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+										labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+										emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+										columnsXL="2" columnsL="2" columnsM="2"
+										singleContainerFullSize="true">
+										<f:content>
+											<Label text="Dato Ban. País" wrapping="true" design="Bold" />
+											<Select id="selectPaiBankS" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKS}" items="{/results}">
+												<core:Item key="{LAND1}" text="{LAND1_DESC}" />
+											</Select>
+											<Label text="Banco - Swift" design="Bold" />
+											<Select id="selectClaBankS" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKL}" items="{/results}">
+												<core:Item key="{BANKL}" text="{BANKL}-{BANKA}" />
+											</Select>
+											<Label text="Cta. Bancaria" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/BANKN}"
+												editable="false" rows="1" />
+											<Label text="Titular Cta." design="Bold" />
+											<TextArea width="100%" value="{dataModel>/KOINH}"
+												editable="false" rows="1" />
+											<Label text="IBAN" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/IBAN}"
+												editable="false" rows="1" />
+											<Label text="SWIFT/BiC" design="Bold" visible="false" />
+											<TextArea id="swiftMS" width="100%" value="{dataModel>/SWIFT}"
+												editable="false" rows="1" visible="false" />
+										</f:content>
+									</f:SimpleForm>
+									<f:SimpleForm id="bancForm2S" width="600px"
+										backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+										labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+										adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+										emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+										columnsM="2" singleContainerFullSize="true">
+										<f:content>
+											<Label text="Dato Ban. País" wrapping="true" design="Bold" />
+											<Select id="selectPaiBankS2" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKS2}" items="{/results}">
+												<core:Item key="{LAND1}" text="{LAND1_DESC}" />
+											</Select>
+											<Label text="Banco - Swift" design="Bold" />
+											<Select id="selectClaBankS2" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKL2}" items="{/results}">
+												<core:Item key="{BANKL}" text="{BANKL}-{BANKA}" />
+											</Select>
+											<Label text="Cta. Bancaria" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/BANKN2}"
+												editable="false" rows="1" />
+											<Label text="Titular Cta." design="Bold" />
+											<TextArea width="100%" value="{dataModel>/KOINH2}"
+												editable="false" rows="1" />
+											<Label text="IBAN" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/IBAN2}"
+												editable="false" rows="1" />
+											<Label text="SWIFT/BiC" design="Bold" visible="false" />
+											<TextArea id="swiftMS2" width="100%" value="{dataModel>/SWIFT}"
+												editable="false" rows="1" visible="false" />
+										</f:content>
+									</f:SimpleForm>
+									<f:SimpleForm id="bancForm3S" width="600px"
+										backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+										labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+										adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+										emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+										columnsM="2" singleContainerFullSize="true">
+										<f:content>
+											<Label text="Dato Ban. País" wrapping="true" design="Bold" />
+											<Select id="selectPaiBankS3" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKS3}" items="{/results}">
+												<core:Item key="{LAND1}" text="{LAND1_DESC}" />
+											</Select>
+											<Label text="Banco - Swift" design="Bold" />
+											<Select id="selectClaBankS3" forceSelection="false"
+												enabled="false" selectedKey="{dataModel>/BANKL3}" items="{/results}">
+												<core:Item key="{BANKL}" text="{BANKL}-{BANKA}" />
+											</Select>
+											<Label text="Cta. Bancaria" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/BANKN3}"
+												editable="false" rows="1" />
+											<Label text="Titular Cta." design="Bold" />
+											<TextArea width="100%" value="{dataModel>/KOINH3}"
+												editable="false" rows="1" />
+											<Label text="IBAN" design="Bold" />
+											<TextArea width="100%" value="{dataModel>/IBAN3}"
+												editable="false" rows="1" />
+											<Label text="SWIFT/BiC" design="Bold" visible="false" />
+											<TextArea id="swiftMS3" width="100%" value="{dataModel>/SWIFT}"
+												editable="false" rows="1" visible="false" />
+										</f:content>
+									</f:SimpleForm>
+									<f:SimpleForm width="600px" backgroundDesign="Transparent"
+										editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+										labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="true"
+										emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+										columnsXL="2" columnsL="2" columnsM="2"
+										singleContainerFullSize="true">
+										<f:toolbar>
+											<Toolbar />
+										</f:toolbar>
+										<f:content>
+											<Label text="Receptor Alt. de Pagos" wrapping="true"
+												design="Bold" />
+											<Input value="{dataModel>/LNRZA}" editable="false"
+												maxLength="11" />
+										</f:content>
+									</f:SimpleForm>
+								</VBox>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+				<ux:ObjectPageSection title="Datos Compra">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title="Generales">
+							<ux:blocks>
+								<f:SimpleForm id="frmDBa" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+									adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+									emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+									columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="Org. Compras" design="Bold" />
+										<MultiComboBox id="selectGrpCompS" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/EKORG_MULTI}">
+											<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+										</MultiComboBox>
+										<Label text="Moneda del Pedido" design="Bold" />
+										<Select id="selectMonedaS" forceSelection="false"
+											enabled="false" selectedKey="{dataModel>/WAERS}" items="{/results}">
+											<core:Item key="{WAERS}" text="{WAERS}-{WAERS_DESC}" />
+										</Select>
+										<Label text="Condición Pago" design="Bold" />
+										<Select id="selectCondPagoCS" width="300px"
+											forceSelection="false" selectedKey="{dataModel>/ZTERM_COMPRAS}"
+											items="{/results}" enabled="false">
+											<core:Item key="{ZTERM}" text="{ZTERM}-{ZTERM_DESC}" />
+										</Select>
+										<Label id="Lico1S" text="Incoterms" design="Bold" />
+										<Select id="ico1S" width="300px" forceSelection="false"
+											enabled="false" selectedKey="{dataModel>/INCO1}">
+											<core:ListItem key="AAA"
+												text="Estandar (sin uso adicional)" additionalText="AAA" />
+											<core:ListItem key="CFR" text="Costes y flete"
+												additionalText="CFR" />
+											<core:ListItem key="CIF" text="Costes, seguro y flete"
+												additionalText="CIF" />
+											<core:ListItem key="CIP" text="Porte pagado y seguro"
+												additionalText="CIP" />
+											<core:ListItem key="CIS" text="Costo y seguro"
+												additionalText="CIS" />
+											<core:ListItem key="CPT" text="Porte pagado"
+												additionalText="CPT" />
+											<core:ListItem key="DAF" text="Entrega en frontera*"
+												additionalText="DAF" />
+											<core:ListItem key="DAP" text="Entrega en Lugar"
+												additionalText="DAP" />
+											<core:ListItem key="DAT" text="Entrega en Terminal"
+												additionalText="DAT" />
+											<core:ListItem key="DDP" text="Entrega con aduana"
+												additionalText="DDP" />
+											<core:ListItem key="DDU" text="Entrega sin aduana*"
+												additionalText="DDU" />
+											<core:ListItem key="DEQ" text="Entrega ex-muelle"
+												additionalText="DEQ" />
+											<core:ListItem key="DES" text="Entrega ex-buque*"
+												additionalText="DES" />
+											<core:ListItem key="EXW" text="Ex-fábrica"
+												additionalText="EXW" />
+											<core:ListItem key="FAS"
+												text="Franco al costado del buque" additionalText="FAS" />
+											<core:ListItem key="FCA" text="Franco transportista"
+												additionalText="FCA" />
+											<core:ListItem key="FH" text="Franco domicilio"
+												additionalText="FH" />
+											<core:ListItem key="FOB" text="Franco a bordo"
+												additionalText="FOB" />
+											<core:ListItem key="UKP" text="Compras UK"
+												additionalText="UKP" />
+											<core:ListItem key="UN" text="Sin franquear"
+												additionalText="UN" />
+											<core:ListItem key="Z01" text="Flete a cargo del cliente"
+												additionalText="Z01" />
+											<core:ListItem key="Z02"
+												text="Flete a cargo de la empresa" additionalText="Z02" />
+											<core:ListItem key="ZDF" text="Impuestos diferidos"
+												additionalText="ZDF" />
+										</Select>
+										<Label id="LGrupEsqProS" text="Grupo Esquema Proveedor"
+											design="Bold" />
+										<Select id="GrupEsqProS" width="300px" forceSelection="false"
+											selectedKey="{dataModel>/KALSK}" enabled="false">
+											<core:ListItem key="Z2"
+												text="Esquema proveedor extranjero" additionalText="Z2" />
+										</Select>
+										<Label id="LctrlConfS" text="Control Confirmación"
+											design="Bold" />
+										<Select id="ctrlConfS" width="300px" forceSelection="false"
+											selectedKey="{dataModel>/BSTAE}" enabled="false">
+											<core:ListItem key="0001" text="Confirmaciones"
+												additionalText="0001" />
+											<core:ListItem key="0002" text="Pre EM"
+												additionalText="0002" />
+											<core:ListItem key="0003" text="AvisEntrg / EMGlobal"
+												additionalText="0003" />
+											<core:ListItem key="0004" text="Aviso de entrega"
+												additionalText="0004" />
+											<core:ListItem key="VINO" text="Confirmaciones Vino"
+												additionalText="VINO" />
+											<core:ListItem key="Z001" text="Confirmaciones"
+												additionalText="Z001" />
+										</Select>
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+						<ux:ObjectPageSubSection title="Contacto Comercial">
+							<ux:blocks>
+								<f:SimpleForm id="frmDCccSM" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+									adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+									emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+									columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="Vendedor" design="Bold" />
+										<Input id="vendSM" editable="false" value="{dataModel>/VERKF}"
+											liveChange="crea_disableSave" />
+										<Label text="Teléfono" design="Bold" />
+										<Input id="dctelSM" editable="false" value="{dataModel>/TELFE}"
+											liveChange="crea_disableSave" />
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+				<ux:ObjectPageSection title="Observaciones">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title=" ">
+							<ux:blocks>
+								<f:SimpleForm id="frmDBaatC" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+									adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+									emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+									columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<TextArea editable="false" id="txtObsC" value="{dataModel>/OBS}"
+											showExceededText="true" maxLength="200" width="100%"
+											valueState="{= ${/value}.length > 200 ? 'Warning' : 'None' }"
+											valueLiveUpdate="false" liveChange="handleLiveChange" />
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+				<ux:ObjectPageSection title="Archivos Adjuntos"
+					visible="true">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title=" ">
+							<ux:blocks>
+								<VBox>
+									<List id="missolFileList" items="{FileModel>/MSFiles}">
+										<ObjectListItem type="Active" press="onMSFilePress"
+											title="{FileModel>name}" icon="sap-icon://attachment"
+											tooltip="Click para descargar!" />
+									</List>
+								</VBox>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+		<ux:ObjectPageLayout id="comprasKeyBMS"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader id="titbcpms"
+					objectTitle="Bloquear/Desbloquear Compras"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button id="btnVolverMSCP" icon="sap-icon://nav-back" text="Volver"
+							type="Emphasized" press="toListado" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:headerContent width="auto"
+				class="sapUiTinyMargin sapUiTinyPadding">
+			</ux:headerContent>
+			<ux:sections>
+				<ux:ObjectPageSection title="Bloqueo/Desbloqueo Compras">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title="">
+							<ux:blocks>
+								<f:SimpleForm id="formCompraBCPMS" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="4" adjustLabelSpan="true" emptySpanXL="2"
+									emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2"
+									columnsL="2" columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="ID Acreedor" design="Bold" />
+										<Input value="{dataModel>/LIFNR}" editable="false" />
+										<Label text="Nombre" design="Bold" />
+										<Input value="{dataModel>/NAME1}" editable="false" />
+										<Label text="" design="Bold" />
+										<TextArea value="{dataModel>/NAME2}" editable="false"
+											rows="1" />
+										<Label text="Grupo Cuenta" design="Bold" />
+										<Select id="grupCtaBD" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" items="{/results}"
+											selectedKey="{dataModel>/KTOKK}">
+											<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+										</Select>
+										<Label text="Org. Compras" design="Bold" />
+										<MultiComboBox id="selectGrpCompBD" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/EKORG}"
+											change="modif_disableSave">
+											<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+										</MultiComboBox>
+										<Label text="Bloqueo de Compras" design="Bold" />
+										<VBox>
+											<CheckBox id="chk1MSBC" text="Org. de Compras(todas)"
+												editable="false" /><!-- selected="{dataModel>/LOEVM}" -->
+											<CheckBox id="chk2MSBC" text="Org. de Compras Seleccionada"
+												editable="false" /><!-- selected="{dataModel>/LOEVM_COMPRAS}" -->
+										</VBox>
+										<Label text="Bloqueos de Borrado" design="Bold" visible="false" />
+										<VBox>
+											<CheckBox id="chk3MSBC" text="Datos Generales"
+												editable="false" visible="false" /><!-- selected="{dataModel>/SPERM}" -->
+										</VBox>
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+		<ux:ObjectPageLayout id="contabKeyBMS"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader id="titbctms"
+					objectTitle="Bloqueo/Desbloqueo Contable"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button id="btnVolverMSCT" icon="sap-icon://nav-back" text="Volver"
+							type="Emphasized" press="toListado" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:sections>
+				<ux:ObjectPageSection title="Bloqueo/Desbloqueo Contable">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title=" ">
+							<ux:blocks>
+								<f:SimpleForm id="formContabBCTMS" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									title="" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="4" adjustLabelSpan="true" emptySpanXL="2"
+									emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="2"
+									columnsL="2" columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="ID Acreedor" design="Bold" />
+										<Input value="{dataModel>/LIFNR}" editable="false" />
+										<Label text="Nombre" design="Bold" />
+										<Input value="{dataModel>/NAME1}" editable="false" />
+										<Label text="" design="Bold" />
+										<TextArea value="{dataModel>/NAME2}" editable="false"
+											rows="1" />
+										<Label text="Grupo Cuenta" design="Bold" />
+										<Select id="grpCtaBDC" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" items="{/results}"
+											selectedKey="{dataModel>/KTOKK}">
+											<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+										</Select>
+										<Label text="Sociedad" design="Bold" />
+										<MultiComboBox id="selectSociedadesBDC" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/BUKRS}"
+											change="modif_disableSave">
+											<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+										</MultiComboBox>
+										<Label text="Peticiones de Borrado" design="Bold"
+											visible="false" />
+										<VBox>
+											<CheckBox id="chk1MSBCT" text="Áreas todas"
+												editable="false" visible="false" />
+											<CheckBox id="chk2MSBCT" text="Sociedad Seleccionada"
+												editable="false" visible="false" />
+										</VBox>
+										<Label text="Bloqueos Contabilización" design="Bold" />
+										<VBox>
+											<CheckBox id="chk3MSBCT" text="Sociedades (todas)"
+												editable="false" />
+											<CheckBox id="chk4MSBCT" text="Sociedad Seleccionada"
+												editable="false" />
+										</VBox>
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+		<ux:ObjectPageLayout id="comprasKeyAMS"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader id="titacpms" objectTitle="Ampliación compras"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button id="btnVolverMSAMPCP" icon="sap-icon://nav-back"
+							text="Volver" type="Emphasized" press="toListado" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:headerContent width="auto"
+				class="sapUiTinyMargin sapUiTinyPadding">
+			</ux:headerContent>
+			<ux:sections>
+				<ux:ObjectPageSection title="Ampliación Compras">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title=" ">
+							<ux:blocks>
+								<f:SimpleForm id="formCompraAMS" width="600px"
+									backgroundDesign="Transparent" editable="true" layout="ResponsiveGridLayout"
+									labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+									adjustLabelSpan="false" emptySpanXL="2" emptySpanL="2"
+									emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+									columnsM="2" singleContainerFullSize="true">
+									<f:content>
+										<Label text="ID Acreedor" design="Bold" />
+										<Text text="{dataModel>/LIFNR}" />
+										<Label text="Nombre" design="Bold" />
+										<Text text="{dataModel>/NAME1}" />
+										<Label text="" design="Bold" />
+										<TextArea value="{dataModel>/NAME2}" editable="false"
+											rows="1" />
+										<Label text="Grupo Cuenta" design="Bold" />
+										<Select id="grpCtaA" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" items="{/results}"
+											selectedKey="{dataModel>/KTOKK}">
+											<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+										</Select>
+										<Label text="Org. Compras" design="Bold" />
+										<MultiComboBox id="selectGrpCompA" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/EKORG}"
+											change="modif_disableSave">
+											<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+										</MultiComboBox>
+										<Label text="Ampliar a" design="Bold" />
+										<MultiComboBox id="selectGrpCompA2" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/EKORG_MULTI}"
+											change="modif_disableSave">
+											<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+										</MultiComboBox>
+										<Label text="Observaciones" design="Bold" />
+										<TextArea value="{dataModel>/OBS}" editable="false" />
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+		<ux:ObjectPageLayout id="contabKeyAMS"
+			enableLazyLoading="true" alwaysShowContentHeader="false"
+			class="sapUiTinyMargin sapUiTinyPadding">
+			<ux:headerTitle>
+				<ux:ObjectPageHeader id="titactms" objectTitle="Ampliación contable"
+					isObjectIconAlwaysVisible="true">
+					<ux:actions>
+						<Button id="btnVolverMSAMPCT" icon="sap-icon://nav-back"
+							text="Volver" type="Emphasized" press="toListado" />
+					</ux:actions>
+				</ux:ObjectPageHeader>
+			</ux:headerTitle>
+			<ux:sections>
+				<ux:ObjectPageSection title="Ampliación Contable">
+					<ux:subSections>
+						<ux:ObjectPageSubSection title=" ">
+							<ux:blocks>
+								<f:SimpleForm width="600px" backgroundDesign="Transparent"
+									editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+									labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="false"
+									emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="0"
+									columnsXL="2" columnsL="4" columnsM="2"
+									singleContainerFullSize="true">
+									<f:content>
+										<Label text="ID Acreedor" design="Bold" />
+										<Text text="{dataModel>/LIFNR}" />
+										<Label text="Nombre" design="Bold" />
+										<Text text="{dataModel>/NAME1}" />
+										<Label text="" design="Bold" />
+										<Text text="{dataModel>/NAME2}" />
+										<Label text="Grupo Cuenta" design="Bold" />
+										<Select id="grpCtaAC" width="40%" autoAdjustWidth="true"
+											enabled="false" forceSelection="false" items="{/results}"
+											selectedKey="{dataModel>/KTOKK}">
+											<core:ListItem key="{KTOKK}" text="{KTOKK_DESC}" />
+										</Select>
+										<Label text="Vías de Pago" design="Bold" />
+										<MultiComboBox id="selectViasPagoAC" width="400px"
+											items="{/results}" selectedKeys="{dataModel>/ZWELS}" change="modif_disableSave"
+											editable="false">
+											<core:Item key="{ZWELS}" text="{ZWELS}-{ZWELS_DESC}" />
+										</MultiComboBox>
+										<Label text="Sociedad" design="Bold" />
+										<MultiComboBox id="selectSociedadesAC" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/BUKRS}"
+											change="modif_disableSave">
+											<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+										</MultiComboBox>
+										<Label text="Sociedad(es) ampliar a" design="Bold" />
+										<MultiComboBox id="selectSociedadesAC2" width="400px"
+											editable="false" items="{/results}" selectedKeys="{dataModel>/BUKRS_MULTI}"
+											change="modif_disableSave">
+											<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+										</MultiComboBox>
+										<Label text="Observaciones" design="Bold" />
+										<TextArea value="{dataModel>/OBS}" editable="false" />
+									</f:content>
+								</f:SimpleForm>
+							</ux:blocks>
+						</ux:ObjectPageSubSection>
+					</ux:subSections>
+				</ux:ObjectPageSection>
+			</ux:sections>
+		</ux:ObjectPageLayout>
+	</Page>
+</core:FragmentDefinition>

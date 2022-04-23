@@ -1,0 +1,188 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:chart="sap.chart" 
+xmlns:data="sap.chart.data" xmlns:layout="sap.ui.commons.layout" 
+xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+controllerName="zac.grc.risk.cust.controller.Page6">
+    <Page showHeader="false" title="Page Title" showFooter="false" showNavButton="false" enableScrolling="false">
+        <content>
+            <layout:AbsoluteLayout horizontalScrolling="Hidden" verticalScrolling="Auto">
+                <layout:positions>
+                    <layout:PositionContainer left="0px" top="701px">
+                        <layout:control>
+                            <Table width="auto" noDataText="" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                                <infoToolbar>
+                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                        <content>
+                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </content>
+                                    </Toolbar>
+                                </infoToolbar>
+                                <headerToolbar>
+                                    <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
+                                        <content>
+                                            <Title text="Riesgos por Gerencias Holding Concha y Toro" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="true"/>
+                                            <ToolbarSpacer width=""/>
+                                            <OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                            <OverflowToolbarButton text="Action" type="Default" icon="sap-icon://download" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="true">
+                                        <header>
+                                            <Title text="Gerencia" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Desktop" demandPopin="true" popinDisplay="WithoutHeader" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Sociedad" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Riesgos" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press="_onRowPress">
+                                        <cells>
+                                            <Text text="CONTROL DE GESTION Y TI CORPORATIVA" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="Viña Concha y Toro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="16.150" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem type="Navigation" press="_onRowPress1">
+                                        <cells>
+                                            <Text text="AGRICOLA" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="Viña Concha y Toro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="1.240" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem type="Navigation">
+                                        <cells>
+                                            <Text text="AGRICOLA" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="Cono Sur" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="28.560" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem type="Navigation" press="_onRowPress2">
+                                        <cells>
+                                            <Text text="AUDITORIA Y CONTROL INTERNO CORPORATIVA" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="Viña Concha y Toro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="45.680" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </layout:control>
+                    </layout:PositionContainer>
+                    <layout:PositionContainer left="1px" top="109px">
+                        <layout:control>
+                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path:'/RiesgoPeriodoSet',parameters:{select:'Critico'},filters:[{path:'Periodo',operator:'EQ',value1:'201807'}]}">
+                                <infoToolbar>
+                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                        <content>
+                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </content>
+                                    </Toolbar>
+                                </infoToolbar>
+                                <headerToolbar/>
+                                <columns>
+                                    <Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Críticos" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Altos" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Medios" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Center" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Bajos" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Navigation" press="_onRowPress3">
+                                        <cells>
+                                            <ObjectNumber number="{Critico}" unit="" emphasized="true" state="None"/>
+                                            <ObjectNumber unit="" emphasized="true" state="None"/>
+                                            <ObjectNumber number="51.2536" unit="" emphasized="true" state="None"/>
+                                            <ObjectNumber number="57.272" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </layout:control>
+                    </layout:PositionContainer>
+                    <layout:PositionContainer left="0px" top="10px">
+                        <layout:control>
+                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="false" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path:'/RiesgoPeriodoSet',parameters:{select:'Periodo'},filters:[{path:'Periodo',operator:'EQ',value1:'201807'}]}">
+                                <infoToolbar>
+                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                        <content>
+                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </content>
+                                    </Toolbar>
+                                </infoToolbar>
+                                <headerToolbar/>
+                                <columns>
+                                    <Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="RIESGOS TOTALES DE ACCESOS" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Active" cells="{path:'/RiesgoPeriodoSet',parameters:{select:'Periodo'},filters:[{path:'Periodo',operator:'EQ',value1:'201807'}]}">
+                                        <cells>
+                                            <ObjectNumber number="{Riskcount}" unit="" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </layout:control>
+                    </layout:PositionContainer>
+                    <layout:PositionContainer left="8px" top="224px">
+                        <layout:control>
+                            <chart:Chart id="sap_m_Page_0-content-sap_chart_CombinedChart-1531876347617-blzov2eohewvostc6sd66efc5_S5" width="100%" height="450px" visibleDimensions="__id" visibleMeasures="mea0,mea1,Measure1" chartType="combination" uiConfig="{}" vizProperties="{plotArea:{dataLabel:{visible: true,hideWhenOverlap:true}}}">
+                                <chart:dimensions>
+                                    <data:Dimension name="__id" label="MESES" role="category" textProperty="dim0"/>
+                                </chart:dimensions>
+                                <chart:measures>
+                                    <data:Measure name="mea0" label="Riesgos" role="axis2"/>
+                                    <data:Measure name="mea1" label="Altos" role="axis2"/>
+                                    <data:Measure name="Measure1" label="Criticos" role="axis2"/>
+                                </chart:measures>
+                            </chart:Chart>
+                        </layout:control>
+                    </layout:PositionContainer>
+                </layout:positions>
+            </layout:AbsoluteLayout>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="auto" design="Auto" enabled="false" visible="false">
+                <content/>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

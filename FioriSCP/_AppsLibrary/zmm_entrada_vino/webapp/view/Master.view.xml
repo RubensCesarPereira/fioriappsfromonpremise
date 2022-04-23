@@ -1,0 +1,98 @@
+<mvc:View
+	controllerName="cl.conchaytoro.zmm_entrada_vino.controller.Master"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:a="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:semantic="sap.m.semantic">
+	
+	<semantic:MasterPage
+		id="page"
+		title="{masterView>/title}"
+		navButtonPress="onNavBack"
+		showNavButton="true">
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<SearchField
+						id="searchField"
+						showRefreshButton="{= !${device>/support/touch} }"
+						tooltip="{i18n>masterSearchTooltip}"
+						width="100%"
+						search=".onSearch">
+					</SearchField>
+					<!--
+					<SearchField
+						id="searchField"
+						showRefreshButton="{= !${device>/support/touch} }"
+						tooltip="{i18n>masterSearchTooltip}"
+						width="100%"
+						liveChange=".onSearch">
+					</SearchField>
+						-->
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+
+		<semantic:content>
+<!--			<VBox>
+				<l:HorizontalLayout>
+					<a:Avatar src="./icons/log_cyt1.png" displaySize="L"/>
+					<l:VerticalLayout class="sapUiSmallMargin">
+						<Title level="H1" titleStyle="H1" text="UI5 Air Cargo"/>
+						<Text text="You name it, we ship it!"/>
+					</l:VerticalLayout>
+				</l:HorizontalLayout>			
+			</VBox>-->
+			<PullToRefresh
+				id="pullToRefresh"
+				visible="{device>/support/touch}"
+				refresh=".onRefresh" />
+			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
+			<List
+				id="list"
+				items="{
+					path: '/EntradaHeaderSet',
+					sorter: {
+						path: 'Ebeln',
+						descending: false
+						},
+					groupHeaderFactory: '.createGroupHeader'
+				}"
+				busyIndicatorDelay="{masterView>/delay}"
+				noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished"
+				selectionChange=".onSelectionChange">
+				<infoToolbar>
+					<Toolbar
+						active="true"
+						id="filterBar"
+						visible="{masterView>/isFilterBarVisible}"
+						press="onOpenViewSettings">
+						<Title
+							id="filterBarLabel"
+							text="{masterView>/filterBarLabel}" />
+					</Toolbar>
+				</infoToolbar>
+				<items>
+					<ObjectListItem
+						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
+						press="onSelectionChange"
+						title="{i18n>masterTitleEntrega}"
+						number="{Ebeln}">
+						<attributes>
+							<ObjectAttribute title="{i18n>masterTitleFecha}" text="{Aedat}"/>
+						</attributes>						
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+
+	</semantic:MasterPage>
+
+</mvc:View>

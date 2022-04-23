@@ -1,0 +1,171 @@
+{ 
+    
+   "_version": "1.1.0",
+  "sap.app": {    
+    "_version": "1.1.0",
+    "id": "com.sap.build.standard.ztestcap",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.6.0"
+    },
+    "dataSources":{
+      
+       "main": {
+          "uri": "/comsapbuildstandardztestcap/here/goes/your/serviceUrl/",
+          "type": "OData",
+          "settings": {
+            "odataVersion": "2.0",
+            "localUri": "localService/metadata.xml"
+          }
+        }
+      
+    },
+      "title": "{{appTitle}}",
+      "description": "{{appDescription}}",
+      "ach": "ach",
+      "resources": "resources.json",
+      "sourceTemplate": {
+        "id": "ui5template.basicSAPUI5ApplicationProject",
+        "version": "1.32.0"
+      },
+      "crossNavigation": {
+        "inbounds": {
+            "intent1": {
+                "signature": {
+                    "parameters": {},
+                    "additionalParameters": "allowed"
+                },
+                "semanticObject": "ZMM_REP_EST_LIB",
+                "action": "display",
+                "title": "{{appTitle}}",
+                "info": " ",
+                "subTitle": " ",
+                "icon": "sap-icon://sales-order-item",
+                "indicatorDataSource": {
+                        "path":"portaldest/sap/backend/FIORI_BGW_HTTP/sap/opu/odata/sap/ZPP_DESCOMPONER_MEZCLA_SRV/LibCabeceraSet/$count",
+                        "refresh":60,
+                        "dataSource":"FIORI_BGW_HTTP"
+                    }				
+            }
+        }
+    }
+  },
+  "sap.cloud": {
+	"public": true,
+	"service": "FioriSCP"
+  },
+  "sap.ui": {
+    "_version": "1.2.0",
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+     "supportedThemes": [
+        "sap_bluecrystal"
+     ]
+  },
+  "sap.ui5": {
+    "_version": "1.1.0",
+    "rootView": {
+      "viewName": "generated.app.view.Page1",
+      "type": "XML"
+    },
+    "dependencies": {
+      "minUI5Version": "1.32.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+        "i18n": {
+          "type": "sap.ui.model.resource.ResourceModel",
+          "uri": "i18n/i18n.properties"
+        },
+        
+          "":{
+          "dataSource": "main",
+          "type": "sap.ui.model.odata.v2.ODataModel",
+          "settings": {
+            "loadMetadataAsync": false,
+            "json": true,
+            "bJSON": true,
+            "defaultBindingMode": "TwoWay",
+            "useBatch": true,
+            "refreshAfterChange": false,
+            "disableHeadRequestForToken": true
+           }
+          }
+          
+      },
+      "resources": {
+        "css": []
+      },
+      "routing": {
+          "config": {
+            "routerClass": "sap.m.routing.Router",
+            "viewType": "XML",
+            "viewPath": "com.sap.build.standard.ztestcap.view",
+            "controlId": "App",
+            "clearTarget": false,
+            "controlAggregation": "pages",
+            "bypassed": {
+              "target": [
+                   "Page1"
+              ]
+            }
+          },
+          "targets": {
+            
+            "Page1": {
+            "controlAggregation": "pages",
+            "viewName": "Page1",
+            "viewId": "Page1",
+            "viewLevel": 1,
+            "transition": "slide"
+            }
+            
+          },
+         "routes": [
+              
+              {
+                "pattern": "Page1/:context:",
+                "name": "Page1",
+                "target": [
+                  "Page1"
+                  ]
+              },
+              
+              {
+                "pattern": "",
+                "name": "default",
+                "target": [
+                  "Page1"
+                  ]
+              }
+              
+          ]
+      }
+    },
+        "sap.platform.cf": {
+            "oAuthScopes":[
+                "$XSAPPNAME.ztestcap"
+            ]
+        } 
+  }

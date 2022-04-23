@@ -1,0 +1,120 @@
+<mvc:View controllerName="cl.conchaytoro.zpp_registro_mezcla.controller.Detail" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<!--<ObjectHeader id="objectHeader" title=""></ObjectHeader>-->
+			<VBox class="sapUiMediumMargin">
+				<f:SimpleForm layout="ResponsiveGridLayout" title="Datos Notificación:" editable="true" adjustLabelSpan="false" labelSpanXL="2"
+					labelSpanL="2" labelSpanM="2" labelSpanS="5">
+					<f:content>
+						<Label text="Orden Proceso" design="Bold"/>
+						<Text id="orden" text="{Aufnr}"/>
+						<Label text="Fase" design="Bold"/>
+						<Text id="fase" text="{Vornr}"/>
+						<Label text="Código Mezcla" design="Bold"/>
+						<Text id="mezcla" text="{Stlbez}"/>
+						<!--<Label text="Notificación" design="Bold"/>
+						<Text id="noti" text="{Aueru}"/>-->
+						<Label text="Cantidad" design="Bold"/>
+						<Text id="cantidad" text="{Gamng} Lts."/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiTinyMargin">
+				<Panel expandable="true" headerText="Características Lote:" width="auto" class="sapUiResponsiveMargin">
+					<content>
+						<l:VerticalLayout>
+							<Label text="Grado Alcohólico:" required="true"/>
+							<Input id="grado" width="300px" placeholder="Ej: 8,0" type="Number" validationError="handleValidationError2"
+								validationSuccess="handleValidationSuccess2" liveChange="validaInput"/>
+							<Label text="N° Mezcla:" required="true"/>
+							<Input id="num_mezcla" width="300px" placeholder="Ej: 25" type="Number" validationError="handleValidationError2"
+								validationSuccess="handleValidationSuccess2" liveChange="validaInput"/>
+							<Label text="Enólogo:" required="true"/>
+							<Input id="enologo" width="300px" placeholder="Ej: Nombre Apellido" validationError="handleValidationError2"
+								validationSuccess="handleValidationSuccess2" liveChange="validaInput"/>
+							<Label text="Bodega Origen:" required="true"/>
+							<Input id="bodega" width="300px" placeholder="Ej: 9" type="Number" validationError="handleValidationError2"
+								validationSuccess="handleValidationSuccess2" liveChange="validaInput"/>
+							<Label text="Turno Elaboración:" required="true"/>
+							<ComboBox id="turno" items="{pp>/motivo}" width="300px" validationError="handleValidationError2"
+								validationSuccess="handleValidationSuccess2" change="validaInput">
+								<core:Item key="{pp>name}" text="{pp>value}"></core:Item>
+							</ComboBox>
+							<Label text="Año Cosecha:" required="true"/>
+							<Input id="cosecha" placeholder="Ej: 2020" validationError="handleValidationError2" validationSuccess="handleValidationSuccess2"
+								liveChange="validaInput"/>
+						</l:VerticalLayout>
+					</content>
+				</Panel>
+				<MessageStrip text="Para Contabilizar debe ingresar Características de Lote." id="msg" type="Warning" showIcon="true"
+					showCloseButton="false" class="sapUiTinyMarginBottom"></MessageStrip>
+			</VBox>
+			<ScrollContainer width="100%" horizontal="true" vertical="true" focusable="true">
+				<Table id="lineItemsList" width="auto" items="{OrdenToPosiciones}" updateFinished="onListUpdateFinished"
+					noDataText="Número de Orden sin Posiciones" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiSmallMargin">
+					<headerToolbar>
+						<Toolbar id="lineItemsToolbar">
+							<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="8em">
+							<Text text="Código"/>
+						</Column>
+						<Column width="6em">
+							<Text text="Cosecha"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Cantidad"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Bodega"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Almacén"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Lote"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Movimiento"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Matnr}"/>
+								<Text text="{Gjahr}"/>
+								<Text text="{Psmng} L"/>
+								<Text text="{Pwerk}"/>
+								<Text text="{Lgort}"/>
+								<Text text="{Charg}"/>
+								<Text text="{ClassMov}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+			<!--<l:VerticalLayout class="sapUiContentPadding" width="100%">
+				<l:content>
+					<MessageStrip text="Para Contabilizar debe ingresar Características de Lote." type="Warning" showIcon="true" showCloseButton="true"
+						class="sapUiTinyMarginBottom"></MessageStrip>
+				</l:content>
+			</l:VerticalLayout>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"></IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"></IconTabFilter>
+				</items>
+			</IconTabBar>-->
+		</semantic:content>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Contabilizar" press="onConta" id="btnConta"/>
+		</semantic:positiveAction>
+		<!--		<semantic:NegativeAction>
+			<semantic:NegativeAction text=""/>
+		</semantic:NegativeAction>-->
+	</semantic:DetailPage>
+</mvc:View>

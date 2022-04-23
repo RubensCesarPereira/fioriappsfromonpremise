@@ -1,0 +1,5 @@
+.sapUiSizeCompact .sapMColumnHeader {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    width: max-content;
+}

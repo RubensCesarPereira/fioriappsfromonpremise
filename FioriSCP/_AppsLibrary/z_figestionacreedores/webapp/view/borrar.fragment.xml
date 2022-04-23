@@ -1,0 +1,221 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt" xmlns:ux="sap.uxap"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	xmlns:blockcolor="sap.uxap.sample.SharedBlocks" xmlns:f="sap.ui.layout.form">
+	<Page id="borrAcreedor" showHeader="false">
+		<tnt:ToolPage id="toolPageB">
+			<tnt:sideContent>
+				<tnt:SideNavigation expanded="true" itemSelect="onItemSelectBorr"
+					id="sideNavigationB">
+					<tnt:item>
+						<tnt:NavigationList>
+							<tnt:NavigationListItem id="comprasNavB"
+								icon="sap-icon://capital-projects" text="Compras" key="comprasKeyB" />
+							<tnt:NavigationListItem id="contabNavB"
+								icon="sap-icon://customer-financial-fact-sheet" text="Contabilidad"
+								key="contabKeyB">
+							</tnt:NavigationListItem>
+						</tnt:NavigationList>
+					</tnt:item>
+				</tnt:SideNavigation>
+			</tnt:sideContent>
+			<tnt:mainContents height="100%">
+				<NavContainer id="pageContainerB">
+					<ScrollContainer id="dummyB">
+					</ScrollContainer>
+					<ux:ObjectPageLayout id="comprasKeyB"
+						enableLazyLoading="true" alwaysShowContentHeader="false"
+						class="sapUiTinyMargin sapUiTinyPadding">
+						<ux:headerTitle>
+							<ux:ObjectPageHeader objectTitle="Bloquear/Desbloquear Compras"
+								isObjectIconAlwaysVisible="true">
+								<ux:actions>
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnValidaBCP" icon="sap-icon://accept"
+										text="Validar" type="Accept" press="borr_validaCP" />
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnGuardaBCP" icon="sap-icon://save"
+										text="Guardar" type="Emphasized" press="borr_onSaveCP"
+										class="sapUiMediumMarginRight" />
+								</ux:actions>
+							</ux:ObjectPageHeader>
+						</ux:headerTitle>
+						<ux:headerContent width="auto"
+							class="sapUiTinyMargin sapUiTinyPadding">
+							<l:HorizontalLayout>
+								<Label text="ID Acreedor:" labelFor="idAcrBCP" class="sapUiSmallMarginEnd" />
+								<FlexBox height="20px" alignItems="Center"
+									justifyContent="Center">
+									<items>
+										<SearchField id="idAcrBCP" placeholder="Indique código Acreedor..."
+											search="onSearchBorrCP" class="sapUiSmallMargin" />
+									</items>
+								</FlexBox>
+							</l:HorizontalLayout>
+						</ux:headerContent>
+						<ux:sections>
+							<ux:ObjectPageSection showTitle="false">
+								<ux:subSections>
+									<ux:ObjectPageSubSection title="Datos Generales ">
+										<ux:blocks>
+											<f:SimpleForm id="formCompraBCP" width="600px"
+												backgroundDesign="Transparent" editable="true"
+												layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+												labelSpanL="4" labelSpanM="4" labelSpanS="4"
+												adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+												emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+												columnsM="2" singleContainerFullSize="true">
+												<f:content>
+													<Label visible="false" />
+													<Text id="ktokk" text="{dataModel>/KTOKK}" visible="false"/>
+													<Label text="Gerente/Subgerente:"
+														class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+													<Select id="selectAprobadoresBCP" forceSelection="true"
+														items="{/Aprobadores}" change="">
+														<core:ListItem key="{APROBADOR}" text="{NAME}" />
+													</Select>
+													<Label text="ID Acreedor" design="Bold" />
+													<Input id="lifnrBCP" value="{dataModel>/LIFNR}"
+														editable="false" />
+													<Label text="Nombre" design="Bold" />
+													<Input id="name1BCP" value="{dataModel>/NAME1}"
+														editable="false" />
+													<Label text="" design="Bold" />
+													<Input id="name2BCP" value="{dataModel>/NAME2}"
+														editable="false" />
+													<Label text="Org. Compras" design="Bold" />
+													<Select id="selectGrpCompBCP" forceSelection="true"
+														selectedKey="" items="{/GrpComp}">
+														<core:Item key="{EKORG}" text="{EKORG_DESC}" />
+													</Select>
+													<Label text="Org. Compras Borrado" design="Bold"
+														visible="false" />
+													<MultiComboBox visible="false"
+														id="selectGrpCompBCPCopia" items="{/GrpComp}">
+														<core:Item key="{EKORG}" text="{EKORG}-{EKORG_DESC}" />
+													</MultiComboBox>
+													<Label text="Bloqueo de Compras" design="Bold" id="lblb1" />
+													<VBox>
+														<CheckBox id="chk1BCP" text="Org. de Compras(todas)" /><!-- 
+															selected="{dataModel>/LOEVM}" -->
+														<CheckBox id="chk2BCP" text="Org. de Compras Seleccionada" /><!-- 
+															selected="{dataModel>/LOEVM_COMPRAS}" -->
+													</VBox>
+													<Label text="Bloqueos de Borrado" design="Bold" id="lblb2"
+														visible="false" />
+													<VBox>
+														<CheckBox id="chk3BCP" text="Datos Generales"
+															visible="false" /><!-- selected="{dataModel>/SPERM}" -->
+														<Button type="Emphasized" text="Marcar para borrado"
+															icon="sap-icon://save" press="onSaveCompra" visible="false" />
+													</VBox>
+												</f:content>
+											</f:SimpleForm>
+										</ux:blocks>
+									</ux:ObjectPageSubSection>
+								</ux:subSections>
+							</ux:ObjectPageSection>
+						</ux:sections>
+					</ux:ObjectPageLayout>
+					<ux:ObjectPageLayout id="contabKeyB"
+						enableLazyLoading="true" alwaysShowContentHeader="false"
+						class="sapUiTinyMargin sapUiTinyPadding">
+						<ux:headerTitle>
+							<ux:ObjectPageHeader objectTitle="Bloquear/Desbloquear Contable"
+								isObjectIconAlwaysVisible="true">
+								<ux:actions>
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnValidaBCT" icon="sap-icon://accept"
+										text="Validar" type="Accept" press="borr_validaCT" />
+									<ux:ObjectPageHeaderActionButton
+										hideText="false" id="btnGuardaBCT" icon="sap-icon://save"
+										text="Guardar" type="Emphasized" press="borr_onSaveCT"
+										class="sapUiMediumMarginRight" />
+								</ux:actions>
+							</ux:ObjectPageHeader>
+						</ux:headerTitle>
+						<ux:headerContent width="auto"
+							class="sapUiTinyMargin sapUiTinyPadding">
+							<l:HorizontalLayout>
+								<Label text="ID Acreedor:" labelFor="idAcrBCT" class="sapUiSmallMarginEnd" />
+								<FlexBox height="20px" alignItems="Center"
+									justifyContent="Center">
+									<items>
+										<SearchField id="idAcrBCT" placeholder="Indique código Acreedor..."
+											search="onSearchBorrCT" class="sapUiSmallMargin" />
+									</items>
+								</FlexBox>
+							</l:HorizontalLayout>
+						</ux:headerContent>
+						<ux:sections>
+							<ux:ObjectPageSection showTitle="false">
+								<ux:subSections>
+									<ux:ObjectPageSubSection title="Datos Generales ">
+										<ux:blocks>
+											<f:SimpleForm id="formContabBCT" width="600px"
+												backgroundDesign="Transparent" editable="true"
+												layout="ResponsiveGridLayout" title="" labelSpanXL="4"
+												labelSpanL="4" labelSpanM="4" labelSpanS="4"
+												adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+												emptySpanM="2" emptySpanS="0" columnsXL="2" columnsL="2"
+												columnsM="2" singleContainerFullSize="true">
+												<f:content>
+													<Label text="Gerente/Subgerente:"
+														class="sapUiMediumMarginBegin sapUiSmallMarginEnd" design="Bold" />
+													<Select id="selectAprobadoresBCT" forceSelection="true"
+														items="{/Aprobadores}" change="">
+														<core:ListItem key="{APROBADOR}" text="{NAME}" />
+													</Select>
+													<Label text="ID Acreedor" design="Bold" />
+													<Input id="lifnrBCT" value="{dataModel>/LIFNR}"
+														editable="false" />
+													<Label text="Nombre" design="Bold" />
+													<Input id="name1BCT" value="{dataModel>/NAME1}"
+														editable="false" />
+													<Label text="" design="Bold" />
+													<Input id="name2BCT" value="{dataModel>/NAME2}"
+														editable="false" />
+													<Label text="Sociedad" design="Bold" />
+													<Select id="selectSociedadesBCT" forceSelection="true"
+														selectedKey="" items="{/Sociedades}">
+														<core:Item key="{BUKRS}" text="{BUKRS_DESC}" />
+													</Select>
+													<Label text="Sociedad(es) Borrado" design="Bold"
+														visible="false" />
+													<MultiComboBox visible="false"
+														id="selectSociedadesBCTCopia" items="{/Sociedades}"
+														change="">
+														<core:Item key="{BUKRS}" text="{BUKRS}-{BUKRS_DESC}" />
+
+													</MultiComboBox>
+													<Label id="lblb3" text="Peticiones de Borrado"
+														design="Bold" visible="false" />
+													<VBox>
+														<CheckBox id="chk1BCT" text="Áreas todas"
+															visible="false" /><!-- selected="{dataModel>/LOEVM}" -->
+														<CheckBox id="chk2BCT" text="Sociedad Seleccionada"
+															visible="false" /><!-- selected="{dataModel>/LOEVM_CONTABLE}" -->
+													</VBox>
+													<Label id="lblb4" text="Bloqueos de Contabilización"
+														design="Bold" />
+													<VBox>
+														<CheckBox id="chk3BCT" text="Sociedades(todas)" /><!-- 
+															selected="{dataModel>/NODEL}" -->
+														<CheckBox id="chk4BCT" text="Soc. Seleccionada" /><!-- 
+															selected="{dataModel>/NODEL_CONTABLE}" -->
+														<Button type="Emphasized" text="Marcar para borrado"
+															icon="sap-icon://save" press="onSaveContab" visible="false" />
+													</VBox>
+												</f:content>
+											</f:SimpleForm>
+										</ux:blocks>
+									</ux:ObjectPageSubSection>
+								</ux:subSections>
+							</ux:ObjectPageSection>
+						</ux:sections>
+					</ux:ObjectPageLayout>
+				</NavContainer>
+			</tnt:mainContents>
+		</tnt:ToolPage>
+	</Page>
+</core:FragmentDefinition>
